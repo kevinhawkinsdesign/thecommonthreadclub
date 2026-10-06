@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import LumaEvents from '../components/LumaEvents.astro';
+import { luma } from '../config';
+
+const formats = [
+  { title: 'Supper clubs', body: 'Long-table dinners where the menu is a conversation starter and the guest list is half the fun.' },
+  { title: 'Wine tastings', body: 'Relaxed, guided tastings with producers and pours worth talking about.' },
+  { title: 'Pop-ups & collabs', body: 'One-night-only events with chefs, venues and friends of the club across the city.' },
+];
+---
+
+<Base title="Events" description="Upcoming supper clubs, wine tastings and pop-up events from The Common Thread in Barcelona.">
+  <section class="section section--cream">
+    <div class="wrap">
+      <p class="eyebrow">Events</p>
+      <h1>What's on</h1>
+      <p class="lede">
+        Every event is one night only and seats are limited. Tickets are sold through Luma{luma.calendarUrl && <>, so <a href={luma.calendarUrl}>follow our calendar</a> to hear about new dates first</>}.
+      </p>
+      <LumaEvents />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">The formats</p>
+      <h2>Ways to join us</h2>
+      <div class="grid">
+        {formats.map((f) => (
+          <div class="card">
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

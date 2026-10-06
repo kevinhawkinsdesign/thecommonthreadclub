@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, luma } from '../config';
+import { url } from '../lib';
+
+const values = [
+  { title: 'Everyone is a guest', body: 'Whether you have lived here for twenty years or landed this morning, there is a seat for you.' },
+  { title: 'Food and wine done properly', body: 'Small, high-quality events built around cooking and pours we are genuinely excited about.' },
+  { title: 'Connection on purpose', body: 'We think about who sits where and how the night flows, so conversation comes easily.' },
+];
+---
+
+<Base title="About" description="The story behind The Common Thread, a Barcelona supper club built around food, wine and connection.">
+  <section class="section section--dark">
+    <div class="wrap">
+      <p class="eyebrow">About</p>
+      <h1>Finding belonging at the dinner table.</h1>
+      <p class="lede">{site.description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap story">
+      <h2>The story</h2>
+      <p>
+        When Kevin Hawkins moved to Barcelona from Amsterdam, he did what came naturally: he started cooking for
+        people. Dinners at his own table became a way to build a sense of home and community in a new city.
+      </p>
+      <p>
+        Word spread. Friends brought friends, and friends of friends brought people they had met that week. What
+        began as intimate gatherings has grown into a social circle of locals, expats, creatives, solo travellers
+        and food lovers, with supper clubs, wine tastings and pop-up events across Barcelona.
+      </p>
+      <p>
+        The idea has stayed the same: a carefully crafted night, great food and wine, and a table full of people
+        who are glad they came.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap">
+      <p class="eyebrow">What we care about</p>
+      <div class="grid">
+        {values.map((v) => (
+          <div class="card">
+            <h3>{v.title}</h3>
+            <p>{v.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="actions">
+        <a class="btn" href={luma.calendarUrl || url('events/')}>Join an event</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .story {
+    max-width: 760px;
+  }
+</style>

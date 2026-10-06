@@ -1,0 +1,197 @@
+---
+import Base from '../layouts/Base.astro';
+import LumaEvents from '../components/LumaEvents.astro';
+import { site, luma } from '../config';
+import { url } from '../lib';
+
+const ticketsHref = luma.calendarUrl || url('events/');
+
+const steps = [
+  {
+    title: 'Pick a night',
+    body: 'Browse upcoming dinners, wine tastings and pop-ups on our Luma calendar and grab a seat.',
+  },
+  {
+    title: 'Come as you are',
+    body: 'Most guests arrive knowing no one. That is the point. We take care of the introductions.',
+  },
+  {
+    title: 'Leave with friends',
+    body: 'Long tables, good wine and great conversation. Plenty of our regulars started as strangers.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Do I need to come with someone?',
+    a: 'Not at all. Lots of guests come solo, and our events are designed so you will never be stuck on your own.',
+  },
+  {
+    q: 'Who comes to The Common Thread?',
+    a: 'Curious locals, expats, creatives, solo travellers and food lovers. A real mix of people, which is what makes the table interesting.',
+  },
+  {
+    q: 'How do I book?',
+    a: 'All tickets are sold through Luma. Follow our calendar to get notified as soon as a new event goes live; seats are limited and go quickly.',
+  },
+  {
+    q: 'Can you cater for dietary requirements?',
+    a: 'Let us know when you book and we will do our best. Details for each event are listed on its Luma page.',
+  },
+];
+---
+
+<Base>
+  <section class="hero section--dark">
+    <div class="wrap">
+      <p class="eyebrow">Supper club · {site.city}</p>
+      <h1>{site.tagline}</h1>
+      <p class="lede">
+        The Common Thread is a community for curious locals, expats and travellers who crave connection over
+        great food and wine. Intimate dinners, wine tastings and pop-ups that make making friends as an adult a
+        little easier.
+      </p>
+      <div class="actions">
+        <a class="btn" href={ticketsHref}>See upcoming events</a>
+        <a class="btn btn--ghost" href={url('about/')}>Our story</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h2>Strangers at nine, friends by dessert.</h2>
+      <div class="grid steps">
+        {
+          steps.map((s, i) => (
+            <div class="card">
+              <div class="num">0{i + 1}</div>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap">
+      <p class="eyebrow">Upcoming</p>
+      <h2>Pull up a chair.</h2>
+      <p class="lede">Seats are limited and every event is one night only.</p>
+      <LumaEvents />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">The story</p>
+        <h2>It started around one dinner table.</h2>
+      </div>
+      <div>
+        <p>
+          When founder Kevin Hawkins moved to Barcelona, he started hosting dinners at home as a way to build a
+          sense of community in a new city. Those intimate gatherings grew into something bigger: a social circle
+          that now spans supper clubs, wine tastings and pop-up events across the city.
+        </p>
+        <p><a href={url('about/')}>Read the full story →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap">
+      <p class="eyebrow">Good to know</p>
+      <h2>Questions</h2>
+      <div class="faqs">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="wrap center">
+      <h2>Hosting something?</h2>
+      <p class="lede">
+        We create private dinners, team socials and brand collaborations with the same warmth as our public
+        events.
+      </p>
+      <div class="actions">
+        <a class="btn" href={url('private-events/')}>Work with us</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: clamp(80px, 14vw, 160px) 0;
+    background:
+      radial-gradient(ellipse at 80% 0%, color-mix(in srgb, var(--brass) 25%, transparent), transparent 55%),
+      var(--wine-deep);
+  }
+  .hero h1 {
+    max-width: 14ch;
+  }
+  .steps {
+    margin-top: 2.5rem;
+  }
+  .split {
+    display: grid;
+    gap: 24px 64px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: start;
+  }
+  .faqs {
+    margin-top: 2rem;
+    max-width: 760px;
+  }
+  details {
+    border-top: 1px solid var(--line);
+    padding: 20px 0;
+  }
+  details:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  summary {
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::after {
+    content: '+';
+    color: var(--brass);
+  }
+  details[open] summary::after {
+    content: '−';
+  }
+  details p {
+    margin: 12px 0 0;
+    color: var(--ink-soft);
+  }
+  .center {
+    text-align: center;
+  }
+  .center p,
+  .center .actions {
+    margin-inline: auto;
+    justify-content: center;
+  }
+</style>

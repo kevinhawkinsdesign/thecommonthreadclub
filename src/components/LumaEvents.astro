@@ -1,0 +1,47 @@
+---
+// Upcoming events straight from Luma, so there's nothing to update on the
+// site when a new dinner goes live. Falls back to a link if no calendar ID is set.
+import { luma } from '../config';
+---
+
+<div class="luma">
+  {
+    luma.calendarId ? (
+      <iframe
+        src={`https://luma.com/embed/calendar/${luma.calendarId}/events?lt=light`}
+        title="Upcoming events on Luma"
+        loading="lazy"
+        allowfullscreen
+      />
+    ) : (
+      <div class="luma__fallback">
+        <p>Our upcoming dinners, tastings and pop-ups are all listed on Luma.</p>
+        {luma.calendarUrl && (
+          <a class="btn" href={luma.calendarUrl}>
+            See upcoming events
+          </a>
+        )}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .luma iframe {
+    width: 100%;
+    height: 720px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+  }
+  .luma__fallback {
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    padding: 40px 28px;
+    text-align: center;
+    background: var(--paper);
+  }
+  .luma__fallback p {
+    margin-inline: auto;
+  }
+</style>

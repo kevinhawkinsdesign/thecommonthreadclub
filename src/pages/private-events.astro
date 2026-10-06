@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import { contact } from '../config';
+
+const offers = [
+  { title: 'Private dinners', body: 'Birthdays, celebrations or simply a table of friends: a supper-club night designed around your group.' },
+  { title: 'Team socials', body: 'An evening that gets colleagues talking, ideal for offsites and teams visiting Barcelona.' },
+  { title: 'Brand & venue collaborations', body: 'Co-hosted events with restaurants, wineries and brands who want to reach a curious, international crowd.' },
+];
+
+const mailto = contact.email
+  ? `mailto:${contact.email}?subject=${encodeURIComponent('Private event enquiry')}`
+  : '';
+---
+
+<Base title="Private events" description="Private dinners, team socials and collaborations with The Common Thread in Barcelona.">
+  <section class="section section--dark">
+    <div class="wrap">
+      <p class="eyebrow">Private events & collaborations</p>
+      <h1>Your table, our kind of night.</h1>
+      <p class="lede">
+        We bring the warmth of our public events to private dinners, team socials and partnerships.
+      </p>
+      {mailto && (
+        <div class="actions">
+          <a class="btn" href={mailto}>Get in touch</a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid">
+        {offers.map((o) => (
+          <div class="card">
+            <h3>{o.title}</h3>
+            <p>{o.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap">
+      <h2>Tell us what you have in mind</h2>
+      <p class="lede">
+        Share a rough date, the number of guests and what you are celebrating, and we will come back with ideas.
+      </p>
+      {mailto ? (
+        <div class="actions"><a class="btn" href={mailto}>Email {contact.email}</a></div>
+      ) : (
+        <p>{/* TODO: shown until contact.email is set in src/config.ts */}Contact details coming soon.</p>
+      )}
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,63 @@
+---
+import { site, nav, luma, contact } from '../config';
+import { url } from '../lib';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div>
+      <p class="footer__name">{site.name}</p>
+      <p class="footer__tag">{site.tagline}<br />{site.city}</p>
+    </div>
+    <ul>
+      {nav.map((item) => <li><a href={url(item.href)}>{item.label}</a></li>)}
+      {luma.calendarUrl && <li><a href={luma.calendarUrl}>Luma calendar</a></li>}
+      {contact.instagram && <li><a href={contact.instagram}>Instagram</a></li>}
+      {contact.email && <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>}
+    </ul>
+  </div>
+  <div class="wrap footer__legal">© {year} {site.name}</div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--ink);
+    color: color-mix(in srgb, var(--cream) 80%, transparent);
+    padding: 56px 0 32px;
+    font-size: 0.95rem;
+  }
+  .footer a {
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .footer__name {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--cream);
+    margin-bottom: 0.25em;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .footer__legal {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid color-mix(in srgb, var(--cream) 15%, transparent);
+    font-size: 0.85rem;
+  }
+</style>
