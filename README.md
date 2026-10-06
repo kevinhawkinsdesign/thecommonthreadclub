@@ -13,6 +13,7 @@ npm run build    # outputs to dist/
 
 ## Editing content
 
+- **Next event to promote:** `nextEvent` in `src/config.ts`. It shows in the top banner, header button, home hero and events page, and drops off automatically after its date (the site rebuilds daily).
 - **Links, Luma calendar, email, Instagram:** `src/config.ts`. Empty values are hidden on the site.
 - **Pages:** `src/pages/` (`index`, `events`, `about`, `private-events`, `404`).
 - **Colours and type:** CSS variables at the top of `src/styles/global.css`.

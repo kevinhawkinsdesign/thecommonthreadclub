@@ -1,9 +1,9 @@
 ---
 import { site, nav, luma } from '../config';
-import { url } from '../lib';
+import { url, upcomingEvent } from '../lib';
 
 const current = Astro.url.pathname;
-const ticketsHref = luma.calendarUrl || url('events/');
+const ticketsHref = upcomingEvent()?.url || luma.calendarUrl || url('events/');
 ---
 
 <header class="header">

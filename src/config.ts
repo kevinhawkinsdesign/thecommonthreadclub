@@ -16,6 +16,18 @@ export const luma = {
   calendarId: '', // TODO: add Luma calendar ID to embed upcoming events
 };
 
+// The event to promote across the site (hero, banner, header button).
+// It disappears automatically once the date has passed (the site rebuilds daily).
+export const nextEvent = {
+  url: 'https://luma.com/thecommon-6hjp',
+  date: '2026-11-26', // YYYY-MM-DD, Barcelona time
+  title: '', // TODO: event name as it appears on Luma
+  time: '', // e.g. '20:30'
+  location: '', // e.g. 'Gràcia, Barcelona' (keep vague if the venue is revealed later)
+  price: '', // e.g. '€65'
+  blurb: '', // one or two sentences about the night
+};
+
 export const contact = {
   email: '', // TODO: e.g. hello@thecommonthreadclub.com
   instagram: '', // TODO: full Instagram URL

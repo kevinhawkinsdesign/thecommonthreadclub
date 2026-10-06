@@ -1,0 +1,43 @@
+---
+// Thin site-wide strip pointing at the promoted event.
+import { upcomingEvent } from '../lib';
+
+const event = upcomingEvent();
+---
+
+{
+  event && (
+    <a class="banner" href={event.url}>
+      <span class="banner__dot" aria-hidden="true">✦</span>
+      <span>
+        Next event: <strong>{event.weekday} {event.day} {event.month}</strong>
+      </span>
+      <span class="banner__cta">Get tickets →</span>
+    </a>
+  )
+}
+
+<style>
+  .banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px 12px;
+    padding: 10px 16px;
+    background: var(--brass);
+    color: var(--ink);
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+  }
+  .banner:hover .banner__cta {
+    text-decoration: underline;
+  }
+  .banner strong {
+    font-weight: 600;
+  }
+  .banner__cta {
+    font-weight: 600;
+  }
+</style>

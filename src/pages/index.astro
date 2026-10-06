@@ -1,10 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import LumaEvents from '../components/LumaEvents.astro';
+import NextEvent from '../components/NextEvent.astro';
 import { site, luma } from '../config';
-import { url } from '../lib';
+import { url, upcomingEvent } from '../lib';
 
-const ticketsHref = luma.calendarUrl || url('events/');
+const event = upcomingEvent();
+const ticketsHref = event?.url || luma.calendarUrl || url('events/');
 
 const steps = [
   {
@@ -43,18 +45,23 @@ const faqs = [
 
 <Base>
   <section class="hero section--dark">
-    <div class="wrap">
-      <p class="eyebrow">Supper club · {site.city}</p>
-      <h1>{site.tagline}</h1>
-      <p class="lede">
-        The Common Thread is a community for curious locals, expats and travellers who crave connection over
-        great food and wine. Intimate dinners, wine tastings and pop-ups that make making friends as an adult a
-        little easier.
-      </p>
-      <div class="actions">
-        <a class="btn" href={ticketsHref}>See upcoming events</a>
-        <a class="btn btn--ghost" href={url('about/')}>Our story</a>
+    <div class:list={['wrap', { hero__grid: event }]}>
+      <div>
+        <p class="eyebrow">Supper club · {site.city}</p>
+        <h1>{site.tagline}</h1>
+        <p class="lede">
+          The Common Thread is a community for curious locals, expats and travellers who crave connection over
+          great food and wine. Intimate dinners, wine tastings and pop-ups that make making friends as an adult a
+          little easier.
+        </p>
+        <div class="actions">
+          <a class="btn" href={ticketsHref}>
+            {event ? `Book ${event.weekdayShort} ${event.day} ${event.monthShort}` : 'See upcoming events'}
+          </a>
+          <a class="btn btn--ghost" href={url('about/')}>Our story</a>
+        </div>
       </div>
+      <NextEvent />
     </div>
   </section>
 
@@ -78,7 +85,7 @@ const faqs = [
 
   <section class="section section--cream">
     <div class="wrap">
-      <p class="eyebrow">Upcoming</p>
+      <p class="eyebrow">{event ? 'More dates' : 'Upcoming'}</p>
       <h2>Pull up a chair.</h2>
       <p class="lede">Seats are limited and every event is one night only.</p>
       <LumaEvents />
@@ -135,13 +142,22 @@ const faqs = [
 
 <style>
   .hero {
-    padding: clamp(80px, 14vw, 160px) 0;
+    padding: clamp(64px, 10vw, 120px) 0;
     background:
       radial-gradient(ellipse at 80% 0%, color-mix(in srgb, var(--brass) 25%, transparent), transparent 55%),
       var(--wine-deep);
   }
   .hero h1 {
     max-width: 14ch;
+  }
+  .hero__grid {
+    display: grid;
+    gap: 48px 64px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+    align-items: center;
+  }
+  .hero__grid h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
   }
   .steps {
     margin-top: 2.5rem;
