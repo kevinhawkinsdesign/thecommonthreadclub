@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Room from '../components/Room.astro';
-import Plate from '../components/Plate.astro';
+import Arch from '../components/Arch.astro';
 import Arrow from '../components/Arrow.astro';
 import { luma } from '../config';
 import { t, type Lang } from '../i18n';
@@ -38,7 +38,7 @@ const plates = [
         <Room tone={rooms[i]} part={i === a.chapters.length - 1 ? 'foot' : 'middle'}>
           {plate ? (
             <div class:list={['setting', { 'setting--flip': altIndex % 2 === 1 }]}>
-              <Plate src={plate.src} position={plate.pos} alt={a.alts[altIndex]} />
+              <Arch src={plate.src} position={plate.pos} alt={a.alts[altIndex]} />
               <div class="stack">
                 <h2>{ch.title}</h2>
                 {ch.body.map((p) => (

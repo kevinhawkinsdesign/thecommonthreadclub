@@ -4,6 +4,7 @@ import Room from '../components/Room.astro';
 import PlaceCard from '../components/PlaceCard.astro';
 import LumaEvents from '../components/LumaEvents.astro';
 import PastCard from '../components/PastCard.astro';
+import Offer from '../components/Offer.astro';
 import { archive } from '../data/past';
 import { t, type Lang } from '../i18n';
 import { upcomingEvent } from '../lib';
@@ -46,10 +47,7 @@ const hasNext = Boolean(upcomingEvent(lang));
     <div class="formats">
       {
         e.formats.map((f) => (
-          <div>
-            <h3>{f.name}</h3>
-            <p>{f.body}</p>
-          </div>
+          <Offer icon={f.icon} name={f.name} body={f.body} />
         ))
       }
     </div>
@@ -86,15 +84,13 @@ const hasNext = Boolean(upcomingEvent(lang));
   }
   .formats {
     display: grid;
-    gap: 28px 40px;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-    text-align: center;
+    gap: 48px 40px;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
   }
-  .formats h3 {
-    margin-bottom: 0.4em;
-  }
-  .formats p {
-    margin-inline: auto;
-    color: var(--ink-soft);
+  @media (min-width: 640px) {
+    .formats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 </style>

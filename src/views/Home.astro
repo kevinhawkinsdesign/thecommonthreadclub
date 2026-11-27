@@ -6,6 +6,7 @@ import Plate from '../components/Plate.astro';
 import PlaceCard from '../components/PlaceCard.astro';
 import Reel from '../components/Reel.astro';
 import PastCard from '../components/PastCard.astro';
+import Arch from '../components/Arch.astro';
 import Arrow from '../components/Arrow.astro';
 import { contact, luma, press } from '../config';
 import { archive } from '../data/past';
@@ -70,9 +71,9 @@ const recent = archive().slice(0, 3);
     </div>
   </Room>
 
-  <Room tone="sand">
+  <Room tone="marigold">
     <div class="setting setting--flip">
-      <Plate src={candlelit} alt={h.hostAlt} position="50% 60%" />
+      <Arch src={candlelit} alt={h.hostAlt} position="50% 60%" />
       <div class="stack">
         <h2>{h.hostTitle}</h2>
         {h.hostBody.map((p) => <p>{p}</p>)}
@@ -102,7 +103,7 @@ const recent = archive().slice(0, 3);
     )
   }
 
-  <Room tone="marigold">
+  <Room tone="sand">
     {
       press.length > 0 && (
         <div class="press center">
@@ -116,14 +117,20 @@ const recent = archive().slice(0, 3);
         </div>
       )
     }
-    <div class="menu">
+    <div class="qa">
       <h2 class="center">{h.faqTitle}</h2>
       <dl>
         {
           h.faqs.map((f) => (
-            <div class="menu__item">
-              <dt>{f.q}</dt>
-              <dd>{f.a}</dd>
+            <div class="qa__pair">
+              <dt>
+                <span class="qa__letter" aria-hidden="true">Q</span>
+                <span class="qa__pill">{f.q}</span>
+              </dt>
+              <dd>
+                <span class="qa__letter" aria-hidden="true">A</span>
+                <span class="qa__pill">{f.a}</span>
+              </dd>
             </div>
           ))
         }
@@ -257,32 +264,51 @@ const recent = archive().slice(0, 3);
     color: var(--aubergine);
   }
 
-  .menu {
-    max-width: 640px;
+  /* Q&A, after the brand's social template */
+  .qa {
+    max-width: 680px;
     margin-inline: auto;
-    padding: clamp(32px, 5vw, 56px) clamp(22px, 4vw, 48px);
-    background: var(--cream);
-    box-shadow: 0 18px 36px -20px rgb(51 4 40 / 0.4);
   }
-  .menu h2 {
-    margin-bottom: 1.2em;
+  .qa h2 {
+    margin-bottom: 1em;
   }
   dl {
+    display: grid;
+    gap: clamp(24px, 4vw, 36px);
     margin: 0;
   }
-  .menu__item {
-    padding: 1.1em 0;
-    text-align: center;
-    border-top: 1px solid color-mix(in srgb, var(--sand) 70%, transparent);
+  .qa__pair {
+    display: grid;
+    gap: 10px;
   }
-  dt {
-    font-family: var(--display);
-    font-size: 1.3rem;
-    margin-bottom: 0.3em;
-  }
+  dt,
   dd {
-    margin: 0 auto;
-    max-width: 46ch;
+    display: grid;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+  }
+  .qa__letter {
+    font-family: var(--display);
+    font-size: 2.4rem;
+    line-height: 1;
+    text-align: center;
+    color: var(--aubergine);
+  }
+  .qa__pill {
+    display: block;
+    padding: 14px 24px;
+    border-radius: 999px;
+    background: var(--cream);
+    box-shadow: 0 10px 22px -16px rgb(51 4 40 / 0.5);
+  }
+  dt .qa__pill {
+    font-family: var(--display);
+    font-size: 1.2rem;
+  }
+  dd .qa__pill {
+    border-radius: 28px;
     color: var(--ink-soft);
   }
   .close {

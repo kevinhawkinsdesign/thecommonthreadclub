@@ -10,6 +10,7 @@ All sourced from the club's own channels on 27 November 2026. The brand pack (`b
 | `public/brand/og.jpg` | Brand pack `PP & Banner/Banner.png`, cropped to 1200×630 |
 | `public/favicon-32.png`, `apple-touch-icon.png`, `icon-512.png` | Brand pack `PP & Banner/Profile Pic.png` |
 | `public/brand/icon-instagram.png` | Brand pack `Social Icons/Social_6.png` |
+| `public/brand/icons/*.png` | Brand pack `Insta Icons/` (dinners, workshops, travel, community, home) |
 | `src/assets/photos/aperitivo.jpg` | Previous site, `…tctc-food.jpeg` |
 | `src/assets/photos/mesa.jpg` | Previous site, `450941623_…_n.jpeg` |
 | `src/assets/photos/candlelit-room.jpg` | Previous site, `470120422_…_n-2.jpg` |

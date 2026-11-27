@@ -108,9 +108,10 @@ export const t = {
       onLuma: 'Event page',
       formatsTitle: 'What we host',
       formats: [
-        { name: 'Supper clubs', body: 'Long-table dinners where the guest list is half the fun.' },
-        { name: 'Wine tastings', body: 'Relaxed, guided tastings with pours worth talking about.' },
-        { name: 'Pop-ups & collaborations', body: 'One-night-only nights with chefs, sommeliers, venues and friends of the club.' },
+        { icon: 'dinners', name: 'Supper clubs', body: 'Long-table dinners where the guest list is half the fun.' },
+        { icon: 'workshops', name: 'Tastings & workshops', body: 'Relaxed, guided wine tastings and hands-on nights with pours worth talking about.' },
+        { icon: 'community', name: 'Pop-ups & collaborations', body: 'One-night-only nights with chefs, sommeliers, venues and friends of the club.' },
+        { icon: 'travel', name: 'Culinary trips', body: 'Every so often, the table goes on the road.' },
       ],
     },
     about: {
@@ -164,9 +165,9 @@ export const t = {
       title: 'Private dinners',
       lede: 'The same long table, just for your people.',
       offers: [
-        { name: 'Celebrations', body: 'Birthdays, anniversaries, or a table of friends who deserve a proper night.' },
-        { name: 'Team nights', body: 'An evening that gets colleagues talking, for offsites and teams visiting Barcelona.' },
-        { name: 'Collaborations', body: 'Co-hosted nights with chefs, sommeliers, venues and brands.' },
+        { icon: 'home', name: 'Celebrations', body: 'Birthdays, anniversaries, or a table of friends who deserve a proper night.' },
+        { icon: 'workshops', name: 'Team nights', body: 'An evening that gets colleagues talking, for offsites and teams visiting Barcelona.' },
+        { icon: 'community', name: 'Collaborations', body: 'Co-hosted nights with chefs, sommeliers, venues and brands.' },
       ],
       askTitle: 'Tell us what you have in mind',
       askBody: 'A rough date, how many guests and what you’re celebrating is all we need to start.',
@@ -271,9 +272,10 @@ export const t = {
       onLuma: 'Página del evento',
       formatsTitle: 'Lo que organizamos',
       formats: [
-        { name: 'Supper clubs', body: 'Cenas en mesa larga donde la lista de invitados es la mitad de la gracia.' },
-        { name: 'Catas de vino', body: 'Catas guiadas y relajadas, con vinos que dan de qué hablar.' },
-        { name: 'Pop-ups y colaboraciones', body: 'Noches únicas con chefs, sumilleres, locales y amigos del club.' },
+        { icon: 'dinners', name: 'Supper clubs', body: 'Cenas en mesa larga donde la lista de invitados es la mitad de la gracia.' },
+        { icon: 'workshops', name: 'Catas y talleres', body: 'Catas de vino guiadas y relajadas, y noches prácticas con vinos que dan de qué hablar.' },
+        { icon: 'community', name: 'Pop-ups y colaboraciones', body: 'Noches únicas con chefs, sumilleres, locales y amigos del club.' },
+        { icon: 'travel', name: 'Viajes gastronómicos', body: 'De vez en cuando, la mesa se va de viaje.' },
       ],
     },
     about: {
@@ -327,9 +329,9 @@ export const t = {
       title: 'Cenas privadas',
       lede: 'La misma mesa larga, solo para tu gente.',
       offers: [
-        { name: 'Celebraciones', body: 'Cumpleaños, aniversarios o una mesa de amigos que se merece una buena noche.' },
-        { name: 'Noches de equipo', body: 'Una velada que hace hablar a los compañeros, para offsites y equipos de visita en Barcelona.' },
-        { name: 'Colaboraciones', body: 'Noches compartidas con chefs, sumilleres, locales y marcas.' },
+        { icon: 'home', name: 'Celebraciones', body: 'Cumpleaños, aniversarios o una mesa de amigos que se merece una buena noche.' },
+        { icon: 'workshops', name: 'Noches de equipo', body: 'Una velada que hace hablar a los compañeros, para offsites y equipos de visita en Barcelona.' },
+        { icon: 'community', name: 'Colaboraciones', body: 'Noches compartidas con chefs, sumilleres, locales y marcas.' },
       ],
       askTitle: 'Cuéntanos qué tienes en mente',
       askBody: 'Una fecha aproximada, cuántas personas y qué celebráis: con eso nos basta para empezar.',
