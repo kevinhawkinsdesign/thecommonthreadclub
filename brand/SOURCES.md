@@ -25,3 +25,4 @@ All sourced from the club's own channels on 27 November 2026. The brand pack (`b
 Originals are kept in `brand/photos/` and `brand/pack/`. Canva templates for posts and stories are linked in `brand/pack/Templates/Templates.txt`.
 | `src/assets/photos/kevin.jpg`, `src/assets/moments/*.jpg`, `src/assets/past/casino-2024.jpg` | Photos sent by the owner in chat, 27 November 2026 (originals in `brand/photos/2026-11/`) |
 | `src/assets/moments/{candlelit-dinner,papel-picado,tacos,friends}.jpg`, `src/assets/trips/*.jpg`, `public/video/a-toast.mp4` | Photos and video sent by the owner, 27 November 2026 (originals in `brand/photos/2026-11b/`; the toast video is cropped to remove a reposter's handle) |
+| `src/assets/moments/{chips,polaroids,arrivals,sommelier,candle-room}.jpg`, `src/assets/past/thanksgiving-2026.jpg` | Photos sent by the owner (originals in `brand/photos/2026-11c/`; Thanksgiving cropped above the story caption) |
