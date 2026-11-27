@@ -127,7 +127,7 @@ const recent = archive().slice(0, 3);
           {press.map((p) => (
             <p class="press__item">
               <span class="press__outlet">{p.outlet}</span>
-              <a href={p.url}>{p.title}</a>
+              {p.url ? <a href={p.url}>{p.title}</a> : <span>{p.title}</span>}
             </p>
           ))}
         </div>
