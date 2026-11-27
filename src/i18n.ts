@@ -7,16 +7,16 @@ export type Lang = (typeof languages)[number];
 // Page keys map to a slug per language.
 export const routes = {
   home: { en: '', es: 'es/' },
-  events: { en: 'events/', es: 'es/eventos/' },
+  events: { en: 'calendar/', es: 'es/calendario/' },
   about: { en: 'about/', es: 'es/nosotros/' },
-  private: { en: 'private-events/', es: 'es/eventos-privados/' },
+  private: { en: 'memories/', es: 'es/recuerdos/' },
 } as const;
 export type RouteKey = keyof typeof routes;
 
 export const t = {
   en: {
     locale: 'en-GB',
-    nav: { events: 'Events', about: 'Our story', private: 'Private dinners', book: 'Take a seat', follow: 'Join the table' },
+    nav: { events: 'Calendar', about: 'Our story', private: 'Memories', book: 'Take a seat', follow: 'Join the table' },
     langSwitch: 'Español',
     skip: 'Skip to content',
     tagline: 'Half dinner party, half speakeasy, 100% fun.',
@@ -71,6 +71,7 @@ export const t = {
       pastBody: 'A few of the nights so far.',
       pastCta: 'See every past event',
       tripsCta: 'See the trips',
+      momentsCta: 'See all memories',
       pressTitle: 'As featured in',
       faqTitle: 'Before you come',
       faqs: [
@@ -105,8 +106,8 @@ export const t = {
       privateCta: 'Private dinners',
     },
     events: {
-      title: 'Events',
-      intro: 'Every event is one night only and seats are limited. Tickets are sold on Luma.',
+      title: 'Calendar',
+      intro: 'Every event is one night only and seats are limited. Subscribe on Luma to hear about new dates first.',
       upcomingTitle: 'Coming up',
       pastTitle: 'Past tables',
       pastIntro: 'Supper clubs, tastings, collaborations and celebrations from the last few years.',
@@ -165,10 +166,14 @@ export const t = {
       ],
       alts: [
         'A candlelit dinner in a high-ceilinged Barcelona apartment',
-        'A cellist playing beside a table of candles',
+        'Guests eating and talking along a long lamplit table',
         'Polaroids and chips on a wine casino table',
       ],
       cta: 'Join the table',
+    },
+    memories: {
+      title: 'Memories',
+      lede: 'Nights we’ve shared around the table, and a few away from it.',
     },
     private: {
       title: 'Private dinners',
@@ -190,7 +195,7 @@ export const t = {
   },
   es: {
     locale: 'es-ES',
-    nav: { events: 'Eventos', about: 'Nuestra historia', private: 'Cenas privadas', book: 'Reserva tu sitio', follow: 'Únete a la mesa' },
+    nav: { events: 'Calendario', about: 'Nuestra historia', private: 'Recuerdos', book: 'Reserva tu sitio', follow: 'Únete a la mesa' },
     langSwitch: 'English',
     skip: 'Ir al contenido',
     tagline: 'Mitad cena entre amigos, mitad speakeasy, 100% diversión.',
@@ -245,6 +250,7 @@ export const t = {
       pastBody: 'Algunas de las noches que hemos vivido.',
       pastCta: 'Ver todos los eventos pasados',
       tripsCta: 'Ver los viajes',
+      momentsCta: 'Ver todos los recuerdos',
       pressTitle: 'Han hablado de nosotros',
       faqTitle: 'Antes de venir',
       faqs: [
@@ -279,8 +285,8 @@ export const t = {
       privateCta: 'Cenas privadas',
     },
     events: {
-      title: 'Eventos',
-      intro: 'Cada evento es una sola noche y las plazas son limitadas. Las entradas se venden en Luma.',
+      title: 'Calendario',
+      intro: 'Cada evento es una sola noche y las plazas son limitadas. Suscríbete en Luma para enterarte antes que nadie de las nuevas fechas.',
       upcomingTitle: 'Próximamente',
       pastTitle: 'Mesas pasadas',
       pastIntro: 'Supper clubs, catas, colaboraciones y celebraciones de los últimos años.',
@@ -339,10 +345,14 @@ export const t = {
       ],
       alts: [
         'Una cena a la luz de las velas en un piso de techos altos de Barcelona',
-        'Una violonchelista tocando junto a una mesa llena de velas',
+        'Invitados comiendo y charlando a lo largo de una mesa larga iluminada con lamparitas',
         'Polaroids y fichas sobre una mesa de casino del vino',
       ],
       cta: 'Únete a la mesa',
+    },
+    memories: {
+      title: 'Recuerdos',
+      lede: 'Noches compartidas alrededor de la mesa, y alguna lejos de ella.',
     },
     private: {
       title: 'Cenas privadas',

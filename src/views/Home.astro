@@ -114,6 +114,9 @@ const recent = archive().slice(0, 3);
       <p>{h.moments.body}</p>
     </div>
     <Moments lang={lang} items={moments.slice(0, homeCount)} video />
+    <p class="center more">
+      <a class="btn btn--quiet" href={href('private', lang)}>{h.momentsCta} <Arrow /></a>
+    </p>
   </Room>
 
   <Room tone="sand">
@@ -164,7 +167,7 @@ const recent = archive().slice(0, 3);
       <div class="stack">
         <h2>{h.privateTitle}</h2>
         <p>{h.privateBody}</p>
-        <p><a class="btn btn--quiet" href={href('private', lang)}>{h.privateCta} <Arrow /></a></p>
+        <p><a class="btn btn--quiet" href={`${href('private', lang)}#your-table`}>{h.privateCta} <Arrow /></a></p>
       </div>
     </div>
   </Room>

@@ -6,8 +6,6 @@ import LumaEvents from '../components/LumaEvents.astro';
 import PastCard from '../components/PastCard.astro';
 import Offer from '../components/Offer.astro';
 import TripCard from '../components/TripCard.astro';
-import Moments from '../components/Moments.astro';
-import { moments, homeCount } from '../data/moments';
 import { trips } from '../data/trips';
 import { archive } from '../data/past';
 import { t, type Lang } from '../i18n';
@@ -26,8 +24,8 @@ const hasNext = Boolean(upcomingEvent(lang));
   <Room tone="aubergine" part="head" class="center">
     <h1 class="title">{e.title}</h1>
     <p class="intro">{e.intro}</p>
-    <PlaceCard lang={lang} />
-    {hasNext && <div class="embed"><LumaEvents /></div>}
+    {hasNext && <PlaceCard lang={lang} />}
+    <div class="embed"><LumaEvents /></div>
   </Room>
 
   {
@@ -54,13 +52,6 @@ const hasNext = Boolean(upcomingEvent(lang));
     <div class="trips">
       {trips.map((trip) => <TripCard trip={trip} lang={lang} />)}
     </div>
-  </Room>
-
-  <Room tone="rust">
-    <div class="center head">
-      <h2>{e.moreMomentsTitle}</h2>
-    </div>
-    <Moments lang={lang} items={moments.slice(homeCount)} />
   </Room>
 
   <Room tone="marigold" part="foot">
