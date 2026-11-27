@@ -4,7 +4,7 @@ import Room from '../components/Room.astro';
 import Arrow from '../components/Arrow.astro';
 import Offer from '../components/Offer.astro';
 import Moments from '../components/Moments.astro';
-import { privateMoments } from '../data/moments';
+import { moments, privateMoments } from '../data/moments';
 import { contact } from '../config';
 import { t, type Lang } from '../i18n';
 
@@ -12,36 +12,34 @@ interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
+const m = t[lang].memories;
 const p = t[lang].private;
 const mailto = contact.email ? `mailto:${contact.email}?subject=${encodeURIComponent(p.title)}` : '';
 ---
 
-<Base lang={lang} title={p.title} description={p.lede}>
+<Base lang={lang} title={m.title} description={m.lede}>
   <Room tone="aubergine" part="head" class="center">
-    <h1 class="title">{p.title}</h1>
-    <p class="lede">{p.lede}</p>
+    <h1 class="title">{m.title}</h1>
+    <p class="lede">{m.lede}</p>
   </Room>
-  <Room tone="marigold">
-    <div class="offers">
-      {
-        p.offers.map((o) => (
-          <Offer icon={o.icon} name={o.name} body={o.body} />
-        ))
-      }
-    </div>
-  </Room>
+
   <Room tone="rust">
-    <h2 class="center gallery-title">{p.galleryTitle}</h2>
-    <Moments lang={lang} items={privateMoments} columns={2} />
+    <Moments lang={lang} items={[...moments, ...privateMoments]} video />
   </Room>
-  <Room tone="olive" part="foot" class="center">
-    <h2>{p.askTitle}</h2>
-    <p class="ask">{p.askBody}</p>
+
+  <Room tone="olive" part="foot">
+    <div class="center" id="your-table">
+      <h2>{p.title}</h2>
+      <p class="ask">{p.lede} {p.askBody}</p>
+    </div>
+    <div class="offers">
+      {p.offers.map((o) => <Offer icon={o.icon} name={o.name} body={o.body} />)}
+    </div>
     <p class="actions">
       {mailto && <a class="btn" href={mailto}>{p.email} <Arrow /></a>}
       {contact.instagram && <a class:list={['btn', { 'btn--quiet': mailto }]} href={contact.instagram}>{p.dm} <Arrow /></a>}
     </p>
-    {!mailto && !contact.instagram && <p>{p.soon}</p>}
+    {!mailto && !contact.instagram && <p class="center">{p.soon}</p>}
   </Room>
 </Base>
 
@@ -53,20 +51,19 @@ const mailto = contact.email ? `mailto:${contact.email}?subject=${encodeURICompo
   }
   .lede {
     margin-inline: auto;
-    max-width: 26ch;
+    max-width: 28ch;
+  }
+  #your-table {
+    scroll-margin-top: 24px;
+  }
+  .ask {
+    margin: 1rem auto clamp(32px, 5vw, 48px);
+    color: var(--ink-soft);
   }
   .offers {
     display: grid;
     gap: 32px 40px;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-    text-align: center;
-  }
-
-  .gallery-title {
-    margin-bottom: 1em;
-  }
-  .ask {
-    margin: 1rem auto 1.8rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
   }
   .actions {
     display: flex;
@@ -74,5 +71,6 @@ const mailto = contact.email ? `mailto:${contact.email}?subject=${encodeURICompo
     justify-content: center;
     gap: 10px;
     max-width: none;
+    margin-top: clamp(32px, 5vw, 48px);
   }
 </style>

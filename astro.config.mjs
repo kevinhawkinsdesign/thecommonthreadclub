@@ -8,5 +8,15 @@ export default defineConfig({
   site: process.env.SITE || 'https://www.thecommonthreadclub.com',
   base: process.env.BASE_PATH || '/',
   trailingSlash: 'ignore',
+  // Old URLs: events became the calendar, private dinners became memories.
+  // Destinations include the base path; Astro doesn't add it to redirects.
+  redirects: Object.fromEntries(
+    [
+      ['/events', 'calendar'],
+      ['/es/eventos', 'es/calendario'],
+      ['/private-events', 'memories'],
+      ['/es/eventos-privados', 'es/recuerdos'],
+    ].map(([from, to]) => [from, `${(process.env.BASE_PATH || '/').replace(/\/$/, '')}/${to}/`]),
+  ),
   integrations: [sitemap({ i18n: { defaultLocale: 'en', locales: { en: 'en-GB', es: 'es-ES' } } })],
 });

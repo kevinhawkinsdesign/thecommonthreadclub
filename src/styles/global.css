@@ -147,6 +147,8 @@ a:hover {
   --room-tone: color-mix(in srgb, var(--room) 86%, var(--cream));
   position: relative;
   isolation: isolate;
+  /* keep child margins (the runner's foot) inside the patterned field */
+  display: flow-root;
   background: var(--room);
   color: var(--room-ink);
 }
@@ -158,6 +160,14 @@ a:hover {
   background: var(--room-tone);
   -webkit-mask: var(--pattern) 0 0 / 560px repeat;
   mask: var(--pattern) 0 0 / 560px repeat;
+}
+/* Aubergine bands inside the page show the page's own pattern, so it runs
+   unbroken from header to footer instead of restarting at each band. */
+.page .room--aubergine {
+  background: none;
+}
+.page .room--aubergine::before {
+  content: none;
 }
 .room--aubergine {
   --room: var(--aubergine);

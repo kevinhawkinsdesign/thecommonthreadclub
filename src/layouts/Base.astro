@@ -59,13 +59,11 @@ const org = {
   <body style={pattern ? `--pattern: url(${pattern})` : undefined}>
     <a class="skip visually-hidden" href="#main">{t[lang].skip}</a>
     <EventBanner lang={lang} />
-    <div class="room room--aubergine">
+    <div class="room room--aubergine page">
       <Header lang={lang} />
-    </div>
-    <main id="main">
-      <slot />
-    </main>
-    <div class="room room--aubergine">
+      <main id="main">
+        <slot />
+      </main>
       <Footer lang={lang} />
     </div>
   </body>
