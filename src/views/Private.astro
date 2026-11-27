@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import Room from '../components/Room.astro';
 import Arrow from '../components/Arrow.astro';
 import Offer from '../components/Offer.astro';
+import Moments from '../components/Moments.astro';
+import { privateMoments } from '../data/moments';
 import { contact } from '../config';
 import { t, type Lang } from '../i18n';
 
@@ -27,6 +29,10 @@ const mailto = contact.email ? `mailto:${contact.email}?subject=${encodeURICompo
         ))
       }
     </div>
+  </Room>
+  <Room tone="rust">
+    <h2 class="center gallery-title">{p.galleryTitle}</h2>
+    <Moments lang={lang} items={privateMoments} columns={2} />
   </Room>
   <Room tone="olive" part="foot" class="center">
     <h2>{p.askTitle}</h2>
@@ -56,6 +62,9 @@ const mailto = contact.email ? `mailto:${contact.email}?subject=${encodeURICompo
     text-align: center;
   }
 
+  .gallery-title {
+    margin-bottom: 1em;
+  }
   .ask {
     margin: 1rem auto 1.8rem;
   }
