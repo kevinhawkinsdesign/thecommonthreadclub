@@ -230,7 +230,7 @@ a:hover {
 }
 .runner--foot {
   padding-bottom: clamp(56px, 8vw, 96px);
-  margin-bottom: clamp(48px, 7vw, 88px);
+  margin-bottom: clamp(32px, 4vw, 48px);
   box-shadow:
     -1px 0 0 rgb(51 4 40 / 0.08),
     1px 0 0 rgb(51 4 40 / 0.08),
