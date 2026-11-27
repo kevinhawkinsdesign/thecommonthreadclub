@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import EventBanner from '../components/EventBanner.astro';
 import { contact, luma, site } from '../config';
 import { t, type Lang } from '../i18n';
-import { alternate, asset, url } from '../lib';
+import { alternates, asset, url } from '../lib';
 
 interface Props {
   lang: Lang;
@@ -16,7 +16,7 @@ interface Props {
 const { lang, title, description = t[lang].description } = Astro.props;
 const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · Supper club ${site.city}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const other = alternate(Astro.url.pathname, lang);
+const versions = alternates(Astro.url.pathname, lang);
 const pattern = asset('brand/pattern.webp');
 const ogImage = asset('brand/og.jpg');
 const org = {
@@ -40,13 +40,13 @@ const org = {
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang={lang} href={canonical} />
-    <link rel="alternate" hreflang={other.lang} href={new URL(other.href, Astro.site)} />
+    {versions.map((v) => <link rel="alternate" hreflang={v.lang} href={new URL(v.href, Astro.site)} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(versions[0].href, Astro.site)} />
     <link rel="icon" href={url('favicon-32.png')} sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href={url('apple-touch-icon.png')} />
     <meta name="theme-color" content="#330428" />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_GB'} />
+    <meta property="og:locale" content={{ en: 'en_GB', es: 'es_ES', ca: 'ca_ES' }[lang]} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />

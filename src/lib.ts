@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { luma, nextEvent } from './config';
-import { routes, t, type Lang, type RouteKey } from './i18n';
+import { languages, routes, t, type Lang, type RouteKey } from './i18n';
 
 // Prefix internal paths with the configured base so links work on
 // both a custom domain and <user>.github.io/<repo>.
@@ -9,15 +9,12 @@ export const url = (p = '') => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/$
 
 export const href = (key: RouteKey, lang: Lang) => url(routes[key][lang]);
 
-export const langFromPath = (pathname: string): Lang =>
-  pathname.replace(import.meta.env.BASE_URL, '/').startsWith('/es') ? 'es' : 'en';
-
-// The same page in the other language, falling back to its home page.
-export function alternate(pathname: string, lang: Lang) {
-  const other: Lang = lang === 'en' ? 'es' : 'en';
+// The same page in every language (current one included), falling back to
+// each language's home page when the page has no translation.
+export function alternates(pathname: string, lang: Lang) {
   const rel = pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '').replace(/^\//, '');
   const key = (Object.keys(routes) as RouteKey[]).find((k) => routes[k][lang] === rel);
-  return { lang: other, href: href(key ?? 'home', other) };
+  return languages.map((l) => ({ lang: l, href: href(key ?? 'home', l), current: l === lang }));
 }
 
 // Brand files and photos are optional at build time: components fall back

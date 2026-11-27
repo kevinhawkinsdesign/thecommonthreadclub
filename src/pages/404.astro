@@ -5,6 +5,7 @@ import { t } from '../i18n';
 import { href } from '../lib';
 const c = t.en.notFound;
 const e = t.es.notFound;
+const k = t.ca.notFound;
 ---
 
 <Base lang="en" title={c.title}>
@@ -13,6 +14,7 @@ const e = t.es.notFound;
     <p class="intro">{c.body}</p>
     <p><a class="btn" href={href('home', 'en')}>{c.cta}</a></p>
     <p class="es" lang="es"><a href={href('home', 'es')}>{e.cta}</a></p>
+    <p class="es" lang="ca"><a href={href('home', 'ca')}>{k.cta}</a></p>
   </Room>
   <Room tone="olive" part="foot" />
 </Base>

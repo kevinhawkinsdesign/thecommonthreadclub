@@ -2,30 +2,37 @@
  "kinds": {
   "brunch": [
    "Brunch",
+   "Brunch",
    "Brunch"
   ],
   "wine": [
    "Wine tasting",
-   "Cata de vino"
+   "Cata de vino",
+   "Tast de vi"
   ],
   "community": [
    "Community",
-   "Comunidad"
+   "Comunidad",
+   "Comunitat"
   ],
   "collab": [
    "Collaboration",
-   "Colaboración"
+   "Colaboración",
+   "Col·laboració"
   ],
   "supper": [
+   "Supper club",
    "Supper club",
    "Supper club"
   ],
   "networking": [
    "Networking",
+   "Networking",
    "Networking"
   ],
   "workshop": [
    "Workshop",
+   "Taller",
    "Taller"
   ]
  },

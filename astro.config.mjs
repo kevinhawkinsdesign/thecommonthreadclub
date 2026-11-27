@@ -18,5 +18,5 @@ export default defineConfig({
       ['/es/eventos-privados', 'es/recuerdos'],
     ].map(([from, to]) => [from, `${(process.env.BASE_PATH || '/').replace(/\/$/, '')}/${to}/`]),
   ),
-  integrations: [sitemap({ i18n: { defaultLocale: 'en', locales: { en: 'en-GB', es: 'es-ES' } } })],
+  integrations: [sitemap({ i18n: { defaultLocale: 'en', locales: { en: 'en-GB', es: 'es-ES', ca: 'ca-ES' } } })],
 });
