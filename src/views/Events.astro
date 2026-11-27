@@ -5,6 +5,8 @@ import PlaceCard from '../components/PlaceCard.astro';
 import LumaEvents from '../components/LumaEvents.astro';
 import PastCard from '../components/PastCard.astro';
 import Offer from '../components/Offer.astro';
+import TripCard from '../components/TripCard.astro';
+import { trips } from '../data/trips';
 import { archive } from '../data/past';
 import { t, type Lang } from '../i18n';
 import { upcomingEvent } from '../lib';
@@ -42,6 +44,16 @@ const hasNext = Boolean(upcomingEvent(lang));
     )
   }
 
+  <Room tone="aubergine">
+    <div class="center head" id="trips">
+      <h2>{e.tripsTitle}</h2>
+      <p>{e.tripsIntro}</p>
+    </div>
+    <div class="trips">
+      {trips.map((trip) => <TripCard trip={trip} lang={lang} />)}
+    </div>
+  </Room>
+
   <Room tone="marigold" part="foot">
     <h2 class="center formats__title">{e.formatsTitle}</h2>
     <div class="formats">
@@ -78,6 +90,11 @@ const hasNext = Boolean(upcomingEvent(lang));
     display: grid;
     gap: clamp(24px, 3vw, 36px);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  }
+  .trips {
+    display: grid;
+    gap: clamp(24px, 3vw, 36px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
   }
   .formats__title {
     margin-bottom: 1em;
