@@ -29,3 +29,4 @@ Originals are kept in `brand/photos/` and `brand/pack/`. Canva templates for pos
 | `src/assets/moments/{cello-room,chef,gallery-cello,guitar,kimono-toast,host-speaking,selfie}.jpg`, `src/assets/private/*.jpg` | Photos sent by the owner (originals in `brand/photos/2026-11d/`) |
 | `src/assets/archive/*.jpg` | Event covers from the Luma calendar (600px), via `scripts/sync-luma.py` |
 | `src/assets/photos/barcelona.jpg` | City photo sent by the owner (original in `brand/photos/2026-11e/`) |
+| `src/assets/trips/can-brull.jpg` | canbrull.com gallery (`masia-invierno-2026-01.jpg`) |

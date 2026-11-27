@@ -13,7 +13,7 @@ import kevin from '../assets/photos/kevin.jpg';
 import selfie from '../assets/moments/selfie.jpg';
 import groupPhoto from '../assets/moments/group.jpg';
 import Arrow from '../components/Arrow.astro';
-import { contact, luma, press } from '../config';
+import { contact, luma, press, ratings } from '../config';
 import { archive } from '../data/past';
 import { t, type Lang } from '../i18n';
 import { href } from '../lib';
@@ -34,6 +34,8 @@ const coursePhotos = [
   { src: sobretaula, pos: '40% 50%' },
 ];
 const recent = archive().slice(0, 3);
+const responses = ratings.reduce((n, [, r]) => n + r, 0);
+const rating = ratings.reduce((sum, [avg, r]) => sum + avg * r, 0) / responses;
 ---
 
 <Base lang={lang}>
@@ -128,6 +130,14 @@ const recent = archive().slice(0, 3);
   </Room>
 
   <Room tone="sand">
+    <div class="rating center">
+      <p class="rating__score">
+        <span class="boil">{rating.toFixed(1)}</span><span class="rating__of">/5</span>
+      </p>
+      <p class="rating__stars" aria-hidden="true">★★★★★</p>
+      <p class="caps rating__label">{h.ratingLabel}</p>
+      <p class="rating__detail">{h.ratingDetail(responses, ratings.length)}</p>
+    </div>
     {
       press.length > 0 && (
         <div class="press center">
@@ -268,6 +278,38 @@ const recent = archive().slice(0, 3);
     margin-top: clamp(32px, 5vw, 48px);
   }
 
+  .rating {
+    margin-bottom: clamp(48px, 7vw, 80px);
+  }
+  .rating__score {
+    margin: 0 auto;
+    font-family: var(--display);
+    font-size: clamp(4rem, 10vw, 6rem);
+    line-height: 1;
+    color: var(--aubergine);
+  }
+  .rating__score .boil {
+    display: inline-block;
+  }
+  .rating__of {
+    font-size: 0.4em;
+    color: var(--ink-soft);
+  }
+  .rating__stars {
+    margin: 0.5rem auto 0;
+    color: var(--rust);
+    letter-spacing: 0.3em;
+    font-size: 1.1rem;
+  }
+  .rating__label {
+    margin: 0.8rem auto 0;
+    color: var(--rust);
+  }
+  .rating__detail {
+    margin: 0.3rem auto 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
   .press {
     margin-bottom: clamp(48px, 7vw, 80px);
   }

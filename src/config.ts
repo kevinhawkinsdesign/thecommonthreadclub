@@ -32,8 +32,20 @@ export const contact = {
   instagram: 'https://www.instagram.com/thecommonthreadclub/',
 };
 
+// Guest ratings from Luma post-event surveys: [average, responses] per event.
+// The site shows the response-weighted average. Add a row after each event.
+export const ratings: [number, number][] = [
+  [4.83, 6], [4.67, 3], [4.8, 5], [4.67, 3], [4.5, 2], [4.0, 4],
+  [5.0, 1], [5.0, 1], [4.5, 2], [4.33, 6], [5.0, 5], [5.0, 3],
+];
+
 // Press coverage, newest first. Leave url empty if there's no link yet.
 export const press = [
+  {
+    outlet: 'Medium',
+    title: 'From UX to Underground Suppers: How Kevin Is Building Community in Barcelona, One Table at a Time',
+    url: 'https://medium.com/@kevinmaurits/from-ux-to-underground-suppers-how-kevin-is-building-community-in-barcelona-one-table-at-a-time-6578e56a5a21',
+  },
   {
     outlet: 'ELLE',
     title: "Where to celebrate New Year's Eve in Barcelona: 8 hotel restaurants for all tastes and budgets",
