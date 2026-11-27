@@ -6,6 +6,7 @@ import casino from '../assets/past/casino-2024.jpg';
 import datemapper from '../assets/past/datemapper-2025.jpg';
 import juneteenth from '../assets/past/juneteenth-2026.jpg';
 import thanksgiving from '../assets/past/thanksgiving-2026.jpg';
+import glamCabaret from '../assets/past/nye-glam-cabaret-2025.jpg';
 
 type Text = { en: string; es: string };
 
@@ -18,7 +19,7 @@ export interface PastEvent {
   summary: Text;
   image: ImageMetadata;
   imageAlt: Text;
-  url: string; // the event's Luma page
+  url: string; // the event's Luma page, or coverage when it had none
 }
 
 export const pastEvents: PastEvent[] = [
@@ -48,6 +49,20 @@ export const pastEvents: PastEvent[] = [
     image: juneteenth,
     imageAlt: { en: 'Juneteenth Barcelona poster', es: 'Cartel de Juneteenth Barcelona' },
     url: 'https://luma.com/juneteenthbcn',
+  },
+  {
+    date: '2025-12-31',
+    title: { en: 'NYE Glam Cabaret', es: 'Nochevieja Glam Cabaret' },
+    kind: { en: 'Collaboration', es: 'Colaboración' },
+    place: { en: 'Borneta, El Born', es: 'Borneta, El Born' },
+    with: 'Borneta',
+    summary: {
+      en: 'New Year’s Eve from 8pm to late: contemporary Italian food, craft cocktails and live performances from Barry Brandon, Tina Masawi and Bellini Boy, then the twelve grapes and fireworks on the rooftop terrace at midnight.',
+      es: 'Nochevieja desde las 20h hasta tarde: cocina italiana contemporánea, cócteles de autor y actuaciones en directo de Barry Brandon, Tina Masawi y Bellini Boy, y a medianoche las doce uvas y fuegos artificiales en la azotea.',
+    },
+    image: glamCabaret,
+    imageAlt: { en: 'Glam Cabaret title card from the night', es: 'Cartel de Glam Cabaret de la noche' },
+    url: 'https://bulevard.es/nye-glam-cabaret-en-borneta-arte-musica-y-performance-para-dar-la-bienvenida-a-2026/',
   },
   {
     date: '2025-01-08',

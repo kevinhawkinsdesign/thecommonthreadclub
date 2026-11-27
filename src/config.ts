@@ -35,6 +35,11 @@ export const contact = {
 // Press coverage, newest first.
 export const press = [
   {
+    outlet: 'Bulevard',
+    title: 'NYE Glam Cabaret en Borneta: arte, música y performance para dar la bienvenida a 2026',
+    url: 'https://bulevard.es/nye-glam-cabaret-en-borneta-arte-musica-y-performance-para-dar-la-bienvenida-a-2026/',
+  },
+  {
     outlet: 'Breakfast Included',
     title: 'Finding Belonging at Dinner Parties: The Common Thread Club in Barcelona',
     url: 'https://www.breakfastincluded.co/branded/finding-belonging-at-dinner-parties-the-common-thread-club-in-barcelona',

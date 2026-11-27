@@ -20,5 +20,6 @@ All sourced from the club's own channels on 27 November 2026. The brand pack (`b
 | `src/assets/photos/first-thread-poster.jpg` | Frame at 0:09 of the previous site's `video.mp4` |
 | `public/video/the-first-thread.mp4` | Previous site, `video.mp4`, re-encoded without audio |
 | `src/assets/past/*.jpg` | Each event's cover image on Luma (see URLs in `src/data/past.ts`) |
+| `src/assets/past/nye-glam-cabaret-2025.jpg` | Opening frame of `brand/pack` NYE video `Glam_cabaret_new.mp4` (iCloud), cropped square |
 
 Originals are kept in `brand/photos/` and `brand/pack/`. Canva templates for posts and stories are linked in `brand/pack/Templates/Templates.txt`.
