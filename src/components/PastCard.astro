@@ -1,0 +1,92 @@
+---
+// One past event, laid on the table like a keepsake menu card.
+import { Picture } from 'astro:assets';
+import type { PastEvent } from '../data/past';
+import { t, type Lang } from '../i18n';
+import { formatDate } from '../lib';
+
+interface Props {
+  event: PastEvent;
+  lang: Lang;
+  compact?: boolean;
+}
+const { event: e, lang, compact = false } = Astro.props;
+const c = t[lang].events;
+const meta = [e.kind[lang], e.place[lang]].join(' · ');
+---
+
+<article class:list={['past', { 'past--compact': compact }]}>
+  <a class="past__img" href={e.url} tabindex="-1" aria-hidden="true">
+    <Picture src={e.image} alt="" widths={[320, 520, 760]} sizes="(min-width: 900px) 360px, 90vw" formats={['avif', 'webp']} loading="lazy" />
+  </a>
+  <div class="past__body">
+    <p class="caps past__date"><time datetime={e.date}>{formatDate(e.date, lang)}</time></p>
+    <h3><a href={e.url}>{e.title[lang]}</a></h3>
+    <p class="past__meta">{meta}</p>
+    {e.with && <p class="past__meta">{c.with} {e.with}</p>}
+    {!compact && <p class="past__summary">{e.summary[lang]}</p>}
+  </div>
+</article>
+
+<style>
+  .past {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background: var(--cream);
+    box-shadow:
+      0 2px 3px rgb(51 4 40 / 0.06),
+      0 20px 34px -22px rgb(51 4 40 / 0.45);
+    transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+  }
+  .past:hover,
+  .past:focus-within {
+    transform: translateY(-4px) rotate(-0.4deg);
+    box-shadow:
+      0 2px 3px rgb(51 4 40 / 0.06),
+      0 30px 40px -22px rgb(51 4 40 / 0.5);
+  }
+  .past__img {
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    margin: 10px 10px 0;
+  }
+  .past__img :global(picture),
+  .past__img :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .past__body {
+    padding: 20px 22px 24px;
+    text-align: center;
+  }
+  .past__date {
+    color: var(--rust);
+    margin: 0 auto 0.5rem;
+  }
+  h3 {
+    text-transform: none;
+    font-size: clamp(1.3rem, 2vw, 1.5rem);
+    line-height: 1.15;
+  }
+  h3 a {
+    color: var(--aubergine);
+    text-decoration: none;
+  }
+  h3 a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+  .past__meta {
+    margin: 0.45rem auto 0;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .past__summary {
+    margin: 0.9rem auto 0;
+    font-size: 0.98rem;
+    max-width: 46ch;
+  }
+</style>

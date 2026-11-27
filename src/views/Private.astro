@@ -33,7 +33,11 @@ const mailto = contact.email ? `mailto:${contact.email}?subject=${encodeURICompo
   <Room tone="olive" part="foot" class="center">
     <h2>{p.askTitle}</h2>
     <p class="ask">{p.askBody}</p>
-    {mailto ? <a class="btn" href={mailto}>{p.email} <Arrow /></a> : <p>{p.soon}</p>}
+    <p class="actions">
+      {mailto && <a class="btn" href={mailto}>{p.email} <Arrow /></a>}
+      {contact.instagram && <a class:list={['btn', { 'btn--quiet': mailto }]} href={contact.instagram}>{p.dm} <Arrow /></a>}
+    </p>
+    {!mailto && !contact.instagram && <p>{p.soon}</p>}
   </Room>
 </Base>
 
@@ -62,5 +66,12 @@ const mailto = contact.email ? `mailto:${contact.email}?subject=${encodeURICompo
   }
   .ask {
     margin: 1rem auto 1.8rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: none;
   }
 </style>

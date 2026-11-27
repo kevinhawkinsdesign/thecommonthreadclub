@@ -3,14 +3,26 @@ import Base from '../layouts/Base.astro';
 import Room from '../components/Room.astro';
 import Plate from '../components/Plate.astro';
 import Arrow from '../components/Arrow.astro';
+import { luma } from '../config';
 import { t, type Lang } from '../i18n';
-import { bookingHref, photo } from '../lib';
+import candlelit from '../assets/photos/candlelit-room.jpg';
+import cellist from '../assets/photos/cellist.jpg';
+import casino from '../assets/photos/casino-polaroids.jpg';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const a = t[lang].about;
+// Chapters alternate through the rooms; three of them carry a photo.
+const rooms = ['rust', 'olive', 'marigold', 'sand', 'aubergine'] as const;
+const plates = [
+  { src: candlelit, pos: '50% 60%' },
+  null,
+  { src: cellist, pos: '40% 40%' },
+  null,
+  { src: casino, pos: '50% 40%' },
+];
 ---
 
 <Base lang={lang} title={a.title} description={a.lede}>
@@ -18,15 +30,41 @@ const a = t[lang].about;
     <h1 class="title">{a.title}</h1>
     <p class="lede">{a.lede}</p>
   </Room>
-  <Room tone="rust" part="foot">
-    <div class="setting">
-      <Plate src={photo('story')} alt={a.plate} />
-      <div class="stack">
-        {a.body.map((p) => <p>{p}</p>)}
-        <p><a class="btn" href={bookingHref(lang)}>{a.cta} <Arrow /></a></p>
-      </div>
-    </div>
-  </Room>
+  {
+    a.chapters.map((ch, i) => {
+      const plate = plates[i];
+      const altIndex = plates.slice(0, i).filter(Boolean).length;
+      return (
+        <Room tone={rooms[i]} part={i === a.chapters.length - 1 ? 'foot' : 'middle'}>
+          {plate ? (
+            <div class:list={['setting', { 'setting--flip': altIndex % 2 === 1 }]}>
+              <Plate src={plate.src} position={plate.pos} alt={a.alts[altIndex]} />
+              <div class="stack">
+                <h2>{ch.title}</h2>
+                {ch.body.map((p) => (
+                  <p>{p}</p>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div class="stack chapter">
+              <h2>{ch.title}</h2>
+              {ch.body.map((p) => (
+                <p>{p}</p>
+              ))}
+            </div>
+          )}
+          {i === a.chapters.length - 1 && (
+            <p class="cta">
+              <a class="btn" href={luma.calendarUrl}>
+                {a.cta} <Arrow />
+              </a>
+            </p>
+          )}
+        </Room>
+      );
+    })
+  }
 </Base>
 
 <style>
@@ -38,5 +76,13 @@ const a = t[lang].about;
   .lede {
     margin-inline: auto;
     max-width: 26ch;
+  }
+  .chapter {
+    max-width: 62ch;
+    margin-inline: auto;
+  }
+  .cta {
+    margin-top: clamp(40px, 6vw, 64px);
+    text-align: center;
   }
 </style>

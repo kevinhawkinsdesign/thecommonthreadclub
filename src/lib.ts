@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { luma, nextEvent, photos } from './config';
+import { luma, nextEvent } from './config';
 import { routes, t, type Lang, type RouteKey } from './i18n';
 
 // Prefix internal paths with the configured base so links work on
@@ -24,7 +24,6 @@ export function alternate(pathname: string, lang: Lang) {
 // gracefully until they're added to public/.
 const exists = (rel: string) => fs.existsSync(path.join(process.cwd(), 'public', rel));
 export const asset = (rel: string) => (exists(rel) ? url(rel) : null);
-export const photo = (key: keyof typeof photos) => (photos[key] ? asset(`photos/${photos[key]}`) : null);
 
 // The promoted event, or null once its date has passed. Evaluated at build
 // time; the deploy workflow rebuilds daily so it drops off on its own.
@@ -45,6 +44,9 @@ export function upcomingEvent(lang: Lang) {
   };
 }
 
-export const bookingHref = (lang: Lang) =>
-  upcomingEvent(lang)?.url || luma.calendarUrl || href('events', lang);
+// Where the main call to action goes: the next event, or the Luma calendar.
+export const bookingHref = (lang: Lang) => upcomingEvent(lang)?.url || luma.calendarUrl || href('events', lang);
+
+export const formatDate = (iso: string, lang: Lang, o: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' }) =>
+  new Date(`${iso}T12:00:00Z`).toLocaleDateString(t[lang].locale, { timeZone: 'UTC', ...o });
 

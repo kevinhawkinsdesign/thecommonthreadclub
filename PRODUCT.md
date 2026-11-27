@@ -19,7 +19,7 @@ Expats, new arrivals and travellers also come, but they are not the primary audi
 
 ## Product Purpose
 
-The Common Thread is a Barcelona supper club and events company: supper clubs, wine tastings and pop-ups built around food, wine and connection. The website exists to get people to book the next event (on Luma) and to make the club feel like something worth belonging to. Success is seats filled for the next event and past guests returning.
+The Common Thread is a Barcelona supper club and events company: supper clubs, wine tastings and pop-ups built around food, wine and connection. The website is the club's home online: it tells the story, shows the nights that have already happened, and builds a following (Luma calendar subscribers, Instagram) between events. When an event is scheduled it is promoted first; when none is, the site invites people to follow on Luma. Success is a growing following, past guests returning, and seats filled whenever a date goes up.
 
 ## Positioning
 
@@ -28,31 +28,34 @@ The Common Thread is a Barcelona supper club and events company: supper clubs, w
 
 ## Operating Context
 
-- Each event is one night only with limited seats; tickets go through Luma (`https://luma.com/thecommon-6hjp` is the next event, Thursday 26 November 2026).
-- There is always a "next event" to promote; it is configured in `src/config.ts` (`nextEvent`) and drops off the site after its date.
+- Each event is one night only with limited seats; tickets go through Luma (calendar: `https://luma.com/thecommonthread`).
+- Often there is no next event scheduled. The optional next event lives in `src/config.ts` (`nextEvent`); past events live in `src/data/past.ts`.
 - Private dinners, team socials and brand/venue collaborations are a secondary enquiry path.
 
 ## Capabilities and Constraints
 
 - Static site only; no backend, accounts or payments on the site.
 - **Languages: English and Spanish.** The full site must be bilingual. Not yet implemented.
-- Open / undecided: Luma calendar URL and calendar ID, contact email, Instagram URL, and the next event's title, time, location, price and description.
+- Open / undecided: contact email; the brand line pattern file (not yet in the repository).
 
 ## Brand Commitments
 
 - Name: **The Common Thread** (domain thecommonthreadclub.com).
 - Established line: "Half dinner party, half speakeasy, 100% fun."
-- The club has an existing **logo, brand colours and fonts** that are binding. **Not yet in the repository**; to be supplied by the owner. Until then, the current site palette and typography are placeholders, not brand.
+- Logo (stacked, in `public/brand/`), palette FFFCF5 / 330428 / 53582F / E49806 / D9B899 / B94514, and the organic line pattern are binding. Brand fonts Romans Story and P22 Underground are replaced permanently by Bodoni Moda and Jost.
+- Instagram: @thecommonthreadclub (as listed on the club's Luma calendar).
+- Founder's own story copy (the previous site's About page) is the source for the story page.
 
 ## Evidence on Hand
 
-- **Event photography** from past dinners exists and will be supplied by the owner. Not yet in the repository.
+- Event photography and the first-dinner reel from the previous site, in `src/assets/photos/` and `public/video/`; originals in `brand/photos/`. See `brand/SOURCES.md`.
+- Past events with facts from their Luma pages (`src/data/past.ts`).
 - Press: Breakfast Included travel blog feature, "Finding Belonging at Dinner Parties: The Common Thread Club in Barcelona".
 - No testimonials, guest numbers, ratings or partner logos are on hand. Do not invent them.
 
 ## Product Principles
 
-1. **The next event comes first.** Every page should make it obvious what's next and how to book it.
+1. **Always show the way in.** The next event when there is one; otherwise, follow on Luma and Instagram.
 2. **It should feel like Kevin's table, not a platform.** Personal, warm, hosted; never generic marketplace or app UI.
 3. **Show the food, the wine and the people.** Real photography and real details carry the persuasion; no stock imagery or invented proof.
 4. **Make the regulars feel at home.** Returning guests should recognise the club and find what's new fast.

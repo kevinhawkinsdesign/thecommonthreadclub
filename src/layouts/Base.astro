@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import EventBanner from '../components/EventBanner.astro';
-import { site } from '../config';
+import { contact, luma, site } from '../config';
 import { t, type Lang } from '../i18n';
 import { alternate, asset, url } from '../lib';
 
@@ -19,6 +19,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const other = alternate(Astro.url.pathname, lang);
 const pattern = asset('brand/pattern.png');
 const ogImage = asset('brand/og.jpg');
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: new URL(url(''), Astro.site).href,
+  logo: new URL(url('brand/logo-stacked-aubergine.png'), Astro.site).href,
+  description,
+  founder: { '@type': 'Person', name: 'Kevin Hawkins' },
+  address: { '@type': 'PostalAddress', addressLocality: site.city, addressCountry: 'ES' },
+  sameAs: [contact.instagram, luma.calendarUrl].filter(Boolean),
+};
 ---
 
 <!doctype html>
@@ -39,6 +50,7 @@ const ogImage = asset('brand/og.jpg');
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site)} />}
+    <script type="application/ld+json" set:html={JSON.stringify(org)} />
   </head>
   <body style={pattern ? `--pattern: url(${pattern})` : undefined}>
     <a class="skip visually-hidden" href="#main">{t[lang].skip}</a>

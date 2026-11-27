@@ -3,15 +3,18 @@ import Base from '../layouts/Base.astro';
 import Room from '../components/Room.astro';
 import PlaceCard from '../components/PlaceCard.astro';
 import LumaEvents from '../components/LumaEvents.astro';
-import Arrow from '../components/Arrow.astro';
-import { luma } from '../config';
+import PastCard from '../components/PastCard.astro';
+import { archive } from '../data/past';
 import { t, type Lang } from '../i18n';
+import { upcomingEvent } from '../lib';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const e = t[lang].events;
+const past = archive();
+const hasNext = Boolean(upcomingEvent(lang));
 ---
 
 <Base lang={lang} title={e.title} description={e.intro}>
@@ -19,10 +22,26 @@ const e = t[lang].events;
     <h1 class="title">{e.title}</h1>
     <p class="intro">{e.intro}</p>
     <PlaceCard lang={lang} />
-    <LumaEvents />
-    {luma.calendarUrl && <p class="more"><a class="link" href={luma.calendarUrl}>{e.calendar}</a></p>}
+    {hasNext && <div class="embed"><LumaEvents /></div>}
   </Room>
-  <Room tone="olive" part="foot">
+
+  {
+    past.length > 0 && (
+      <Room tone="olive">
+        <div class="center head" id="past">
+          <h2>{e.pastTitle}</h2>
+          <p>{e.pastIntro}</p>
+        </div>
+        <div class="archive">
+          {past.map((ev) => (
+            <PastCard event={ev} lang={lang} />
+          ))}
+        </div>
+      </Room>
+    )
+  }
+
+  <Room tone="marigold" part="foot">
     <h2 class="center formats__title">{e.formatsTitle}</h2>
     <div class="formats">
       {
@@ -46,8 +65,21 @@ const e = t[lang].events;
     margin: 1rem auto clamp(32px, 5vw, 56px);
     color: var(--ink-soft);
   }
-  .more {
-    margin-top: 2rem;
+  .embed {
+    margin-top: clamp(32px, 5vw, 56px);
+  }
+  .head {
+    margin-bottom: clamp(32px, 5vw, 56px);
+    scroll-margin-top: 24px;
+  }
+  .head p {
+    margin-top: 0.6rem;
+    color: var(--ink-soft);
+  }
+  .archive {
+    display: grid;
+    gap: clamp(24px, 3vw, 36px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   }
   .formats__title {
     margin-bottom: 1em;

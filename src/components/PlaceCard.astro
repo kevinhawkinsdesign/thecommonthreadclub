@@ -2,7 +2,7 @@
 // The folded place card at the head of the table: the next event and how to
 // book it. When nothing is scheduled it points to the Luma calendar instead.
 import Arrow from './Arrow.astro';
-import { luma } from '../config';
+import { contact, luma } from '../config';
 import { t, type Lang } from '../i18n';
 import { href, upcomingEvent } from '../lib';
 
@@ -45,9 +45,16 @@ const laterHref = luma.calendarUrl || href('events', lang);
       ) : (
         <>
           <p class="card__title">{c.noneBody}</p>
-          <a class="btn card__btn" href={laterHref}>
-            {c.noneCta} <Arrow />
-          </a>
+          <div class="card__actions">
+            <a class="btn" href={laterHref}>
+              {c.noneCta} <Arrow />
+            </a>
+            {contact.instagram && (
+              <a class="btn btn--quiet" href={contact.instagram}>
+                {c.instagram}
+              </a>
+            )}
+          </div>
         </>
       )
     }
@@ -119,6 +126,13 @@ const laterHref = luma.calendarUrl || href('events', lang);
     margin: 0.4rem auto 0;
   }
   .card__btn {
+    margin-top: 1.3rem;
+  }
+  .card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
     margin-top: 1.3rem;
   }
   .card__via {

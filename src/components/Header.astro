@@ -2,7 +2,7 @@
 import Arrow from './Arrow.astro';
 import Logo from './Logo.astro';
 import { t, type Lang } from '../i18n';
-import { alternate, bookingHref, href } from '../lib';
+import { alternate, bookingHref, href, upcomingEvent } from '../lib';
 
 interface Props {
   lang: Lang;
@@ -20,7 +20,7 @@ const other = alternate(current, lang);
 
 <header class="header">
   <a class="header__logo" href={href('home', lang)}>
-    <Logo layout="horizontal" tone="cream" />
+    <Logo tone="cream" />
   </a>
   <nav aria-label={lang === 'es' ? 'Principal' : 'Main'}>
     <ul>
@@ -37,7 +37,7 @@ const other = alternate(current, lang);
         <a href={other.href} hreflang={other.lang} lang={other.lang} class="header__lang">{c.langSwitch}</a>
       </li>
       <li>
-        <a class="btn header__book" href={bookingHref(lang)}>{c.nav.book} <Arrow /></a>
+        <a class="btn header__book" href={bookingHref(lang)}>{upcomingEvent(lang) ? c.nav.book : c.nav.follow} <Arrow /></a>
       </li>
     </ul>
   </nav>
@@ -54,7 +54,7 @@ const other = alternate(current, lang);
     color: var(--cream);
   }
   .header__logo {
-    width: clamp(220px, 24vw, 300px);
+    width: clamp(120px, 11vw, 150px);
     font-size: 1.35rem;
     color: var(--cream);
     text-decoration: none;

@@ -1,0 +1,107 @@
+---
+// The first-dinner reel, framed like a card propped up on the table.
+// Muted loop; starts on its own unless the visitor prefers reduced motion.
+import { getImage } from 'astro:assets';
+import poster from '../assets/photos/first-thread-poster.jpg';
+import { url } from '../lib';
+import { t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t[lang].home;
+const still = await getImage({ src: poster, width: 480, format: 'webp' });
+---
+
+<figure class="reel">
+  <div class="reel__frame">
+    <video
+      src={url('video/the-first-thread.mp4')}
+      poster={still.src}
+      muted
+      loop
+      playsinline
+      preload="none"
+      aria-label={c.reelTitle}
+      data-reel></video>
+    <button class="reel__toggle" type="button" data-play={c.reelPlay} data-pause={c.reelPause} aria-label={c.reelPlay}>
+      <svg viewBox="0 0 20 20" aria-hidden="true" class="i-play"><path d="M6 4.5v11l9-5.5z" fill="currentColor"></path></svg>
+      <svg viewBox="0 0 20 20" aria-hidden="true" class="i-pause"><path d="M6 4h3v12H6zM11 4h3v12h-3z" fill="currentColor"></path></svg>
+    </button>
+  </div>
+</figure>
+
+<script>
+  for (const fig of document.querySelectorAll<HTMLElement>('.reel')) {
+    const video = fig.querySelector('video')!;
+    const btn = fig.querySelector<HTMLButtonElement>('.reel__toggle')!;
+    const sync = () => {
+      const playing = !video.paused;
+      fig.classList.toggle('is-playing', playing);
+      btn.setAttribute('aria-label', playing ? btn.dataset.pause! : btn.dataset.play!);
+    };
+    btn.addEventListener('click', () => (video.paused ? video.play() : video.pause()));
+    video.addEventListener('play', sync);
+    video.addEventListener('pause', sync);
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!still && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      }, { threshold: 0.4 }).observe(video);
+    }
+  }
+</script>
+
+<style>
+  .reel {
+    margin: 0 auto;
+    width: min(100%, 300px);
+  }
+  .reel__frame {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    background: var(--aubergine);
+    border: 10px solid var(--cream);
+    box-shadow:
+      0 2px 3px rgb(51 4 40 / 0.1),
+      0 28px 44px -20px rgb(51 4 40 / 0.55);
+    transform: rotate(-1.5deg);
+  }
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .reel__toggle {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 252 245 / 0.92);
+    color: var(--aubergine);
+    cursor: pointer;
+    transition: transform 0.25s var(--ease);
+  }
+  .reel__toggle:hover {
+    transform: scale(1.06);
+  }
+  .reel__toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+  .i-pause,
+  .is-playing .i-play {
+    display: none;
+  }
+  .is-playing .i-pause {
+    display: block;
+  }
+</style>

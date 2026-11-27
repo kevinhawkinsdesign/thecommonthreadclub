@@ -9,17 +9,19 @@ export const site = {
 
 export const luma = {
   // Public calendar page, e.g. https://luma.com/thecommonthread
-  calendarUrl: '', // TODO: add Luma calendar URL
-  // Calendar ID from Luma → Calendar → Settings → Embed (looks like "cal-XXXXXXXX")
-  calendarId: '', // TODO: add Luma calendar ID to embed upcoming events
+  calendarUrl: 'https://luma.com/thecommonthread',
+  // Calendar ID from Luma → Calendar → Settings → Embed
+  calendarId: 'cal-y8ergaqNQm9K33Z',
 };
 
 // The event to promote across the site (place card, banner, header button).
-// It disappears automatically once the date has passed (the site rebuilds daily).
+// Leave url empty when nothing is scheduled; the site then invites people to
+// follow on Luma. It also disappears once the date has passed (daily rebuild).
+// After an event, add it to src/data/past.ts for the archive.
 export const nextEvent = {
-  url: 'https://luma.com/thecommon-6hjp',
-  date: '2026-11-26', // YYYY-MM-DD, Barcelona time
-  title: '', // TODO: event name as it appears on Luma
+  url: '', // e.g. 'https://luma.com/abc123'
+  date: '', // YYYY-MM-DD, Barcelona time
+  title: '', // event name as it appears on Luma
   time: '', // e.g. '20:30'
   location: '', // e.g. 'Gràcia' (keep vague if the venue is revealed later)
   price: '', // e.g. '€65'
@@ -27,15 +29,14 @@ export const nextEvent = {
 
 export const contact = {
   email: '', // TODO: e.g. hello@thecommonthreadclub.com
-  instagram: '', // TODO: full Instagram URL
+  instagram: 'https://www.instagram.com/thecommonthreadclub/',
 };
 
-// Photos shown on the "plates". Put files in public/photos/ and set the file
-// name here (e.g. 'aperitivo.jpg'). Empty slots show an empty plate.
-export const photos = {
-  aperitivo: '',
-  mesa: '',
-  sobretaula: '',
-  host: '',
-  story: '',
-};
+// Press coverage, newest first.
+export const press = [
+  {
+    outlet: 'Breakfast Included',
+    title: 'Finding Belonging at Dinner Parties: The Common Thread Club in Barcelona',
+    url: 'https://www.breakfastincluded.co/branded/finding-belonging-at-dinner-parties-the-common-thread-club-in-barcelona',
+  },
+];
