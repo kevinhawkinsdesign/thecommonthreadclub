@@ -169,7 +169,7 @@ export const t = {
       alts: [
         'A candlelit dinner in a high-ceilinged Barcelona apartment',
         'Guests eating and talking along a long lamplit table',
-        'Polaroids and chips on a wine casino table',
+        'People dining at a lamplit terrace on a stone street in Barcelona at dusk',
       ],
       cta: 'Join the table',
     },
@@ -350,7 +350,7 @@ export const t = {
       alts: [
         'Una cena a la luz de las velas en un piso de techos altos de Barcelona',
         'Invitados comiendo y charlando a lo largo de una mesa larga iluminada con lamparitas',
-        'Polaroids y fichas sobre una mesa de casino del vino',
+        'Gente cenando en una terraza iluminada en una calle empedrada de Barcelona al anochecer',
       ],
       cta: 'Únete a la mesa',
     },
