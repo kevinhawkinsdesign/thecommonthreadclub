@@ -23,3 +23,4 @@ All sourced from the club's own channels on 27 November 2026. The brand pack (`b
 | `src/assets/past/nye-glam-cabaret-2025.jpg` | Opening frame of `brand/pack` NYE video `Glam_cabaret_new.mp4` (iCloud), cropped square |
 
 Originals are kept in `brand/photos/` and `brand/pack/`. Canva templates for posts and stories are linked in `brand/pack/Templates/Templates.txt`.
+| `src/assets/photos/kevin.jpg`, `src/assets/moments/*.jpg`, `src/assets/past/casino-2024.jpg` | Photos sent by the owner in chat, 27 November 2026 (originals in `brand/photos/2026-11/`) |
