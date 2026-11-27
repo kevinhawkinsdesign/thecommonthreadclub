@@ -15,8 +15,8 @@ const stamp = asset('brand/stamp-cream.png');
 ---
 
 <footer class="footer">
-  {stamp && <img class="footer__stamp" src={stamp} alt="" width="56" height="81" loading="lazy" />}
-  <a class="footer__logo" href={href('home', lang)}><Logo tone="cream" /></a>
+  {stamp && <img class="footer__stamp boil" src={stamp} alt="" width="56" height="81" loading="lazy" />}
+  <a class="footer__logo" href={href('home', lang)}><Logo tone="cream" class="boil" /></a>
   <p class="footer__tag">{c.tagline}</p>
   <p class="caps footer__signoff" lang="en">{c.footer.signoff}</p>
   <ul>

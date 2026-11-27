@@ -20,7 +20,7 @@ const hasNext = Boolean(upcomingEvent(lang));
 
 <Base lang={lang} title={e.title} description={e.intro}>
   <Room tone="aubergine" part="head" class="center">
-    <h1 class="title">{e.title}</h1>
+    <h1 class="title boil">{e.title}</h1>
     <p class="intro">{e.intro}</p>
     {hasNext && <PlaceCard lang={lang} />}
     <div class="embed"><LumaEvents /></div>

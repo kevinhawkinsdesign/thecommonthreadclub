@@ -58,6 +58,10 @@ const org = {
   </head>
   <body style={pattern ? `--pattern: url(${pattern})` : undefined}>
     <a class="skip visually-hidden" href="#main">{t[lang].skip}</a>
+    <!-- Three slightly different wobbles for the hand-drawn "boil" effect (see .boil) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <filter id="boil-1" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="1" seed="3" /><feDisplacementMap in="SourceGraphic" scale="3.2" /></filter><filter id="boil-2" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="1" seed="19" /><feDisplacementMap in="SourceGraphic" scale="3.2" /></filter><filter id="boil-3" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="1" seed="41" /><feDisplacementMap in="SourceGraphic" scale="3.2" /></filter>
+    </svg>
     <EventBanner lang={lang} />
     <div class="room room--aubergine page">
       <Header lang={lang} />
