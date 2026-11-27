@@ -1,11 +1,9 @@
-// Single place for links and contact details used across the site.
+// Single place for links, contact details and photos used across the site.
 // Anything left as an empty string is hidden rather than rendered broken.
+// Visible copy (both languages) lives in src/i18n.ts.
 
 export const site = {
   name: 'The Common Thread',
-  tagline: 'Half dinner party, half speakeasy, 100% fun.',
-  description:
-    'A Barcelona supper club and community for curious locals, expats and travellers who crave connection over great food and wine.',
   city: 'Barcelona',
 };
 
@@ -16,16 +14,15 @@ export const luma = {
   calendarId: '', // TODO: add Luma calendar ID to embed upcoming events
 };
 
-// The event to promote across the site (hero, banner, header button).
+// The event to promote across the site (place card, banner, header button).
 // It disappears automatically once the date has passed (the site rebuilds daily).
 export const nextEvent = {
   url: 'https://luma.com/thecommon-6hjp',
   date: '2026-11-26', // YYYY-MM-DD, Barcelona time
   title: '', // TODO: event name as it appears on Luma
   time: '', // e.g. '20:30'
-  location: '', // e.g. 'Gràcia, Barcelona' (keep vague if the venue is revealed later)
+  location: '', // e.g. 'Gràcia' (keep vague if the venue is revealed later)
   price: '', // e.g. '€65'
-  blurb: '', // one or two sentences about the night
 };
 
 export const contact = {
@@ -33,8 +30,12 @@ export const contact = {
   instagram: '', // TODO: full Instagram URL
 };
 
-export const nav = [
-  { href: 'events/', label: 'Events' },
-  { href: 'about/', label: 'About' },
-  { href: 'private-events/', label: 'Private events' },
-];
+// Photos shown on the "plates". Put files in public/photos/ and set the file
+// name here (e.g. 'aperitivo.jpg'). Empty slots show an empty plate.
+export const photos = {
+  aperitivo: '',
+  mesa: '',
+  sobretaula: '',
+  host: '',
+  story: '',
+};

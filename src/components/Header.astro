@@ -1,97 +1,107 @@
 ---
-import { site, nav, luma } from '../config';
-import { url, upcomingEvent } from '../lib';
+import Arrow from './Arrow.astro';
+import Logo from './Logo.astro';
+import { t, type Lang } from '../i18n';
+import { alternate, bookingHref, href } from '../lib';
 
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t[lang];
 const current = Astro.url.pathname;
-const ticketsHref = upcomingEvent()?.url || luma.calendarUrl || url('events/');
+const links = [
+  { href: href('events', lang), label: c.nav.events },
+  { href: href('about', lang), label: c.nav.about },
+  { href: href('private', lang), label: c.nav.private },
+];
+const other = alternate(current, lang);
 ---
 
 <header class="header">
-  <div class="wrap header__inner">
-    <a class="logo" href={url()}>
-      <span class="logo__mark" aria-hidden="true">✦</span>
-      {site.name}
-    </a>
-    <nav aria-label="Main">
-      <ul>
-        {
-          nav.map((item) => {
-            const href = url(item.href);
-            return (
-              <li>
-                <a href={href} aria-current={current.startsWith(href) ? 'page' : undefined}>
-                  {item.label}
-                </a>
-              </li>
-            );
-          })
-        }
-        <li><a class="btn header__cta" href={ticketsHref}>Get tickets</a></li>
-      </ul>
-    </nav>
-  </div>
+  <a class="header__logo" href={href('home', lang)}>
+    <Logo layout="horizontal" tone="cream" />
+  </a>
+  <nav aria-label={lang === 'es' ? 'Principal' : 'Main'}>
+    <ul>
+      {
+        links.map((l) => (
+          <li>
+            <a href={l.href} aria-current={current.startsWith(l.href) ? 'page' : undefined}>
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a href={other.href} hreflang={other.lang} lang={other.lang} class="header__lang">{c.langSwitch}</a>
+      </li>
+      <li>
+        <a class="btn header__book" href={bookingHref(lang)}>{c.nav.book} <Arrow /></a>
+      </li>
+    </ul>
+  </nav>
 </header>
 
 <style>
   .header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: color-mix(in srgb, var(--paper) 92%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-  }
-  .header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    min-height: 68px;
     flex-wrap: wrap;
+    gap: 14px 32px;
+    padding: 18px var(--gutter);
+    color: var(--cream);
   }
-  .logo {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--ink);
+  .header__logo {
+    width: clamp(220px, 24vw, 300px);
+    font-size: 1.35rem;
+    color: var(--cream);
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .logo__mark {
-    color: var(--brass);
   }
   ul {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 4px 20px;
-    list-style: none;
+    gap: 6px 26px;
     margin: 0;
-    padding: 8px 0;
+    padding: 0;
+    list-style: none;
   }
   nav a:not(.btn) {
-    color: var(--ink-soft);
+    color: color-mix(in srgb, var(--cream) 86%, transparent);
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
+    padding-block: 6px;
+    border-bottom: 1px solid transparent;
   }
   nav a:not(.btn):hover,
   nav a[aria-current='page'] {
-    color: var(--wine);
+    color: var(--cream);
+    border-bottom-color: var(--marigold);
   }
-  .header__cta {
-    padding: 0.55em 1.1em;
-    font-size: 0.9rem;
+  .header__lang {
+    opacity: 0.8;
   }
-  @media (max-width: 560px) {
-    .header__inner {
+  .header__book {
+    min-height: 40px;
+    padding: 0.55em 1.2em;
+  }
+  .header__book:hover {
+    background: var(--cream);
+    border-color: var(--cream);
+    color: var(--aubergine);
+  }
+  @media (max-width: 760px) {
+    .header {
       justify-content: center;
-      padding-block: 8px;
     }
     ul {
       justify-content: center;
+      gap: 4px 18px;
     }
   }
 </style>

@@ -1,15 +1,31 @@
 ---
 import Base from '../layouts/Base.astro';
-import { url } from '../lib';
+import Room from '../components/Room.astro';
+import { t } from '../i18n';
+import { href } from '../lib';
+const c = t.en.notFound;
+const e = t.es.notFound;
 ---
 
-<Base title="Page not found">
-  <section class="section">
-    <div class="wrap">
-      <p class="eyebrow">404</p>
-      <h1>This seat is empty.</h1>
-      <p class="lede">The page you're looking for doesn't exist, but dinner is still on.</p>
-      <div class="actions"><a class="btn" href={url()}>Back to the home page</a></div>
-    </div>
-  </section>
+<Base lang="en" title={c.title}>
+  <Room tone="aubergine" part="head" class="center">
+    <h1 class="title">{c.title}</h1>
+    <p class="intro">{c.body}</p>
+    <p><a class="btn" href={href('home', 'en')}>{c.cta}</a></p>
+    <p class="es" lang="es"><a href={href('home', 'es')}>{e.cta}</a></p>
+  </Room>
+  <Room tone="olive" part="foot" />
 </Base>
+
+<style>
+  .title {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    text-transform: uppercase;
+  }
+  .intro {
+    margin: 1rem auto 2rem;
+  }
+  .es {
+    margin: 1.2rem auto 0;
+  }
+</style>

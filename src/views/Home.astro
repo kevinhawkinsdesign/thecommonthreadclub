@@ -1,0 +1,145 @@
+---
+import Base from '../layouts/Base.astro';
+import Room from '../components/Room.astro';
+import Logo from '../components/Logo.astro';
+import Plate from '../components/Plate.astro';
+import PlaceCard from '../components/PlaceCard.astro';
+import Arrow from '../components/Arrow.astro';
+import { luma } from '../config';
+import { t, type Lang } from '../i18n';
+import { href, photo } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t[lang];
+const h = c.home;
+const courseRooms = ['marigold', 'olive', 'aubergine'] as const;
+const coursePhotos = [photo('aperitivo'), photo('mesa'), photo('sobretaula')];
+const calendarHref = luma.calendarUrl || href('events', lang);
+---
+
+<Base lang={lang}>
+  <Room tone="aubergine" part="head" class="head">
+    <h1 class="head__logo"><Logo /></h1>
+    <p class="lede center head__tag">{c.tagline}</p>
+    <p class="center head__intro">{h.intro}</p>
+    <PlaceCard lang={lang} />
+  </Room>
+
+  {
+    h.courses.map((course, i) => (
+      <Room tone={courseRooms[i]}>
+        <div class:list={['setting', { 'setting--flip': i % 2 === 1 }]}>
+          <Plate src={coursePhotos[i]} alt={course.plate} />
+          <div>
+            <h2>{course.name}</h2>
+            <p>{course.body}</p>
+          </div>
+        </div>
+      </Room>
+    ))
+  }
+
+  <Room tone="rust">
+    <div class="setting">
+      <Plate src={photo('host')} alt={h.hostPlate} />
+      <div class="stack">
+        <h2>{h.hostTitle}</h2>
+        {h.hostBody.map((p) => <p>{p}</p>)}
+        <p><a class="link" href={href('about', lang)}>{h.hostLink}</a></p>
+      </div>
+    </div>
+  </Room>
+
+  <Room tone="sand">
+    <div class="menu">
+      <h2 class="center">{h.faqTitle}</h2>
+      <dl>
+        {
+          h.faqs.map((f) => (
+            <div class="menu__item">
+              <dt>{f.q}</dt>
+              <dd>{f.a}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </Room>
+
+  <Room tone="olive" part="foot">
+    <div class="close">
+      <div class="stack">
+        <h2>{h.regularsTitle}</h2>
+        <p>{h.regularsBody}</p>
+        <p><a class="btn" href={calendarHref}>{h.regularsCta} <Arrow /></a></p>
+      </div>
+      <div class="stack">
+        <h2>{h.privateTitle}</h2>
+        <p>{h.privateBody}</p>
+        <p><a class="btn btn--quiet" href={href('private', lang)}>{h.privateCta} <Arrow /></a></p>
+      </div>
+    </div>
+  </Room>
+</Base>
+
+<style>
+  :global(.head) {
+    display: grid;
+    justify-items: center;
+    gap: clamp(18px, 2.6vw, 28px);
+    text-align: center;
+  }
+  :global(.head > *) {
+    margin-inline: auto;
+  }
+  .head__logo {
+    display: flex;
+    justify-content: center;
+    width: min(100%, 520px);
+    font-size: clamp(2.6rem, 8vw, 5rem);
+    color: var(--aubergine);
+  }
+  .head__tag {
+    max-width: 24ch;
+  }
+  .head__intro {
+    color: var(--ink-soft);
+    margin-bottom: clamp(8px, 2vw, 20px);
+  }
+  .menu {
+    max-width: 640px;
+    margin-inline: auto;
+    padding: clamp(32px, 5vw, 56px) clamp(22px, 4vw, 48px);
+    background: var(--cream);
+    box-shadow: 0 18px 36px -20px rgb(51 4 40 / 0.4);
+  }
+  .menu h2 {
+    margin-bottom: 1.2em;
+  }
+  dl {
+    margin: 0;
+  }
+  .menu__item {
+    padding: 1.1em 0;
+    text-align: center;
+    border-top: 1px solid color-mix(in srgb, var(--sand) 70%, transparent);
+  }
+  dt {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    margin-bottom: 0.3em;
+  }
+  dd {
+    margin: 0 auto;
+    max-width: 46ch;
+    color: var(--ink-soft);
+  }
+  .close {
+    display: grid;
+    gap: clamp(48px, 6vw, 72px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  }
+</style>

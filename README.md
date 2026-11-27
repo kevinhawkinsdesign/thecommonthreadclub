@@ -14,9 +14,12 @@ npm run build    # outputs to dist/
 ## Editing content
 
 - **Next event to promote:** `nextEvent` in `src/config.ts`. It shows in the top banner, header button, home hero and events page, and drops off automatically after its date (the site rebuilds daily).
-- **Links, Luma calendar, email, Instagram:** `src/config.ts`. Empty values are hidden on the site.
-- **Pages:** `src/pages/` (`index`, `events`, `about`, `private-events`, `404`).
+- **Words (English and Spanish):** `src/i18n.ts`.
+- **Links, Luma calendar, email, Instagram, photos:** `src/config.ts`. Empty values are hidden on the site.
+- **Logo, pattern, photos:** see `brand/README.md` for file names.
+- **Page layouts:** `src/views/` (shared by both languages); routes live in `src/pages/` and `src/pages/es/`.
 - **Colours and type:** CSS variables at the top of `src/styles/global.css`.
+- **Design record:** `PRODUCT.md` and `.impeccable/` hold the product brief and design direction for the Impeccable skill.
 
 Upcoming events come straight from the Luma calendar embed (`src/components/LumaEvents.astro`),
 so there's nothing to update here when a new event goes live. Set `luma.calendarId`

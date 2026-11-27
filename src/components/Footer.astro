@@ -1,63 +1,75 @@
 ---
-import { site, nav, luma, contact } from '../config';
-import { url } from '../lib';
+import Logo from './Logo.astro';
+import { luma, contact, site } from '../config';
+import { t, type Lang } from '../i18n';
+import { alternate, href } from '../lib';
 
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t[lang];
+const other = alternate(Astro.url.pathname, lang);
 const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
-  <div class="wrap footer__inner">
-    <div>
-      <p class="footer__name">{site.name}</p>
-      <p class="footer__tag">{site.tagline}<br />{site.city}</p>
-    </div>
-    <ul>
-      {nav.map((item) => <li><a href={url(item.href)}>{item.label}</a></li>)}
-      {luma.calendarUrl && <li><a href={luma.calendarUrl}>Luma calendar</a></li>}
-      {contact.instagram && <li><a href={contact.instagram}>Instagram</a></li>}
-      {contact.email && <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>}
-    </ul>
-  </div>
-  <div class="wrap footer__legal">© {year} {site.name}</div>
+  <a class="footer__logo" href={href('home', lang)}><Logo tone="cream" /></a>
+  <p class="footer__tag">{c.tagline}</p>
+  <ul>
+    <li><a href={href('events', lang)}>{c.nav.events}</a></li>
+    <li><a href={href('about', lang)}>{c.nav.about}</a></li>
+    <li><a href={href('private', lang)}>{c.nav.private}</a></li>
+    {luma.calendarUrl && <li><a href={luma.calendarUrl}>{c.footer.calendar}</a></li>}
+    {contact.instagram && <li><a href={contact.instagram}>{c.footer.instagram}</a></li>}
+    {contact.email && <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>}
+    <li><a href={other.href} hreflang={other.lang} lang={other.lang}>{c.langSwitch}</a></li>
+  </ul>
+  <p class="footer__legal">© {year} {site.name} · {site.city}</p>
 </footer>
 
 <style>
   .footer {
-    background: var(--ink);
-    color: color-mix(in srgb, var(--cream) 80%, transparent);
-    padding: 56px 0 32px;
-    font-size: 0.95rem;
+    display: grid;
+    justify-items: center;
+    gap: 22px;
+    padding: 0 var(--gutter) 40px;
+    color: color-mix(in srgb, var(--cream) 82%, transparent);
+    text-align: center;
   }
-  .footer a {
+  .footer__logo {
+    width: clamp(180px, 22vw, 240px);
+    font-size: 1.6rem;
     color: var(--cream);
     text-decoration: none;
   }
-  .footer a:hover {
-    text-decoration: underline;
-  }
-  .footer__inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 32px;
-  }
-  .footer__name {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
+  .footer__tag {
+    font-family: var(--display);
+    font-size: 1.15rem;
     color: var(--cream);
-    margin-bottom: 0.25em;
   }
   ul {
-    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 26px;
     margin: 0;
     padding: 0;
-    display: grid;
-    gap: 8px;
+    list-style: none;
+  }
+  a {
+    color: var(--cream);
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--marigold);
   }
   .footer__legal {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid color-mix(in srgb, var(--cream) 15%, transparent);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
   }
 </style>

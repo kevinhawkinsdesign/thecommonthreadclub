@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Room from '../components/Room.astro';
+import Plate from '../components/Plate.astro';
+import Arrow from '../components/Arrow.astro';
+import { t, type Lang } from '../i18n';
+import { bookingHref, photo } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const a = t[lang].about;
+---
+
+<Base lang={lang} title={a.title} description={a.lede}>
+  <Room tone="aubergine" part="head" class="center">
+    <h1 class="title">{a.title}</h1>
+    <p class="lede">{a.lede}</p>
+  </Room>
+  <Room tone="rust" part="foot">
+    <div class="setting">
+      <Plate src={photo('story')} alt={a.plate} />
+      <div class="stack">
+        {a.body.map((p) => <p>{p}</p>)}
+        <p><a class="btn" href={bookingHref(lang)}>{a.cta} <Arrow /></a></p>
+      </div>
+    </div>
+  </Room>
+</Base>
+
+<style>
+  .title {
+    font-size: clamp(2.6rem, 7vw, 4.5rem);
+    text-transform: uppercase;
+    margin-bottom: 0.4em;
+  }
+  .lede {
+    margin-inline: auto;
+    max-width: 26ch;
+  }
+</style>

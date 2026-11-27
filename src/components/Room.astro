@@ -1,0 +1,16 @@
+---
+// One stretch of the table: a colour field (the room) with the linen runner
+// passing through it. The runner stays continuous from section to section.
+interface Props {
+  tone?: 'aubergine' | 'olive' | 'marigold' | 'rust' | 'sand';
+  part?: 'head' | 'foot' | 'middle';
+  class?: string;
+}
+const { tone = 'aubergine', part = 'middle', class: cls } = Astro.props;
+---
+
+<section class:list={['room', `room--${tone}`]}>
+  <div class:list={['runner', part !== 'middle' && `runner--${part}`, cls]}>
+    <slot />
+  </div>
+</section>

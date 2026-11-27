@@ -4,47 +4,53 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import EventBanner from '../components/EventBanner.astro';
 import { site } from '../config';
+import { t, type Lang } from '../i18n';
+import { alternate, asset, url } from '../lib';
 
 interface Props {
+  lang: Lang;
   title?: string;
   description?: string;
 }
 
-const { title, description = site.description } = Astro.props;
-const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · Supper club in ${site.city}`;
+const { lang, title, description = t[lang].description } = Astro.props;
+const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · Supper club ${site.city}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const other = alternate(Astro.url.pathname, lang);
+const pattern = asset('brand/pattern.png');
+const ogImage = asset('brand/og.jpg');
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} type="image/svg+xml" />
-
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang={other.lang} href={new URL(other.href, Astro.site)} />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <meta name="theme-color" content="#330428" />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_GB'} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="theme-color" content="#4b141d" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site)} />}
   </head>
-  <body>
-    <a class="visually-hidden" href="#main">Skip to content</a>
-    <EventBanner />
-    <Header />
+  <body style={pattern ? `--pattern: url(${pattern})` : undefined}>
+    <a class="skip visually-hidden" href="#main">{t[lang].skip}</a>
+    <EventBanner lang={lang} />
+    <div class="room room--aubergine">
+      <Header lang={lang} />
+    </div>
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    <div class="room room--aubergine">
+      <Footer lang={lang} />
+    </div>
   </body>
 </html>

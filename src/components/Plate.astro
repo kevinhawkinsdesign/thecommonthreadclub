@@ -1,0 +1,47 @@
+---
+// A round photo on the linen: plates are round. Empty slots show a bare plate.
+interface Props {
+  src: string | null;
+  alt: string;
+  size?: string;
+}
+const { src, alt, size = 'clamp(180px, 26vw, 260px)' } = Astro.props;
+---
+
+<div class:list={['plate', { 'plate--empty': !src }]} style={`--size: ${size}`} aria-hidden={src ? undefined : 'true'}>
+  {src && <img src={src} alt={alt} loading="lazy" decoding="async" />}
+</div>
+
+<style>
+  .plate {
+    position: relative;
+    width: var(--size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin-inline: auto;
+    background: var(--cream);
+    padding: 7%;
+    box-shadow:
+      0 1px 0 rgb(51 4 40 / 0.06),
+      0 14px 28px -10px rgb(51 4 40 / 0.35);
+  }
+  .plate::after {
+    content: '';
+    position: absolute;
+    inset: 7%;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sand) 70%, transparent);
+    pointer-events: none;
+  }
+  .plate img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .plate--empty {
+    background:
+      radial-gradient(circle, transparent 54%, color-mix(in srgb, var(--sand) 55%, transparent) 54.5% 55%, transparent 55.5%),
+      var(--cream);
+  }
+</style>

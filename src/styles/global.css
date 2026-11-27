@@ -1,20 +1,39 @@
+@import '@fontsource/bodoni-moda/400.css';
+@import '@fontsource/bodoni-moda/500.css';
+@import '@fontsource/jost/300.css';
+@import '@fontsource/jost/400.css';
+@import '@fontsource/jost/500.css';
+
+/* Brand palette (binding, from the brand board) */
 :root {
-  --ink: #1d1714;
-  --ink-soft: #4a3f39;
-  --cream: #f6efe4;
-  --paper: #fbf7f0;
-  --wine: #6e1f2b;
-  --wine-deep: #4b141d;
-  --brass: #b98a43;
-  --line: #e2d6c4;
+  --cream: #fffcf5;
+  --aubergine: #330428;
+  --olive: #53582f;
+  --marigold: #e49806;
+  --sand: #d9b899;
+  --rust: #b94514;
 
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  /* The linen runner: cream warmed with a little sand */
+  --linen: color-mix(in srgb, var(--sand) 22%, var(--cream));
+  --linen-hem: color-mix(in srgb, var(--sand) 70%, var(--aubergine) 8%);
+  --ink: var(--aubergine);
+  --ink-soft: color-mix(in srgb, var(--aubergine) 78%, var(--linen));
 
-  --measure: 64ch;
-  --wrap: 1120px;
-  --gutter: clamp(16px, 4vw, 40px);
-  --radius: 14px;
+  /* Stand-ins for Romans Story and P22 Underground */
+  --display: 'Bodoni Moda', 'Didot', 'Bodoni 72', serif;
+  --sans: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+
+  --runner: min(880px, calc(100% - 2 * var(--gutter)));
+  --gutter: clamp(16px, 4vw, 48px);
+  --pad: clamp(28px, 5vw, 72px);
+  --step: clamp(72px, 10vw, 128px);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Set by the layout when the pattern file exists */
+  --pattern: linear-gradient(transparent, transparent);
+
+  color-scheme: light;
+  accent-color: var(--rust);
 }
 
 *,
@@ -25,15 +44,23 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--rust) var(--aubergine);
 }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--aubergine);
   color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: clamp(1.0625rem, 1vw + 0.8rem, 1.1875rem);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--marigold);
+  color: var(--aubergine);
 }
 
 img {
@@ -44,147 +71,279 @@ img {
 h1,
 h2,
 h3 {
-  font-family: var(--font-display);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  margin: 0 0 0.5em;
+  font-family: var(--display);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+  margin: 0;
 }
 
-h1 {
-  font-size: clamp(2.5rem, 7vw, 4.75rem);
-}
 h2 {
-  font-size: clamp(1.9rem, 4vw, 2.75rem);
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  text-transform: uppercase;
 }
+
 h3 {
-  font-size: 1.35rem;
+  font-size: clamp(1.35rem, 2vw, 1.6rem);
+  text-transform: uppercase;
 }
 
 p {
-  margin: 0 0 1em;
-  max-width: var(--measure);
+  margin: 0;
+  max-width: 62ch;
+  text-wrap: pretty;
 }
 
 a {
-  color: var(--wine);
-  text-underline-offset: 3px;
+  color: var(--rust);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: color 0.2s var(--ease);
+}
+a:hover {
+  color: var(--aubergine);
 }
 
 :focus-visible {
-  outline: 2px solid var(--brass);
+  outline: 2px solid var(--marigold);
   outline-offset: 3px;
+  border-radius: 2px;
 }
 
-.wrap {
-  max-width: var(--wrap);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-}
-
-.section {
-  padding: clamp(64px, 10vw, 120px) 0;
-}
-
-.section--dark {
-  background: var(--wine-deep);
-  color: var(--cream);
-}
-.section--dark a {
-  color: var(--cream);
-}
-
-.section--cream {
-  background: var(--cream);
-}
-
-.eyebrow {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--brass);
-  margin-bottom: 1rem;
-}
-
-.lede {
-  font-size: clamp(1.15rem, 2vw, 1.35rem);
-  color: var(--ink-soft);
-}
-.section--dark .lede {
-  color: color-mix(in srgb, var(--cream) 82%, transparent);
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.85em 1.5em;
-  border-radius: 999px;
-  background: var(--wine);
-  color: var(--cream);
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid var(--wine);
-  transition: background 0.15s ease, color 0.15s ease;
-}
-.btn:hover {
-  background: var(--wine-deep);
-}
-.btn--ghost {
-  background: transparent;
-  color: inherit;
-  border-color: currentColor;
-}
-.btn--ghost:hover {
-  background: color-mix(in srgb, currentColor 10%, transparent);
-}
-.section--dark .btn {
-  background: var(--cream);
-  color: var(--wine-deep);
-  border-color: var(--cream);
-}
-.section--dark .btn--ghost {
-  background: transparent;
-  color: var(--cream);
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 2rem;
-}
-
-.grid {
-  display: grid;
-  gap: clamp(20px, 3vw, 32px);
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-}
-
-.card {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 28px;
-}
-.card p:last-child {
-  margin-bottom: 0;
-}
-
-.num {
-  font-family: var(--font-display);
-  font-size: 2.25rem;
-  color: var(--brass);
-  line-height: 1;
-  margin-bottom: 0.75rem;
-}
-
-.visually-hidden {
+.visually-hidden:not(:focus) {
   position: absolute;
   width: 1px;
   height: 1px;
   overflow: hidden;
-  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
   white-space: nowrap;
+}
+
+.skip:focus {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--cream);
+  color: var(--aubergine);
+}
+
+/* Petite caps labels, after P22 Underground Light Petite Caps */
+.caps {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ---------- The room: colour fields carrying the pattern ---------- */
+
+.room {
+  --room: var(--aubergine);
+  --room-ink: var(--cream);
+  --room-tone: color-mix(in srgb, var(--room) 86%, var(--cream));
+  position: relative;
+  isolation: isolate;
+  background: var(--room);
+  color: var(--room-ink);
+}
+.room::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--room-tone);
+  -webkit-mask: var(--pattern) 0 0 / 560px repeat;
+  mask: var(--pattern) 0 0 / 560px repeat;
+}
+.room--aubergine {
+  --room: var(--aubergine);
+  --room-tone: color-mix(in srgb, var(--aubergine) 82%, var(--rust));
+}
+.room--olive {
+  --room: var(--olive);
+  --room-tone: color-mix(in srgb, var(--olive) 84%, var(--sand));
+}
+.room--marigold {
+  --room: var(--marigold);
+  --room-ink: var(--aubergine);
+  --room-tone: color-mix(in srgb, var(--marigold) 82%, var(--rust));
+}
+.room--rust {
+  --room: var(--rust);
+  --room-tone: color-mix(in srgb, var(--rust) 84%, var(--marigold));
+}
+.room--sand {
+  --room: var(--sand);
+  --room-ink: var(--aubergine);
+  --room-tone: color-mix(in srgb, var(--sand) 80%, var(--rust));
+}
+
+/* ---------- The runner: one linen strip down the whole page ---------- */
+
+.runner {
+  position: relative;
+  width: var(--runner);
+  margin-inline: auto;
+  padding: var(--step) var(--pad);
+  color: var(--ink);
+  background:
+    repeating-linear-gradient(0deg, rgb(51 4 40 / 0.018) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgb(51 4 40 / 0.018) 0 1px, transparent 1px 3px),
+    var(--linen);
+  box-shadow:
+    -1px 0 0 rgb(51 4 40 / 0.08),
+    1px 0 0 rgb(51 4 40 / 0.08),
+    -14px 0 30px -18px rgb(0 0 0 / 0.5),
+    14px 0 30px -18px rgb(0 0 0 / 0.5);
+}
+/* The stitched hem along both long edges */
+.runner::before {
+  content: '';
+  position: absolute;
+  inset: 0 12px;
+  border-inline: 1px dashed var(--linen-hem);
+  pointer-events: none;
+}
+.runner--head {
+  padding-top: clamp(48px, 7vw, 88px);
+}
+.runner--head::after {
+  /* the hemmed end of the cloth */
+  content: '';
+  position: absolute;
+  inset: 12px 12px auto;
+  border-top: 1px dashed var(--linen-hem);
+}
+.runner--foot {
+  padding-bottom: clamp(56px, 8vw, 96px);
+  margin-bottom: clamp(48px, 7vw, 88px);
+  box-shadow:
+    -1px 0 0 rgb(51 4 40 / 0.08),
+    1px 0 0 rgb(51 4 40 / 0.08),
+    0 18px 40px -12px rgb(0 0 0 / 0.35);
+}
+.runner--foot::after {
+  content: '';
+  position: absolute;
+  inset: auto 12px 12px;
+  border-top: 1px dashed var(--linen-hem);
+}
+
+/* The cloth unrolls once, from the head of the table */
+@media (prefers-reduced-motion: no-preference) {
+  .runner--head {
+    animation: unroll 1.1s var(--ease) both;
+  }
+  @keyframes unroll {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+}
+
+.stack > * + * {
+  margin-top: 1.1em;
+}
+
+.lede {
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.center {
+  text-align: center;
+}
+.center p {
+  margin-inline: auto;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 48px;
+  padding: 0.8em 1.7em;
+  border: 1px solid var(--rust);
+  border-radius: 999px;
+  background: var(--rust);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+.btn:hover {
+  background: var(--aubergine);
+  border-color: var(--aubergine);
+  color: var(--cream);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn svg {
+  width: 1.1em;
+  height: 1.1em;
+  transition: transform 0.25s var(--ease);
+}
+.btn:hover svg {
+  transform: translateX(3px);
+}
+.btn--quiet {
+  background: transparent;
+  color: var(--aubergine);
+  border-color: color-mix(in srgb, var(--aubergine) 40%, transparent);
+}
+.btn--quiet:hover {
+  background: var(--aubergine);
+  color: var(--cream);
+}
+
+.link {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ---------- Place settings along the runner ---------- */
+
+.setting {
+  display: grid;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 720px) {
+  .setting {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .setting--flip {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .setting--flip > :first-child {
+    order: 2;
+  }
+}
+.setting h2,
+.setting h3 {
+  margin-bottom: 0.45em;
 }
