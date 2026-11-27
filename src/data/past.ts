@@ -33,7 +33,7 @@ export const pastEvents: PastEvent[] = [
       es: 'Cinco platos de comida casera de Estados Unidos y Canadá: pavo asado, jamón glaseado, macarrones con queso, arándanos y tarta de calabaza casera, con cócteles toda la noche y alguna actuación entre plato y plato.',
     },
     image: thanksgiving,
-    imageAlt: { en: 'Event artwork: Feast Mode, give thanks', es: 'Cartel del evento: Feast Mode, give thanks' },
+    imageAlt: { en: 'Candles in wine bottles on a long table in an old industrial space', es: 'Velas en botellas de vino sobre una mesa larga en un antiguo espacio industrial' },
     url: 'https://luma.com/thecommon-6hjp',
   },
   {

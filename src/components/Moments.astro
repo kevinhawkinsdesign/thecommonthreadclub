@@ -13,6 +13,11 @@ import casino from '../assets/moments/casino-table.jpg';
 import papelPicado from '../assets/moments/papel-picado.jpg';
 import firstDinner from '../assets/moments/first-dinner.jpg';
 import friends from '../assets/moments/friends.jpg';
+import chips from '../assets/moments/chips.jpg';
+import polaroids from '../assets/moments/polaroids.jpg';
+import arrivals from '../assets/moments/arrivals.jpg';
+import sommelier from '../assets/moments/sommelier.jpg';
+import candleRoom from '../assets/moments/candle-room.jpg';
 import toastPoster from '../assets/moments/toast-poster.jpg';
 
 interface Props {
@@ -20,8 +25,8 @@ interface Props {
 }
 const { lang } = Astro.props;
 const c = t[lang].home.moments;
-const photos = [group, candlelit, longTable, seastar, tacos, casino, papelPicado, firstDinner, friends];
-const tilts = [-1.2, 0.8, -0.4, 1.1, -0.9, 0.5, -0.6, 1, -0.8, 0.6];
+const photos = [group, candlelit, arrivals, seastar, tacos, chips, longTable, casino, candleRoom, papelPicado, polaroids, firstDinner, sommelier, friends];
+const tilts = [-1.2, 0.8, -0.4, 1.1, -0.9, 0.5, -0.6, 1, -0.8, 0.6, -1, 0.7, -0.5, 0.9, -0.7];
 const poster = await getImage({ src: toastPoster, width: 480, format: 'webp' });
 ---
 
@@ -34,7 +39,7 @@ const poster = await getImage({ src: toastPoster, width: 480, format: 'webp' });
       </figure>
     ))
   }
-  <figure style={`--tilt: ${tilts[9]}deg`}>
+  <figure style={`--tilt: ${tilts[14]}deg`}>
     <video src={url('video/a-toast.mp4')} poster={poster.src} muted loop playsinline autoplay preload="none" aria-label={c.toast}></video>
     <figcaption>{c.toast}</figcaption>
   </figure>
