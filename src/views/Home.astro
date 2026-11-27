@@ -1,0 +1,324 @@
+---
+import Base from '../layouts/Base.astro';
+import Room from '../components/Room.astro';
+import Logo from '../components/Logo.astro';
+import Plate from '../components/Plate.astro';
+import PlaceCard from '../components/PlaceCard.astro';
+import Reel from '../components/Reel.astro';
+import PastCard from '../components/PastCard.astro';
+import Arch from '../components/Arch.astro';
+import Arrow from '../components/Arrow.astro';
+import { contact, luma, press } from '../config';
+import { archive } from '../data/past';
+import { t, type Lang } from '../i18n';
+import { href } from '../lib';
+import aperitivo from '../assets/photos/aperitivo.jpg';
+import mesa from '../assets/photos/mesa.jpg';
+import sobretaula from '../assets/photos/sobretaula.jpg';
+import candlelit from '../assets/photos/candlelit-room.jpg';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t[lang];
+const h = c.home;
+const courseRooms = ['marigold', 'olive', 'aubergine'] as const;
+const coursePhotos = [
+  { src: aperitivo, pos: '50% 50%' },
+  { src: mesa, pos: '45% 55%' },
+  { src: sobretaula, pos: '40% 50%' },
+];
+const recent = archive().slice(0, 3);
+---
+
+<Base lang={lang}>
+  <Room tone="aubergine" part="head" class="head">
+    <h1 class="head__logo"><Logo /></h1>
+    <p class="lede head__tag">{c.tagline}</p>
+    <p class="head__intro">{h.intro}</p>
+    <PlaceCard lang={lang} />
+  </Room>
+
+  {
+    h.courses.map((course, i) => (
+      <Room tone={courseRooms[i]}>
+        <div class:list={['setting', { 'setting--flip': i % 2 === 1 }]}>
+          <Plate src={coursePhotos[i].src} position={coursePhotos[i].pos} alt={course.alt} />
+          <div>
+            <h2>{course.name}</h2>
+            <p>{course.body}</p>
+          </div>
+        </div>
+      </Room>
+    ))
+  }
+
+  <Room tone="rust">
+    <div class="setting reel-setting">
+      <div class="reel-col">
+        <Reel lang={lang} />
+        <p class="reel-caption">
+          <span class="caps">{h.reelTitle}</span>
+          <br />
+          {h.reelBody}
+        </p>
+      </div>
+      <blockquote class="quote">
+        <p class="quote__line">“{h.quote}”</p>
+        <p class="quote__body">{h.quoteBody}</p>
+      </blockquote>
+    </div>
+  </Room>
+
+  <Room tone="marigold">
+    <div class="setting setting--flip">
+      <Arch src={candlelit} alt={h.hostAlt} position="50% 60%" />
+      <div class="stack">
+        <h2>{h.hostTitle}</h2>
+        {h.hostBody.map((p) => <p>{p}</p>)}
+        <p><a class="link" href={href('about', lang)}>{h.hostLink}</a></p>
+      </div>
+    </div>
+  </Room>
+
+  {
+    recent.length > 0 && (
+      <Room tone="olive">
+        <div class="center section-head">
+          <h2>{h.pastTitle}</h2>
+          <p>{h.pastBody}</p>
+        </div>
+        <div class="past-grid">
+          {recent.map((e) => (
+            <PastCard event={e} lang={lang} compact />
+          ))}
+        </div>
+        <p class="center more">
+          <a class="btn btn--quiet" href={`${href('events', lang)}#past`}>
+            {h.pastCta} <Arrow />
+          </a>
+        </p>
+      </Room>
+    )
+  }
+
+  <Room tone="sand">
+    {
+      press.length > 0 && (
+        <div class="press center">
+          <p class="caps press__label">{h.pressTitle}</p>
+          {press.map((p) => (
+            <p class="press__item">
+              <span class="press__outlet">{p.outlet}</span>
+              <a href={p.url}>{p.title}</a>
+            </p>
+          ))}
+        </div>
+      )
+    }
+    <div class="qa">
+      <h2 class="center">{h.faqTitle}</h2>
+      <dl>
+        {
+          h.faqs.map((f) => (
+            <div class="qa__pair">
+              <dt>
+                <span class="qa__letter" aria-hidden="true">Q</span>
+                <span class="qa__pill">{f.q}</span>
+              </dt>
+              <dd>
+                <span class="qa__letter" aria-hidden="true">A</span>
+                <span class="qa__pill">{f.a}</span>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </Room>
+
+  <Room tone="aubergine" part="foot">
+    <div class="close">
+      <div class="stack">
+        <h2>{h.joinTitle}</h2>
+        <p>{h.joinBody}</p>
+        <p class="actions">
+          <a class="btn" href={luma.calendarUrl}>{h.joinLuma} <Arrow /></a>
+          {contact.instagram && <a class="btn btn--quiet" href={contact.instagram}>{h.joinInstagram}</a>}
+        </p>
+      </div>
+      <div class="stack">
+        <h2>{h.privateTitle}</h2>
+        <p>{h.privateBody}</p>
+        <p><a class="btn btn--quiet" href={href('private', lang)}>{h.privateCta} <Arrow /></a></p>
+      </div>
+    </div>
+  </Room>
+</Base>
+
+<style>
+  :global(.head) {
+    display: grid;
+    justify-items: center;
+    gap: clamp(18px, 2.6vw, 28px);
+    text-align: center;
+  }
+  :global(.head > *) {
+    margin-inline: auto;
+  }
+  .head__logo {
+    display: flex;
+    justify-content: center;
+    width: min(100%, 480px);
+    font-size: clamp(2.6rem, 8vw, 5rem);
+    color: var(--aubergine);
+  }
+  .head__tag {
+    max-width: 24ch;
+  }
+  .head__intro {
+    color: var(--ink-soft);
+    max-width: 54ch;
+    margin-bottom: clamp(8px, 2vw, 20px);
+  }
+
+  .reel-setting {
+    align-items: center;
+  }
+  .reel-col :global(.reel) {
+    width: min(100%, 250px);
+  }
+  @media (min-width: 720px) {
+    .reel-setting {
+      grid-template-columns: 270px minmax(0, 1fr);
+    }
+  }
+  .reel-col {
+    display: grid;
+    gap: 22px;
+    justify-items: center;
+    text-align: center;
+  }
+  .reel-caption {
+    max-width: 30ch;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+  .reel-caption .caps {
+    color: var(--rust);
+  }
+  .quote {
+    margin: 0;
+  }
+  .quote__line {
+    font-family: var(--display);
+    font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+    line-height: 1.2;
+    color: var(--aubergine);
+    text-wrap: balance;
+  }
+  .quote__body {
+    margin-top: 1.2rem;
+    color: var(--ink-soft);
+  }
+
+  .section-head {
+    margin-bottom: clamp(32px, 5vw, 56px);
+  }
+  .section-head p {
+    margin-top: 0.6rem;
+    color: var(--ink-soft);
+  }
+  .past-grid {
+    display: grid;
+    gap: clamp(20px, 3vw, 32px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  }
+  .more {
+    margin-top: clamp(32px, 5vw, 48px);
+  }
+
+  .press {
+    margin-bottom: clamp(48px, 7vw, 80px);
+  }
+  .press__label {
+    color: var(--rust);
+    margin-inline: auto;
+  }
+  .press__item {
+    margin: 1.6rem auto 0;
+    max-width: 34ch;
+    font-family: var(--display);
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    line-height: 1.25;
+  }
+  .press__outlet {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+  .press__item a {
+    color: var(--aubergine);
+  }
+
+  /* Q&A, after the brand's social template */
+  .qa {
+    max-width: 680px;
+    margin-inline: auto;
+  }
+  .qa h2 {
+    margin-bottom: 1em;
+  }
+  dl {
+    display: grid;
+    gap: clamp(24px, 4vw, 36px);
+    margin: 0;
+  }
+  .qa__pair {
+    display: grid;
+    gap: 10px;
+  }
+  dt,
+  dd {
+    display: grid;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+  }
+  .qa__letter {
+    font-family: var(--display);
+    font-size: 2.4rem;
+    line-height: 1;
+    text-align: center;
+    color: var(--aubergine);
+  }
+  .qa__pill {
+    display: block;
+    padding: 14px 24px;
+    border-radius: 999px;
+    background: var(--cream);
+    box-shadow: 0 10px 22px -16px rgb(51 4 40 / 0.5);
+  }
+  dt .qa__pill {
+    font-family: var(--display);
+    font-size: 1.2rem;
+  }
+  dd .qa__pill {
+    border-radius: 28px;
+    color: var(--ink-soft);
+  }
+  .close {
+    display: grid;
+    gap: clamp(48px, 6vw, 72px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+</style>

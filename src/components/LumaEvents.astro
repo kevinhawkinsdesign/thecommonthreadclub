@@ -1,0 +1,26 @@
+---
+// Upcoming events straight from Luma. Without a calendar ID set, the place
+// card does the job on its own and this renders nothing.
+import { luma } from '../config';
+---
+
+{
+  luma.calendarId && (
+    <iframe
+      class="luma"
+      src={`https://luma.com/embed/calendar/${luma.calendarId}/events?lt=light`}
+      title="Luma"
+      loading="lazy"
+      allowfullscreen
+    />
+  )
+}
+
+<style>
+  .luma {
+    width: 100%;
+    height: 720px;
+    border: 1px solid color-mix(in srgb, var(--sand) 70%, transparent);
+    background: var(--cream);
+  }
+</style>

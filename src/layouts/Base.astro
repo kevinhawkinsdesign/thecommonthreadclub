@@ -1,0 +1,72 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import EventBanner from '../components/EventBanner.astro';
+import { contact, luma, site } from '../config';
+import { t, type Lang } from '../i18n';
+import { alternate, asset, url } from '../lib';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+}
+
+const { lang, title, description = t[lang].description } = Astro.props;
+const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · Supper club ${site.city}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const other = alternate(Astro.url.pathname, lang);
+const pattern = asset('brand/pattern.webp');
+const ogImage = asset('brand/og.jpg');
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: new URL(url(''), Astro.site).href,
+  logo: new URL(url('brand/logo-stacked-aubergine.png'), Astro.site).href,
+  description,
+  founder: { '@type': 'Person', name: 'Kevin Hawkins' },
+  address: { '@type': 'PostalAddress', addressLocality: site.city, addressCountry: 'ES' },
+  sameAs: [contact.instagram, luma.calendarUrl].filter(Boolean),
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang={other.lang} href={new URL(other.href, Astro.site)} />
+    <link rel="icon" href={url('favicon-32.png')} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={url('apple-touch-icon.png')} />
+    <meta name="theme-color" content="#330428" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_GB'} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site)} />}
+    {ogImage && <meta property="og:image:width" content="1200" />}
+    {ogImage && <meta property="og:image:height" content="630" />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(org)} />
+  </head>
+  <body style={pattern ? `--pattern: url(${pattern})` : undefined}>
+    <a class="skip visually-hidden" href="#main">{t[lang].skip}</a>
+    <EventBanner lang={lang} />
+    <div class="room room--aubergine">
+      <Header lang={lang} />
+    </div>
+    <main id="main">
+      <slot />
+    </main>
+    <div class="room room--aubergine">
+      <Footer lang={lang} />
+    </div>
+  </body>
+</html>

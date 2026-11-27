@@ -1,0 +1,87 @@
+---
+import Logo from './Logo.astro';
+import { luma, contact, site } from '../config';
+import { t, type Lang } from '../i18n';
+import { alternate, asset, href } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t[lang];
+const other = alternate(Astro.url.pathname, lang);
+const year = new Date().getFullYear();
+const stamp = asset('brand/stamp-cream.png');
+---
+
+<footer class="footer">
+  {stamp && <img class="footer__stamp" src={stamp} alt="" width="56" height="81" loading="lazy" />}
+  <a class="footer__logo" href={href('home', lang)}><Logo tone="cream" /></a>
+  <p class="footer__tag">{c.tagline}</p>
+  <p class="caps footer__signoff" lang="en">{c.footer.signoff}</p>
+  <ul>
+    <li><a href={href('events', lang)}>{c.nav.events}</a></li>
+    <li><a href={href('about', lang)}>{c.nav.about}</a></li>
+    <li><a href={href('private', lang)}>{c.nav.private}</a></li>
+    {luma.calendarUrl && <li><a href={luma.calendarUrl}>{c.footer.calendar}</a></li>}
+    {contact.instagram && <li><a href={contact.instagram}>{c.footer.instagram}</a></li>}
+    {contact.email && <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>}
+    <li><a href={other.href} hreflang={other.lang} lang={other.lang}>{c.langSwitch}</a></li>
+  </ul>
+  <p class="footer__legal">© {year} {site.name} · {site.city}</p>
+</footer>
+
+<style>
+  .footer {
+    display: grid;
+    justify-items: center;
+    gap: 22px;
+    padding: 0 var(--gutter) 40px;
+    color: color-mix(in srgb, var(--cream) 82%, transparent);
+    text-align: center;
+  }
+  .footer__logo {
+    width: clamp(180px, 22vw, 240px);
+    font-size: 1.6rem;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .footer__stamp {
+    width: 56px;
+    height: auto;
+    margin-bottom: 4px;
+  }
+  .footer__signoff {
+    color: var(--marigold);
+    margin-top: -6px;
+  }
+  .footer__tag {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    color: var(--cream);
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 26px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  a {
+    color: var(--cream);
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--marigold);
+  }
+  .footer__legal {
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+  }
+</style>

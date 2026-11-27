@@ -1,0 +1,157 @@
+---
+// The folded place card at the head of the table: the next event and how to
+// book it. When nothing is scheduled it points to the Luma calendar instead.
+import Arrow from './Arrow.astro';
+import { contact, luma } from '../config';
+import { t, type Lang } from '../i18n';
+import { asset, href, upcomingEvent } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t[lang].card;
+const event = upcomingEvent(lang);
+const meta = event ? [c.next, event.time, event.location, event.price].filter(Boolean) : [];
+const laterHref = luma.calendarUrl || href('events', lang);
+const seal = asset('brand/stamp-rust.png');
+---
+
+<article class="card" aria-labelledby="place-card-title">
+  {seal && <img class="card__seal" src={seal} alt="" width="44" height="64" />}
+  <div class="card__fold card__top">
+    {
+      event ? (
+        <h2 id="place-card-title" class="card__date">
+          <span class="card__weekday">{event.weekday}</span>
+          <span class="card__daymonth">
+            {event.day} {event.month}
+          </span>
+        </h2>
+      ) : (
+        <h2 id="place-card-title" class="card__none">{c.noneTitle}</h2>
+      )
+    }
+  </div>
+  <div class="card__fold card__bottom">
+    {
+      event ? (
+        <>
+          <p class="card__title">{event.title}</p>
+          <p class="caps card__meta">{meta.join(' · ')}</p>
+          <a class="btn card__btn" href={event.url}>
+            {c.book} <Arrow />
+          </a>
+          <p class="card__via">{c.via}</p>
+        </>
+      ) : (
+        <>
+          <p class="card__title">{c.noneBody}</p>
+          <div class="card__actions">
+            <a class="btn" href={laterHref}>
+              {c.noneCta} <Arrow />
+            </a>
+            {contact.instagram && (
+              <a class="btn btn--quiet" href={contact.instagram}>
+                {c.instagram}
+              </a>
+            )}
+          </div>
+        </>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    width: min(100%, 460px);
+    margin-inline: auto;
+    background: var(--cream);
+    text-align: center;
+    transform-origin: 50% 50%;
+    box-shadow:
+      0 2px 3px rgb(51 4 40 / 0.08),
+      0 22px 40px -18px rgb(51 4 40 / 0.45);
+    transition:
+      transform 0.5s var(--ease),
+      box-shadow 0.5s var(--ease);
+  }
+  /* Tents up a little, like a card picked up off the table */
+  .card:hover,
+  .card:focus-within {
+    transform: perspective(900px) rotateX(9deg) translateY(-4px);
+    box-shadow:
+      0 2px 3px rgb(51 4 40 / 0.06),
+      0 34px 46px -20px rgb(51 4 40 / 0.5);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card:hover,
+    .card:focus-within {
+      transform: none;
+    }
+  }
+  .card__seal {
+    position: absolute;
+    top: -26px;
+    left: 50%;
+    width: 44px;
+    height: auto;
+    translate: -50% 0;
+    background: var(--cream);
+    border-radius: 999px;
+    box-shadow: 0 0 0 5px var(--cream);
+  }
+  .card__fold {
+    padding: clamp(28px, 4vw, 40px) clamp(20px, 4vw, 36px) clamp(22px, 4vw, 34px);
+  }
+  .card__top {
+    padding-top: 52px;
+    background: linear-gradient(to bottom, var(--cream), color-mix(in srgb, var(--sand) 12%, var(--cream)));
+    border-bottom: 1px solid color-mix(in srgb, var(--sand) 75%, transparent);
+  }
+  .card__date {
+    display: grid;
+    gap: 0.15em;
+    text-transform: uppercase;
+  }
+  .card__weekday {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--rust);
+  }
+  .card__daymonth {
+    font-size: clamp(2.1rem, 5vw, 3rem);
+  }
+  .card__none {
+    font-size: clamp(1.5rem, 3.4vw, 2rem);
+    text-transform: uppercase;
+  }
+  .card__title {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    margin-inline: auto;
+  }
+  .card__meta {
+    color: var(--ink-soft);
+    margin: 0.4rem auto 0;
+  }
+  .card__btn {
+    margin-top: 1.3rem;
+  }
+  .card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1.3rem;
+  }
+  .card__via {
+    margin: 0.9rem auto 0;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+</style>

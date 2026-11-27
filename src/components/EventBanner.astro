@@ -1,0 +1,61 @@
+---
+// A marigold ribbon above the header pointing at the next event.
+import Arrow from './Arrow.astro';
+import { t, type Lang } from '../i18n';
+import { upcomingEvent } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const event = upcomingEvent(lang);
+const c = t[lang].banner;
+---
+
+{
+  event && (
+    <a class="banner" href={event.url}>
+      <span>
+        {c.next} · <strong>{event.longDate}</strong>
+      </span>
+      <span class="banner__cta">
+        {c.cta} <Arrow />
+      </span>
+    </a>
+  )
+}
+
+<style>
+  .banner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4px 16px;
+    padding: 9px 16px;
+    background: var(--marigold);
+    color: var(--aubergine);
+    font-size: 0.76rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .banner strong {
+    font-weight: 500;
+  }
+  .banner__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+  }
+  .banner__cta :global(svg) {
+    width: 14px;
+    height: 14px;
+  }
+  .banner:hover {
+    color: var(--aubergine);
+    background: color-mix(in srgb, var(--marigold) 88%, var(--cream));
+  }
+</style>

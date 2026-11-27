@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import Room from '../components/Room.astro';
+import Arch from '../components/Arch.astro';
+import Arrow from '../components/Arrow.astro';
+import { luma } from '../config';
+import { t, type Lang } from '../i18n';
+import candlelit from '../assets/photos/candlelit-room.jpg';
+import cellist from '../assets/photos/cellist.jpg';
+import casino from '../assets/photos/casino-polaroids.jpg';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const a = t[lang].about;
+// Chapters alternate through the rooms; three of them carry a photo.
+const rooms = ['rust', 'olive', 'marigold', 'sand', 'aubergine'] as const;
+const plates = [
+  { src: candlelit, pos: '50% 60%' },
+  null,
+  { src: cellist, pos: '40% 40%' },
+  null,
+  { src: casino, pos: '50% 40%' },
+];
+---
+
+<Base lang={lang} title={a.title} description={a.lede}>
+  <Room tone="aubergine" part="head" class="center">
+    <h1 class="title">{a.title}</h1>
+    <p class="lede">{a.lede}</p>
+  </Room>
+  {
+    a.chapters.map((ch, i) => {
+      const plate = plates[i];
+      const altIndex = plates.slice(0, i).filter(Boolean).length;
+      return (
+        <Room tone={rooms[i]} part={i === a.chapters.length - 1 ? 'foot' : 'middle'}>
+          {plate ? (
+            <div class:list={['setting', { 'setting--flip': altIndex % 2 === 1 }]}>
+              <Arch src={plate.src} position={plate.pos} alt={a.alts[altIndex]} />
+              <div class="stack">
+                <h2>{ch.title}</h2>
+                {ch.body.map((p) => (
+                  <p>{p}</p>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div class="stack chapter">
+              <h2>{ch.title}</h2>
+              {ch.body.map((p) => (
+                <p>{p}</p>
+              ))}
+            </div>
+          )}
+          {i === a.chapters.length - 1 && (
+            <p class="cta">
+              <a class="btn" href={luma.calendarUrl}>
+                {a.cta} <Arrow />
+              </a>
+            </p>
+          )}
+        </Room>
+      );
+    })
+  }
+</Base>
+
+<style>
+  .title {
+    font-size: clamp(2.6rem, 7vw, 4.5rem);
+    text-transform: uppercase;
+    margin-bottom: 0.4em;
+  }
+  .lede {
+    margin-inline: auto;
+    max-width: 26ch;
+  }
+  .chapter {
+    max-width: 62ch;
+    margin-inline: auto;
+  }
+  .cta {
+    margin-top: clamp(40px, 6vw, 64px);
+    text-align: center;
+  }
+</style>

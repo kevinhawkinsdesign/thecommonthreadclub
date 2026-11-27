@@ -1,0 +1,107 @@
+---
+import Arrow from './Arrow.astro';
+import Logo from './Logo.astro';
+import { t, type Lang } from '../i18n';
+import { alternate, bookingHref, href, upcomingEvent } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t[lang];
+const current = Astro.url.pathname;
+const links = [
+  { href: href('events', lang), label: c.nav.events },
+  { href: href('about', lang), label: c.nav.about },
+  { href: href('private', lang), label: c.nav.private },
+];
+const other = alternate(current, lang);
+---
+
+<header class="header">
+  <a class="header__logo" href={href('home', lang)}>
+    <Logo layout="horizontal" tone="cream" />
+  </a>
+  <nav aria-label={lang === 'es' ? 'Principal' : 'Main'}>
+    <ul>
+      {
+        links.map((l) => (
+          <li>
+            <a href={l.href} aria-current={current.startsWith(l.href) ? 'page' : undefined}>
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a href={other.href} hreflang={other.lang} lang={other.lang} class="header__lang">{c.langSwitch}</a>
+      </li>
+      <li>
+        <a class="btn header__book" href={bookingHref(lang)}>{upcomingEvent(lang) ? c.nav.book : c.nav.follow} <Arrow /></a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px 32px;
+    padding: 18px var(--gutter);
+    color: var(--cream);
+  }
+  .header__logo {
+    width: clamp(220px, 22vw, 290px);
+    font-size: 1.35rem;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  ul {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 26px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  nav a:not(.btn) {
+    color: color-mix(in srgb, var(--cream) 86%, transparent);
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding-block: 6px;
+    border-bottom: 1px solid transparent;
+  }
+  nav a:not(.btn):hover,
+  nav a[aria-current='page'] {
+    color: var(--cream);
+    border-bottom-color: var(--marigold);
+  }
+  .header__lang {
+    opacity: 0.8;
+  }
+  .header__book {
+    min-height: 40px;
+    padding: 0.55em 1.2em;
+  }
+  .header__book:hover {
+    background: var(--cream);
+    border-color: var(--cream);
+    color: var(--aubergine);
+  }
+  @media (max-width: 760px) {
+    .header {
+      justify-content: center;
+    }
+    ul {
+      justify-content: center;
+      gap: 4px 18px;
+    }
+  }
+</style>

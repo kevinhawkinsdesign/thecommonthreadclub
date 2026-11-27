@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+import Room from '../components/Room.astro';
+import PlaceCard from '../components/PlaceCard.astro';
+import LumaEvents from '../components/LumaEvents.astro';
+import PastCard from '../components/PastCard.astro';
+import Offer from '../components/Offer.astro';
+import { archive } from '../data/past';
+import { t, type Lang } from '../i18n';
+import { upcomingEvent } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const e = t[lang].events;
+const past = archive();
+const hasNext = Boolean(upcomingEvent(lang));
+---
+
+<Base lang={lang} title={e.title} description={e.intro}>
+  <Room tone="aubergine" part="head" class="center">
+    <h1 class="title">{e.title}</h1>
+    <p class="intro">{e.intro}</p>
+    <PlaceCard lang={lang} />
+    {hasNext && <div class="embed"><LumaEvents /></div>}
+  </Room>
+
+  {
+    past.length > 0 && (
+      <Room tone="olive">
+        <div class="center head" id="past">
+          <h2>{e.pastTitle}</h2>
+          <p>{e.pastIntro}</p>
+        </div>
+        <div class="archive">
+          {past.map((ev) => (
+            <PastCard event={ev} lang={lang} />
+          ))}
+        </div>
+      </Room>
+    )
+  }
+
+  <Room tone="marigold" part="foot">
+    <h2 class="center formats__title">{e.formatsTitle}</h2>
+    <div class="formats">
+      {
+        e.formats.map((f) => (
+          <Offer icon={f.icon} name={f.name} body={f.body} />
+        ))
+      }
+    </div>
+  </Room>
+</Base>
+
+<style>
+  .title {
+    font-size: clamp(2.6rem, 7vw, 4.5rem);
+    text-transform: uppercase;
+  }
+  .intro {
+    margin: 1rem auto clamp(32px, 5vw, 56px);
+    color: var(--ink-soft);
+  }
+  .embed {
+    margin-top: clamp(32px, 5vw, 56px);
+  }
+  .head {
+    margin-bottom: clamp(32px, 5vw, 56px);
+    scroll-margin-top: 24px;
+  }
+  .head p {
+    margin-top: 0.6rem;
+    color: var(--ink-soft);
+  }
+  .archive {
+    display: grid;
+    gap: clamp(24px, 3vw, 36px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  }
+  .formats__title {
+    margin-bottom: 1em;
+  }
+  .formats {
+    display: grid;
+    gap: 48px 40px;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+  @media (min-width: 640px) {
+    .formats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

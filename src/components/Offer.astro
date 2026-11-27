@@ -1,0 +1,37 @@
+---
+// One kind of evening, marked with the brand's ring icon.
+import { url } from '../lib';
+
+interface Props {
+  icon: string;
+  name: string;
+  body: string;
+}
+const { icon, name, body } = Astro.props;
+---
+
+<div class="offer">
+  <img src={url(`brand/icons/${icon}.png`)} alt="" width="96" height="96" loading="lazy" />
+  <h3>{name}</h3>
+  <p>{body}</p>
+</div>
+
+<style>
+  .offer {
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  img {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 0.4rem;
+    filter: drop-shadow(0 8px 14px rgb(51 4 40 / 0.18));
+  }
+  p {
+    margin-inline: auto;
+    max-width: 30ch;
+    color: var(--ink-soft);
+  }
+</style>
