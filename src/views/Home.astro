@@ -99,6 +99,9 @@ const recent = archive().slice(0, 3);
           <a class="btn btn--quiet" href={`${href('events', lang)}#past`}>
             {h.pastCta} <Arrow />
           </a>
+          <a class="btn btn--quiet" href={`${href('events', lang)}#trips`}>
+            {h.tripsCta} <Arrow />
+          </a>
         </p>
       </Room>
     )
@@ -245,6 +248,11 @@ const recent = archive().slice(0, 3);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
   }
   .more {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: none;
     margin-top: clamp(32px, 5vw, 48px);
   }
 

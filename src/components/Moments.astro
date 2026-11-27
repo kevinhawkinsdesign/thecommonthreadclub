@@ -1,33 +1,43 @@
 ---
 // A loose spread of photos from past nights, like prints laid on the table.
 import { Picture } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import { t, type Lang } from '../i18n';
+import { url } from '../lib';
 import group from '../assets/moments/group.jpg';
+import candlelit from '../assets/moments/candlelit-dinner.jpg';
 import longTable from '../assets/moments/long-table.jpg';
 import seastar from '../assets/moments/seastar-priorat.jpg';
+import tacos from '../assets/moments/tacos.jpg';
 import casino from '../assets/moments/casino-table.jpg';
+import papelPicado from '../assets/moments/papel-picado.jpg';
 import firstDinner from '../assets/moments/first-dinner.jpg';
-import oliveKevin from '../assets/moments/olive-oil-kevin.jpg';
-import oliveBottles from '../assets/moments/olive-oil-bottles.jpg';
-import oliveTable from '../assets/moments/olive-oil-table.jpg';
+import friends from '../assets/moments/friends.jpg';
+import toastPoster from '../assets/moments/toast-poster.jpg';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const c = t[lang].home.moments;
-const photos = [group, longTable, seastar, oliveKevin, casino, firstDinner, oliveBottles, oliveTable];
+const photos = [group, candlelit, longTable, seastar, tacos, casino, papelPicado, firstDinner, friends];
+const tilts = [-1.2, 0.8, -0.4, 1.1, -0.9, 0.5, -0.6, 1, -0.8, 0.6];
+const poster = await getImage({ src: toastPoster, width: 480, format: 'webp' });
 ---
 
 <div class="moments">
   {
     photos.map((src, i) => (
-      <figure style={`--tilt: ${[-1.2, 0.8, -0.4, 1.1, -0.9, 0.5, -0.6, 1][i]}deg`}>
+      <figure style={`--tilt: ${tilts[i]}deg`}>
         <Picture src={src} alt={c.alts[i]} widths={[320, 480, 720]} sizes="(min-width: 900px) 280px, 45vw" formats={['avif', 'webp']} loading="lazy" />
         <figcaption>{c.captions[i]}</figcaption>
       </figure>
     ))
   }
+  <figure style={`--tilt: ${tilts[9]}deg`}>
+    <video src={url('video/a-toast.mp4')} poster={poster.src} muted loop playsinline autoplay preload="none" aria-label={c.toast}></video>
+    <figcaption>{c.toast}</figcaption>
+  </figure>
 </div>
 
 <style>
@@ -58,6 +68,21 @@ const photos = [group, longTable, seastar, oliveKevin, casino, firstDinner, oliv
     figure,
     figure:hover {
       transform: none;
+    }
+  }
+  video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 720 / 1160;
+    object-fit: cover;
+    background: var(--aubergine);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    video {
+      display: none;
+    }
+    figure:has(video) {
+      display: none;
     }
   }
   figure :global(img) {
