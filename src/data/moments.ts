@@ -60,6 +60,10 @@ export const moments: Moment[] = [
 
 export const homeCount = 12;
 
+// Alt text for one of the photos above, in the given language.
+export const altFor = (src: ImageMetadata, lang: 'en' | 'es') =>
+  moments.find((m) => m.src === src)?.alt[lang] ?? '';
+
 export const privateMoments: Moment[] = [
   m(teamEvent, { en: 'Catering a company event', es: 'Catering para un evento de empresa' }, { en: 'Kevin in an apron posing with guests and a tray of bites in front of an event backdrop', es: 'Kevin con delantal posando con invitados y una bandeja de bocados delante de un photocall' }),
   m(service, { en: 'Bites, passed by hand', es: 'Bocados servidos a mano' }, { en: 'A server smiling as she offers a tray with a single bite', es: 'Una camarera sonriendo mientras ofrece una bandeja con un bocado' }),

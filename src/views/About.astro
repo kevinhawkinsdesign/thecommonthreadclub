@@ -2,6 +2,9 @@
 import Base from '../layouts/Base.astro';
 import Room from '../components/Room.astro';
 import Arch from '../components/Arch.astro';
+import { altFor } from '../data/moments';
+import hostSpeaking from '../assets/moments/host-speaking.jpg';
+import kimono from '../assets/moments/kimono-toast.jpg';
 import Arrow from '../components/Arrow.astro';
 import { luma } from '../config';
 import { t, type Lang } from '../i18n';
@@ -38,7 +41,17 @@ const plates = [
         <Room tone={rooms[i]} part={i === a.chapters.length - 1 ? 'foot' : 'middle'}>
           {plate ? (
             <div class:list={['setting', { 'setting--flip': altIndex % 2 === 1 }]}>
-              <Arch src={plate.src} position={plate.pos} alt={a.alts[altIndex]} />
+              {i === 0 ? (
+                <Arch
+                  slides={[
+                    { src: hostSpeaking, alt: altFor(hostSpeaking, lang), position: '50% 45%' },
+                    { src: kimono, alt: altFor(kimono, lang), position: '50% 40%' },
+                    { src: plate.src, alt: a.alts[altIndex], position: plate.pos },
+                  ]}
+                />
+              ) : (
+                <Arch src={plate.src} position={plate.pos} alt={a.alts[altIndex]} />
+              )}
               <div class="stack">
                 <h2>{ch.title}</h2>
                 {ch.body.map((p) => (
