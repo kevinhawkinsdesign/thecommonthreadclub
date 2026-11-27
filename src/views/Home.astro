@@ -7,6 +7,8 @@ import PlaceCard from '../components/PlaceCard.astro';
 import Reel from '../components/Reel.astro';
 import PastCard from '../components/PastCard.astro';
 import Arch from '../components/Arch.astro';
+import Moments from '../components/Moments.astro';
+import kevin from '../assets/photos/kevin.jpg';
 import Arrow from '../components/Arrow.astro';
 import { contact, luma, press } from '../config';
 import { archive } from '../data/past';
@@ -15,7 +17,6 @@ import { href } from '../lib';
 import aperitivo from '../assets/photos/aperitivo.jpg';
 import mesa from '../assets/photos/mesa.jpg';
 import sobretaula from '../assets/photos/sobretaula.jpg';
-import candlelit from '../assets/photos/candlelit-room.jpg';
 
 interface Props {
   lang: Lang;
@@ -73,7 +74,7 @@ const recent = archive().slice(0, 3);
 
   <Room tone="marigold">
     <div class="setting setting--flip">
-      <Arch src={candlelit} alt={h.hostAlt} position="50% 60%" />
+      <Arch src={kevin} alt={h.hostAlt} position="55% 30%" />
       <div class="stack">
         <h2>{h.hostTitle}</h2>
         {h.hostBody.map((p) => <p>{p}</p>)}
@@ -102,6 +103,14 @@ const recent = archive().slice(0, 3);
       </Room>
     )
   }
+
+  <Room tone="rust">
+    <div class="center section-head">
+      <h2>{h.moments.title}</h2>
+      <p>{h.moments.body}</p>
+    </div>
+    <Moments lang={lang} />
+  </Room>
 
   <Room tone="sand">
     {

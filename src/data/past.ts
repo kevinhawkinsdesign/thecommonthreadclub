@@ -90,8 +90,8 @@ export const pastEvents: PastEvent[] = [
     },
     image: casino,
     imageAlt: {
-      en: 'Wine glasses on a casino table under the projected logo',
-      es: 'Copas de vino sobre una mesa de casino bajo el logo proyectado',
+      en: 'Guests around the casino tasting table as the sommelier reads the results',
+      es: 'Invitados alrededor de la mesa de casino mientras la sumiller lee los resultados',
     },
     url: 'https://luma.com/fattkbmt',
   },

@@ -1,0 +1,75 @@
+---
+// A loose spread of photos from past nights, like prints laid on the table.
+import { Picture } from 'astro:assets';
+import { t, type Lang } from '../i18n';
+import group from '../assets/moments/group.jpg';
+import longTable from '../assets/moments/long-table.jpg';
+import seastar from '../assets/moments/seastar-priorat.jpg';
+import casino from '../assets/moments/casino-table.jpg';
+import firstDinner from '../assets/moments/first-dinner.jpg';
+import oliveKevin from '../assets/moments/olive-oil-kevin.jpg';
+import oliveBottles from '../assets/moments/olive-oil-bottles.jpg';
+import oliveTable from '../assets/moments/olive-oil-table.jpg';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t[lang].home.moments;
+const photos = [group, longTable, seastar, oliveKevin, casino, firstDinner, oliveBottles, oliveTable];
+---
+
+<div class="moments">
+  {
+    photos.map((src, i) => (
+      <figure style={`--tilt: ${[-1.2, 0.8, -0.4, 1.1, -0.9, 0.5, -0.6, 1][i]}deg`}>
+        <Picture src={src} alt={c.alts[i]} widths={[320, 480, 720]} sizes="(min-width: 900px) 280px, 45vw" formats={['avif', 'webp']} loading="lazy" />
+        <figcaption>{c.captions[i]}</figcaption>
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  .moments {
+    columns: 2 160px;
+    column-gap: clamp(14px, 2.5vw, 24px);
+  }
+  @media (min-width: 760px) {
+    .moments {
+      columns: 3;
+    }
+  }
+  figure {
+    break-inside: avoid;
+    margin: 0 0 clamp(14px, 2.5vw, 24px);
+    padding: 8px 8px 0;
+    background: var(--cream);
+    transform: rotate(var(--tilt));
+    box-shadow:
+      0 2px 3px rgb(51 4 40 / 0.08),
+      0 18px 30px -18px rgb(51 4 40 / 0.5);
+    transition: transform 0.4s var(--ease);
+  }
+  figure:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    figure,
+    figure:hover {
+      transform: none;
+    }
+  }
+  figure :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  figcaption {
+    padding: 8px 4px 10px;
+    font-size: 0.82rem;
+    line-height: 1.35;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+</style>
