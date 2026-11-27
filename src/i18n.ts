@@ -193,7 +193,7 @@ export const t = {
       soon: 'Contact details coming soon.',
     },
     notFound: { title: 'This seat is empty', body: 'The page you’re looking for isn’t here, but dinner is still on.', cta: 'Back to the table' },
-    footer: { calendar: 'Luma', instagram: 'Instagram', signoff: 'One string at a time' },
+    footer: { calendar: 'Luma', instagram: 'Instagram', signoff: 'One thread 💬 at a time' },
   },
   es: {
     locale: 'es-ES',
@@ -374,7 +374,7 @@ export const t = {
       soon: 'Datos de contacto próximamente.',
     },
     notFound: { title: 'Este sitio está vacío', body: 'La página que buscas no existe, pero la cena sigue en pie.', cta: 'Volver a la mesa' },
-    footer: { calendar: 'Luma', instagram: 'Instagram', signoff: 'One string at a time' },
+    footer: { calendar: 'Luma', instagram: 'Instagram', signoff: 'One thread 💬 at a time' },
   },
 } as const;
 

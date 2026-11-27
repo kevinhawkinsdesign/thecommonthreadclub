@@ -1,22 +1,46 @@
 ---
 // A photo in the brand's arched frame (from the social templates).
+// Pass `slides` to crossfade slowly between several photos; visitors who
+// prefer reduced motion see the first one only.
 import type { ImageMetadata } from 'astro';
 import { Picture } from 'astro:assets';
 
+type Slide = { src: ImageMetadata; alt: string; position?: string };
+
 interface Props {
-  src: ImageMetadata;
-  alt: string;
+  src?: ImageMetadata;
+  alt?: string;
   position?: string;
+  slides?: Slide[];
 }
-const { src, alt, position = '50% 50%' } = Astro.props;
+const { src, alt = '', position = '50% 50%', slides: given } = Astro.props;
+const slides: Slide[] = given ?? (src ? [{ src, alt, position }] : []);
+const each = 6; // seconds each photo is on screen
 ---
 
-<div class="arch" style={`--pos: ${position}`}>
-  <Picture src={src} alt={alt} widths={[320, 480, 720]} sizes="(min-width: 720px) 320px, 80vw" formats={['avif', 'webp']} loading="lazy" />
+<div
+  class:list={['arch', { 'arch--slides': slides.length > 1 }]}
+  style={`--n: ${slides.length}; --each: ${each}s; --total: ${slides.length * each}s`}>
+  {
+    slides.map((s, i) => (
+      <Picture
+        src={s.src}
+        alt={s.alt}
+        widths={[320, 480, 720]}
+        sizes="(min-width: 720px) 320px, 80vw"
+        formats={['avif', 'webp']}
+        loading="lazy"
+        style={`--pos: ${s.position ?? '50% 50%'}`}
+        pictureAttributes={{ style: `--i: ${i}` }}
+        aria-hidden={i > 0 ? 'true' : undefined}
+      />
+    ))
+  }
 </div>
 
 <style>
   .arch {
+    position: relative;
     width: clamp(220px, 26vw, 320px);
     max-width: 100%;
     margin-inline: auto;
@@ -36,5 +60,44 @@ const { src, alt, position = '50% 50%' } = Astro.props;
     object-fit: cover;
     object-position: var(--pos);
     border-radius: 999px 999px 0 0;
+  }
+
+  /* Stack the photos; the first sets the size, the rest sit on top. */
+  .arch--slides :global(picture:not(:first-child)) {
+    position: absolute;
+    inset: 10px;
+    width: auto;
+  }
+  .arch--slides :global(picture:not(:first-child) img) {
+    height: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .arch--slides :global(picture) {
+      animation: arch-fade var(--total) ease-in-out infinite;
+      /* negative delays: every fade is already running at load, in step */
+      animation-delay: calc((var(--i, 0) - 1) * var(--each) - var(--total));
+    }
+    .arch--slides :global(picture:first-child) {
+      animation-name: arch-fade-first;
+      animation-delay: 0s;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .arch--slides :global(picture:not(:first-child)) {
+      display: none;
+    }
+  }
+  /* For three photos of 6s each: visible for a third of the loop, with a
+     1.5s fade either side. The first photo stays underneath and only
+     fades out while the last one is fading in, so the frame is never empty. */
+  @keyframes arch-fade {
+    0% { opacity: 0; }
+    8% { opacity: 1; }
+    33% { opacity: 1; }
+    41% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  @keyframes arch-fade-first {
+    0%, 100% { opacity: 1; }
   }
 </style>
