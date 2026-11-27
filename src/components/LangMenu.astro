@@ -1,0 +1,111 @@
+---
+// Language switcher: a translate icon that opens a small menu of the same
+// page in each language. A native <details> so it works without JavaScript.
+import { languageNames, type Lang } from '../i18n';
+import { alternates } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const options = alternates(Astro.url.pathname, lang);
+const label = { en: 'Language', es: 'Idioma', ca: 'Idioma' }[lang];
+---
+
+<details class="lang">
+  <summary aria-label={`${label}: ${languageNames[lang]}`}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="lang__icon">
+      <path
+        d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0014.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"
+        fill="currentColor"></path>
+    </svg>
+    <span class="lang__code">{lang.toUpperCase()}</span>
+  </summary>
+  <ul>
+    {
+      options.map((o) => (
+        <li>
+          <a href={o.href} hreflang={o.lang} lang={o.lang} aria-current={o.current ? 'true' : undefined}>
+            {languageNames[o.lang]}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>
+
+<script>
+  // Close the menu on outside click or Escape.
+  for (const menu of document.querySelectorAll<HTMLDetailsElement>('details.lang')) {
+    document.addEventListener('click', (e) => {
+      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
+    });
+    menu.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .lang {
+    position: relative;
+  }
+  summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 40px;
+    padding: 0 10px;
+    border: 1px solid color-mix(in srgb, var(--cream) 35%, transparent);
+    border-radius: 999px;
+    color: var(--cream);
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    cursor: pointer;
+    list-style: none;
+    transition: border-color 0.2s var(--ease);
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary:hover,
+  .lang[open] summary {
+    border-color: var(--marigold);
+  }
+  .lang__icon {
+    width: 18px;
+    height: 18px;
+  }
+  ul {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 20;
+    min-width: 150px;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--cream);
+    border-radius: 10px;
+    box-shadow: 0 18px 32px -12px rgb(0 0 0 / 0.45);
+  }
+  a {
+    display: block;
+    padding: 9px 12px;
+    border-radius: 6px;
+    color: var(--aubergine);
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+  a:hover {
+    background: color-mix(in srgb, var(--sand) 40%, var(--cream));
+  }
+  a[aria-current] {
+    font-weight: 500;
+    color: var(--rust);
+  }
+</style>

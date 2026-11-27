@@ -16,9 +16,9 @@ hood = {'Carrer del Comerç, 11': 'El Born', 'C/ del Comerç, 11': 'El Born', 'C
         'Passeig de Picasso, 26': 'Borneta, El Born', 'Passeig de Picasso, 26, 30': 'Borneta, El Born', 'Borneta': 'Borneta, El Born',
         'Barcelona, Catalunya': 'Barcelona', 'Barcelona, Cataluña': 'Barcelona', 'Amsterdam-West': 'Amsterdam'}
 kinds = {
- 'brunch': ('Brunch', 'Brunch'), 'wine': ('Wine tasting', 'Cata de vino'), 'community': ('Community', 'Comunidad'),
- 'collab': ('Collaboration', 'Colaboración'), 'supper': ('Supper club', 'Supper club'), 'networking': ('Networking', 'Networking'),
- 'workshop': ('Workshop', 'Taller'),
+ 'brunch': ('Brunch', 'Brunch', 'Brunch'), 'wine': ('Wine tasting', 'Cata de vino', 'Tast de vi'), 'community': ('Community', 'Comunidad', 'Comunitat'),
+ 'collab': ('Collaboration', 'Colaboración', 'Col·laboració'), 'supper': ('Supper club', 'Supper club', 'Supper club'), 'networking': ('Networking', 'Networking', 'Networking'),
+ 'workshop': ('Workshop', 'Taller', 'Taller'),
 }
 def kind(name, hosts):
     n = name.lower()

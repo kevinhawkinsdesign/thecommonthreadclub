@@ -1,15 +1,18 @@
-// All visible copy in English and Spanish. Pages read from here so the two
-// languages stay in step. Story copy follows the club's own About page.
+// All visible copy in English, Spanish and Catalan. Pages read from here so
+// the languages stay in step. Story copy follows the club's own About page.
 
-export const languages = ['en', 'es'] as const;
+export const languages = ['en', 'es', 'ca'] as const;
+
+// Each language's name in its own language, for the switcher.
+export const languageNames: Record<Lang, string> = { en: 'English', es: 'Español', ca: 'Català' };
 export type Lang = (typeof languages)[number];
 
 // Page keys map to a slug per language.
 export const routes = {
-  home: { en: '', es: 'es/' },
-  events: { en: 'calendar/', es: 'es/calendario/' },
-  about: { en: 'about/', es: 'es/nosotros/' },
-  private: { en: 'memories/', es: 'es/recuerdos/' },
+  home: { en: '', es: 'es/', ca: 'ca/' },
+  events: { en: 'calendar/', es: 'es/calendario/', ca: 'ca/calendari/' },
+  about: { en: 'about/', es: 'es/nosotros/', ca: 'ca/nosaltres/' },
+  private: { en: 'memories/', es: 'es/recuerdos/', ca: 'ca/records/' },
 } as const;
 export type RouteKey = keyof typeof routes;
 
@@ -374,6 +377,187 @@ export const t = {
       soon: 'Datos de contacto próximamente.',
     },
     notFound: { title: 'Este sitio está vacío', body: 'La página que buscas no existe, pero la cena sigue en pie.', cta: 'Volver a la mesa' },
+    footer: { calendar: 'Luma', instagram: 'Instagram', signoff: 'One thread 💬 at a time' },
+  },
+  ca: {
+    locale: 'ca-ES',
+    nav: { events: 'Calendari', about: 'La nostra història', private: 'Records', book: 'Reserva el teu lloc', follow: 'Uneix-te a la taula' },
+    langSwitch: 'Català',
+    skip: 'Vés al contingut',
+    tagline: 'Meitat sopar entre amics, meitat speakeasy, 100% diversió.',
+    description:
+      'Un supper club a Barcelona amb en Kevin Hawkins com a amfitrió. Sopars, tastos de vi i pop-ups al voltant del menjar, el vi i la gent.',
+    card: {
+      next: 'Propera taula',
+      book: 'Reserva el teu lloc',
+      via: 'Reserves a Luma · places limitades',
+      noneTitle: 'Estem parant la propera taula',
+      noneBody: 'Segueix-nos a Luma i seràs dels primers a saber la propera data.',
+      noneCta: 'Segueix a Luma',
+      instagram: 'Instagram',
+      untitled: 'Supper club',
+    },
+    banner: { next: 'Propera taula', cta: 'Reserva el teu lloc' },
+    home: {
+      intro:
+        'Sopars, tastos de vi i pop-ups d’una sola nit per a gent curiosa: d’aquí i nouvinguts, creatius i amants de la bona taula. Fer amics de gran mai no havia estat tan fàcil.',
+      courses: [
+        {
+          name: 'Aperitiu',
+          body: 'Arribes, prens alguna cosa i coneixes la gent amb qui compartiràs taula. Ningú no continua sent un desconegut gaire estona.',
+          alt: 'Safates de canapès amb espàrrecs i tomàquets cherry',
+        },
+        {
+          name: 'La taula',
+          body: 'Una taula llarga, menjar fet amb cura i vins triats per acompanyar-lo. Algunes nits és un menú degustació de temporada; d’altres, un sopar relaxat al pati amb còctels casolans.',
+          alt: 'Convidats al voltant d’una taula llarga sota el logotip projectat de The Common Thread',
+        },
+        {
+          name: 'Sobretaula',
+          body: 'Quedar-se a taula quan ja s’han retirat els plats. És la nostra part preferida de la nit.',
+          alt: 'Convidats conversant a la llum de les espelmes',
+        },
+      ],
+      reelTitle: 'El primer fil',
+      reelBody: 'On va començar tot: el primeríssim sopar de The Common Thread, a la taula d’en Kevin.',
+      reelPlay: 'Reprodueix el vídeo',
+      reelPause: 'Posa en pausa el vídeo',
+      quote: 'No es tracta de ser elegant. Es tracta de sentir-se a gust.',
+      quoteBody:
+        'És el que ens diuen els nostres convidats: aquestes nits els ajuden a respirar una mica millor, riure una mica més fort i recordar què vol dir sentir que formes part d’alguna cosa.',
+      hostTitle: 'El teu amfitrió',
+      hostBody: [
+        'En mudar-se d’Amsterdam a Barcelona, en Kevin Hawkins va començar a organitzar sopars per reconstruir el seu sentit de llar i de comunitat.',
+        'El que va començar al voltant de la seva pròpia taula s’ha convertit en un cercle social amb pop-ups, tastos de vi i molt més. En Kevin continua sent l’amfitrió.',
+      ],
+      hostLink: 'Llegeix la història',
+      hostAlt: 'En Kevin Hawkins somrient al costat d’una piscina en un pati de Barcelona',
+      pastTitle: 'Taules passades',
+      pastBody: 'Algunes de les nits que hem viscut.',
+      pastCta: 'Veure tots els esdeveniments passats',
+      tripsCta: 'Veure els viatges',
+      momentsCta: 'Veure tots els records',
+      pressTitle: 'Han parlat de nosaltres',
+      faqTitle: 'Abans de venir',
+      faqs: [
+        {
+          q: 'Puc venir sense acompanyant?',
+          a: 'És clar, molta gent ho fa. És una sola taula compartida, així que estaràs xerrant amb algú abans d’acabar la primera copa.',
+        },
+        {
+          q: 'Com faig la reserva?',
+          a: 'Tots els esdeveniments es reserven a Luma. Les places són limitades, així que segueix el nostre calendari per assabentar-te’n abans que ningú.',
+        },
+        {
+          q: 'I si tinc al·lèrgies o una dieta especial?',
+          a: 'Avisa’ns en reservar. Els detalls de cada esdeveniment són a la seva pàgina de Luma.',
+        },
+        {
+          q: 'Puc reservar la taula sencera?',
+          a: 'Sí. Organitzem sopars privats, nits d’equip i col·laboracions.',
+        },
+      ],
+      moments: {
+        title: 'Moments',
+        body: 'Algunes imatges al voltant de la taula.',
+        toast: 'Un brindis',
+      },
+      joinTitle: 'Uneix-te a la taula',
+      joinBody: 'Les noves dates surten primer a Luma, i les nits mateixes es viuen a Instagram.',
+      joinLuma: 'Segueix a Luma',
+      joinInstagram: 'Instagram',
+      privateTitle: 'La teva pròpia taula',
+      privateBody: 'Aniversaris, sopars d’equip, un sopar de marca: la mateixa nit, només per a la teva gent.',
+      privateCta: 'Sopars privats',
+    },
+    events: {
+      title: 'Calendari',
+      intro: 'Cada esdeveniment és d’una sola nit i les places són limitades. Subscriu-te a Luma per assabentar-te abans que ningú de les noves dates.',
+      upcomingTitle: 'Properament',
+      pastTitle: 'Taules passades',
+      pastIntro: 'Supper clubs, tastos, col·laboracions i celebracions dels darrers anys.',
+      moreMomentsTitle: 'Més moments',
+      everyTitle: 'Totes les taules',
+      everyIntro: 'La llista completa, des del nostre calendari de Luma.',
+      tripsTitle: 'Viatges gastronòmics',
+      tripsIntro: 'De tant en tant, la taula se’n va de viatge.',
+      with: 'Amb',
+      onLuma: 'Pàgina de l’esdeveniment',
+      formatsTitle: 'El que organitzem',
+      formats: [
+        { icon: 'dinners', name: 'Supper clubs', body: 'Sopars en taula llarga on la llista de convidats és la meitat de la gràcia.' },
+        { icon: 'workshops', name: 'Tastos i tallers', body: 'Tastos de vi guiats i relaxats, i nits pràctiques amb vins que donen molt de què parlar.' },
+        { icon: 'community', name: 'Pop-ups i col·laboracions', body: 'Nits úniques amb xefs, sommeliers, locals i amics del club.' },
+        { icon: 'travel', name: 'Viatges gastronòmics', body: 'De tant en tant, la taula se’n va de viatge: Bordeus, Grècia, mar endins.' },
+      ],
+    },
+    about: {
+      title: 'La nostra història',
+      lede: 'Tot va començar al voltant d’una taula a Barcelona.',
+      chapters: [
+        {
+          title: 'Benvingut a TCT',
+          body: [
+            'Després de mudar-se a Barcelona arran d’una ruptura a Amsterdam, en Kevin va començar a organitzar sopars com a manera de reconstruir el seu sentit de llar i de comunitat.',
+            'El que va començar com a trobades íntimes al voltant de la seva pròpia taula s’ha convertit en un cercle social amb pop-ups, tastos de vi i molt més.',
+          ],
+        },
+        {
+          title: 'Més que un supper club',
+          body: [
+            'The Common Thread és una comunitat cuidada al detall: gent d’aquí, expats, creatius, viatgers que van per lliure i amants de la bona taula que es troben en esdeveniments íntims i de qualitat al voltant del menjar, el vi i la connexió.',
+            'Organitzem sopars, tastos de vi, pop-ups i, de tant en tant, algun viatge gastronòmic. El fil que ho uneix tot és la intenció: a qui reunim, com dissenyem l’experiència i com se sent formar-ne part.',
+          ],
+        },
+        {
+          title: 'Per què és important',
+          body: [
+            'Parlem molt de connexió, però a la pràctica costa de trobar, sobretot a Barcelona, una ciutat tan espectacular com de pas. Hi ha alguna cosa sagrada a seure amb altres persones sense cap altre pla que gaudir, ser-hi i compartir.',
+            'Per això dissenyem cada esdeveniment amb cura. Això vol dir més que plats bonics i vins naturals: vol dir un espai inclusiu, relaxat, càlid i segur, tant si vens sol com si portes algú.',
+          ],
+        },
+        {
+          title: 'Íntim, no exclusiu',
+          body: [
+            'Més enllà dels sopars hi ha un propòsit més profund: la inclusió i l’equitat. Qui viatja per lliure s’ha de sentir benvingut des del primer moment. Una parella queer s’ha de sentir no només segura, sinó celebrada. Gent d’aquí i nouvinguts han de seure cara a cara com a iguals.',
+            'No creiem en cordons de vellut ni en nits només per a VIPs. Creiem en la calidesa, l’obertura i en el que passa quan la gent adequada es troba al voltant d’un bon àpat.',
+          ],
+        },
+        {
+          title: 'Per què Barcelona',
+          body: [
+            'És una ciutat de llum i sopars tardans, de creativitat i contradicció: vermuteries de tota la vida a dues passes de menús degustació vegans, i artistes, fundadors, dissenyadors i forners a la mateixa taula.',
+            'Però per magnètica que sigui, Barcelona també pot ser solitària, sobretot si hi acabes d’arribar. Per això existim: no per dividir la ciutat, sinó per complementar-la.',
+          ],
+        },
+      ],
+      alts: [
+        'Un sopar a la llum de les espelmes en un pis de sostres alts de Barcelona',
+        'Convidats menjant i xerrant al llarg d’una taula llarga il·luminada amb llumetes',
+        'Gent sopant en una terrassa il·luminada en un carrer empedrat de Barcelona al capvespre',
+      ],
+      cta: 'Uneix-te a la taula',
+    },
+    memories: {
+      title: 'Records',
+      lede: 'Nits compartides al voltant de la taula, i alguna lluny d’ella.',
+    },
+    private: {
+      title: 'Sopars privats',
+      lede: 'La mateixa taula llarga, només per a la teva gent.',
+      offers: [
+        { icon: 'home', name: 'Celebracions', body: 'Aniversaris o una taula d’amics que es mereix una bona nit.' },
+        { icon: 'workshops', name: 'Nits d’equip', body: 'Una vetllada que fa parlar els companys, per a offsites i equips de visita a Barcelona.' },
+        { icon: 'community', name: 'Col·laboracions', body: 'Nits compartides amb xefs, sommeliers, locals i marques.' },
+      ],
+      galleryTitle: 'D’esdeveniments privats anteriors',
+      askTitle: 'Explica’ns què tens al cap',
+      askBody: 'Una data aproximada, quantes persones i què celebreu: amb això en tenim prou per començar.',
+      email: 'Escriu-nos',
+      dm: 'Escriu-nos per Instagram',
+      soon: 'Dades de contacte properament.',
+    },
+    notFound: { title: 'Aquest lloc és buit', body: 'La pàgina que busques no existeix, però el sopar continua en peu.', cta: 'Torna a la taula' },
     footer: { calendar: 'Luma', instagram: 'Instagram', signoff: 'One thread 💬 at a time' },
   },
 } as const;

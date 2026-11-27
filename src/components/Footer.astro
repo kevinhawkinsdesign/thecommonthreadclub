@@ -1,15 +1,15 @@
 ---
 import Logo from './Logo.astro';
 import { luma, contact, site } from '../config';
-import { t, type Lang } from '../i18n';
-import { alternate, asset, href } from '../lib';
+import { languageNames, t, type Lang } from '../i18n';
+import { alternates, asset, href } from '../lib';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const c = t[lang];
-const other = alternate(Astro.url.pathname, lang);
+const others = alternates(Astro.url.pathname, lang).filter((o) => !o.current);
 const year = new Date().getFullYear();
 const stamp = asset('brand/stamp-cream.png');
 ---
@@ -26,7 +26,7 @@ const stamp = asset('brand/stamp-cream.png');
     {luma.calendarUrl && <li><a href={luma.calendarUrl}>{c.footer.calendar}</a></li>}
     {contact.instagram && <li><a href={contact.instagram}>{c.footer.instagram}</a></li>}
     {contact.email && <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>}
-    <li><a href={other.href} hreflang={other.lang} lang={other.lang}>{c.langSwitch}</a></li>
+    {others.map((o) => <li><a href={o.href} hreflang={o.lang} lang={o.lang}>{languageNames[o.lang]}</a></li>)}
   </ul>
   <p class="footer__legal">© {year} {site.name} · {site.city}</p>
 </footer>
