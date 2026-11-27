@@ -3,6 +3,7 @@ import type { ImageMetadata } from 'astro';
 import bordeaux from '../assets/trips/bordeaux.jpg';
 import oliveOil from '../assets/trips/olive-oil.jpg';
 import yacht from '../assets/trips/yacht.jpg';
+import canBrull from '../assets/trips/can-brull.jpg';
 
 type Text = { en: string; es: string; ca: string };
 
@@ -15,6 +16,21 @@ export interface Trip {
 }
 
 export const trips: Trip[] = [
+  {
+    title: { en: 'Nature escapes at Can Brull', es: 'Escapadas a la naturaleza en Can Brull', ca: 'Escapades a la natura a Can Brull' },
+    place: { en: 'Montseny, an hour from Barcelona', es: 'Montseny, a una hora de Barcelona', ca: 'Montseny, a una hora de Barcelona' },
+    summary: {
+      en: 'Out of the city to a 16th-century masia on 75 hectares of forest and farmland in the Montseny natural park: land, fire, food and craft.',
+      es: 'Fuera de la ciudad, en una masía del siglo XVI con 75 hectáreas de bosque y tierras de cultivo en el parque natural del Montseny: tierra, fuego, comida y artesanía.',
+      ca: 'Fora de la ciutat, en una masia del segle XVI amb 75 hectàrees de bosc i conreus al parc natural del Montseny: terra, foc, menjar i ofici.',
+    },
+    image: canBrull,
+    imageAlt: {
+      en: 'The stone masia at Can Brull in winter',
+      es: 'La masía de piedra de Can Brull en invierno',
+      ca: 'La masia de pedra de Can Brull a l’hivern',
+    },
+  },
   {
     title: { en: 'Dinner at a Bordeaux château', es: 'Cena en un château de Burdeos', ca: 'Sopar en un château de Bordeus' },
     place: { en: 'Bordeaux, France', es: 'Burdeos, Francia', ca: 'Bordeus, França' },

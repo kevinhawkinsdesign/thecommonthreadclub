@@ -75,6 +75,8 @@ export const t = {
       pastCta: 'See every past event',
       tripsCta: 'See the trips',
       momentsCta: 'See all memories',
+      ratingLabel: 'average guest rating',
+      ratingDetail: (n: number, e: number) => `from ${n} guest reviews across ${e} events`,
       pressTitle: 'As featured in',
       faqTitle: 'Before you come',
       faqs: [
@@ -256,6 +258,8 @@ export const t = {
       pastCta: 'Ver todos los eventos pasados',
       tripsCta: 'Ver los viajes',
       momentsCta: 'Ver todos los recuerdos',
+      ratingLabel: 'valoración media de los invitados',
+      ratingDetail: (n: number, e: number) => `de ${n} opiniones de invitados en ${e} eventos`,
       pressTitle: 'Han hablado de nosotros',
       faqTitle: 'Antes de venir',
       faqs: [
@@ -437,6 +441,8 @@ export const t = {
       pastCta: 'Veure tots els esdeveniments passats',
       tripsCta: 'Veure els viatges',
       momentsCta: 'Veure tots els records',
+      ratingLabel: 'valoració mitjana dels convidats',
+      ratingDetail: (n: number, e: number) => `de ${n} opinions de convidats en ${e} esdeveniments`,
       pressTitle: 'Han parlat de nosaltres',
       faqTitle: 'Abans de venir',
       faqs: [
