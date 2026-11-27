@@ -3,12 +3,10 @@ import Base from '../layouts/Base.astro';
 import Room from '../components/Room.astro';
 import PlaceCard from '../components/PlaceCard.astro';
 import LumaEvents from '../components/LumaEvents.astro';
-import PastCard from '../components/PastCard.astro';
 import Offer from '../components/Offer.astro';
 import TripCard from '../components/TripCard.astro';
 import ArchiveList from '../components/ArchiveList.astro';
 import { trips } from '../data/trips';
-import { archive } from '../data/past';
 import { t, type Lang } from '../i18n';
 import { upcomingEvent } from '../lib';
 
@@ -17,7 +15,6 @@ interface Props {
 }
 const { lang } = Astro.props;
 const e = t[lang].events;
-const past = archive();
 const hasNext = Boolean(upcomingEvent(lang));
 ---
 
@@ -29,23 +26,8 @@ const hasNext = Boolean(upcomingEvent(lang));
     <div class="embed"><LumaEvents /></div>
   </Room>
 
-  {
-    past.length > 0 && (
-      <Room tone="olive">
-        <div class="center head" id="past">
-          <h2>{e.pastTitle}</h2>
-          <p>{e.pastIntro}</p>
-        </div>
-        <div class="archive">
-          {past.map((ev) => (
-            <PastCard event={ev} lang={lang} />
-          ))}
-        </div>
-      </Room>
-    )
-  }
 
-  <Room tone="sand">
+  <Room tone="olive">
     <div class="center head" id="all">
       <h2>{e.everyTitle}</h2>
       <p>{e.everyIntro}</p>
@@ -94,11 +76,6 @@ const hasNext = Boolean(upcomingEvent(lang));
   .head p {
     margin-top: 0.6rem;
     color: var(--ink-soft);
-  }
-  .archive {
-    display: grid;
-    gap: clamp(24px, 3vw, 36px);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   }
   .trips {
     display: grid;
