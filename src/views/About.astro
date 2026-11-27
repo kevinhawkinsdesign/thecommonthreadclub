@@ -18,9 +18,10 @@ interface Props {
 const { lang } = Astro.props;
 const a = t[lang].about;
 // Chapters alternate through the rooms; three of them carry a photo.
-const rooms = ['rust', 'olive', 'marigold', 'sand', 'aubergine'] as const;
+const rooms = ['rust', 'sand', 'olive', 'marigold', 'rust', 'aubergine'] as const;
 const plates = [
   { src: candlelit, pos: '50% 60%' },
+  null,
   null,
   { src: eating, pos: '45% 50%' },
   null,

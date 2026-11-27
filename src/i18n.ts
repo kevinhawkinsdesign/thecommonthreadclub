@@ -143,6 +143,14 @@ export const t = {
           ],
         },
         {
+          title: 'The science of simple',
+          body: [
+            '“I wanted to build what I wish existed when I moved here,” Kevin says. “A space for people who aren’t just passing through.” He started The Common Thread as a hobby in July 2024, after a design career leading teams at Booking.com and Glovo and living in four countries.',
+            'His mantra is the science of simple: no over-planning, no forced networking, just people, thoughtfully placed. “The simpler the structure, the more space there is for real connection.” Kevin still curates every guest list himself and works with some of the best chefs in the city.',
+            '“Everyone comes from somewhere different. But by the end of the night, you always find some kind of common thread.”',
+          ],
+        },
+        {
           title: 'More than a supper club',
           body: [
             'The Common Thread is a carefully crafted community of locals, expats, creatives, solo travellers and food lovers who come together for intimate, high-quality events built around food, wine and connection.',
@@ -326,6 +334,14 @@ export const t = {
           ],
         },
         {
+          title: 'La ciencia de lo simple',
+          body: [
+            '«Quería crear lo que me habría gustado encontrar al llegar», dice Kevin. «Un espacio para quienes no están solo de paso». Empezó The Common Thread como afición en julio de 2024, después de una carrera en diseño liderando equipos en Booking.com y Glovo y de vivir en cuatro países.',
+            'Su lema es la ciencia de lo simple: nada de planificar en exceso ni de networking forzado, solo personas sentadas con intención. «Cuanto más simple es la estructura, más espacio queda para la conexión real». Kevin sigue eligiendo cada lista de invitados y trabaja con algunos de los mejores chefs de la ciudad.',
+            '«Cada uno viene de un sitio distinto. Pero al final de la noche, siempre encuentras algún hilo en común».',
+          ],
+        },
+        {
           title: 'Más que un supper club',
           body: [
             'The Common Thread es una comunidad cuidada al detalle: gente de aquí, expats, creativos, viajeros que van por libre y amantes de la buena mesa que se reúnen en eventos íntimos y de calidad en torno a la comida, el vino y la conexión.',
@@ -506,6 +522,14 @@ export const t = {
           body: [
             'Després de mudar-se a Barcelona arran d’una ruptura a Amsterdam, en Kevin va començar a organitzar sopars com a manera de reconstruir el seu sentit de llar i de comunitat.',
             'El que va començar com a trobades íntimes al voltant de la seva pròpia taula s’ha convertit en un cercle social amb pop-ups, tastos de vi i molt més.',
+          ],
+        },
+        {
+          title: 'La ciència del que és simple',
+          body: [
+            '«Volia crear el que m’hauria agradat trobar quan vaig arribar», diu en Kevin. «Un espai per a la gent que no hi és només de pas». Va començar The Common Thread com a afició el juliol de 2024, després d’una carrera en disseny liderant equips a Booking.com i Glovo i de viure a quatre països.',
+            'El seu lema és la ciència del que és simple: res de planificar en excés ni de networking forçat, només persones assegudes amb intenció. «Com més simple és l’estructura, més espai queda per a la connexió real». En Kevin continua triant cada llista de convidats i treballa amb alguns dels millors xefs de la ciutat.',
+            '«Cadascú ve d’un lloc diferent. Però al final de la nit, sempre trobes algun fil en comú».',
           ],
         },
         {

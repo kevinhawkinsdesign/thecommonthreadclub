@@ -44,6 +44,7 @@ export const press = [
   {
     outlet: 'Medium',
     title: 'From UX to Underground Suppers: How Kevin Is Building Community in Barcelona, One Table at a Time',
+    // Kevin Maurits, 2 September 2025
     url: 'https://medium.com/@kevinmaurits/from-ux-to-underground-suppers-how-kevin-is-building-community-in-barcelona-one-table-at-a-time-6578e56a5a21',
   },
   {
