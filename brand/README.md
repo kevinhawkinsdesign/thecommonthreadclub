@@ -9,7 +9,7 @@ typeset stand-in (logo) or a plain colour field (pattern) is shown instead.
 | `public/brand/logo-horizontal-cream.png` | Horizontal logo, cream (header) |
 | `public/brand/logo-stacked-cream.png` | Stacked logo, cream (footer) |
 | `public/brand/logo-horizontal-aubergine.png` | Horizontal logo, aubergine (spare) |
-| `public/brand/pattern.png` | The line pattern, any colour on a transparent background; only its shape is used, and the site recolours it per section. About 1200px square is plenty. |
+| `public/brand/pattern.webp` | The line pattern (shape only; the site recolours it per section) |
 | `public/brand/og.jpg` | Optional 1200×630 image for link previews |
 | `public/photos/*.jpg` | Event photos; set the file names in `src/config.ts` → `photos` |
 

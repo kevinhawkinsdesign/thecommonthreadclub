@@ -4,7 +4,7 @@
 import Arrow from './Arrow.astro';
 import { contact, luma } from '../config';
 import { t, type Lang } from '../i18n';
-import { href, upcomingEvent } from '../lib';
+import { asset, href, upcomingEvent } from '../lib';
 
 interface Props {
   lang: Lang;
@@ -14,9 +14,11 @@ const c = t[lang].card;
 const event = upcomingEvent(lang);
 const meta = event ? [c.next, event.time, event.location, event.price].filter(Boolean) : [];
 const laterHref = luma.calendarUrl || href('events', lang);
+const seal = asset('brand/stamp-rust.png');
 ---
 
 <article class="card" aria-labelledby="place-card-title">
+  {seal && <img class="card__seal" src={seal} alt="" width="44" height="64" />}
   <div class="card__fold card__top">
     {
       event ? (
@@ -90,10 +92,22 @@ const laterHref = luma.calendarUrl || href('events', lang);
       transform: none;
     }
   }
+  .card__seal {
+    position: absolute;
+    top: -26px;
+    left: 50%;
+    width: 44px;
+    height: auto;
+    translate: -50% 0;
+    background: var(--cream);
+    border-radius: 999px;
+    box-shadow: 0 0 0 5px var(--cream);
+  }
   .card__fold {
-    padding: clamp(22px, 4vw, 34px) clamp(20px, 4vw, 36px);
+    padding: clamp(28px, 4vw, 40px) clamp(20px, 4vw, 36px) clamp(22px, 4vw, 34px);
   }
   .card__top {
+    padding-top: 52px;
     background: linear-gradient(to bottom, var(--cream), color-mix(in srgb, var(--sand) 12%, var(--cream)));
     border-bottom: 1px solid color-mix(in srgb, var(--sand) 75%, transparent);
   }

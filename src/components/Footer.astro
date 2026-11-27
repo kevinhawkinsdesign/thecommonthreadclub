@@ -2,7 +2,7 @@
 import Logo from './Logo.astro';
 import { luma, contact, site } from '../config';
 import { t, type Lang } from '../i18n';
-import { alternate, href } from '../lib';
+import { alternate, asset, href } from '../lib';
 
 interface Props {
   lang: Lang;
@@ -11,11 +11,14 @@ const { lang } = Astro.props;
 const c = t[lang];
 const other = alternate(Astro.url.pathname, lang);
 const year = new Date().getFullYear();
+const stamp = asset('brand/stamp-cream.png');
 ---
 
 <footer class="footer">
+  {stamp && <img class="footer__stamp" src={stamp} alt="" width="56" height="81" loading="lazy" />}
   <a class="footer__logo" href={href('home', lang)}><Logo tone="cream" /></a>
   <p class="footer__tag">{c.tagline}</p>
+  <p class="caps footer__signoff" lang="en">{c.footer.signoff}</p>
   <ul>
     <li><a href={href('events', lang)}>{c.nav.events}</a></li>
     <li><a href={href('about', lang)}>{c.nav.about}</a></li>
@@ -42,6 +45,15 @@ const year = new Date().getFullYear();
     font-size: 1.6rem;
     color: var(--cream);
     text-decoration: none;
+  }
+  .footer__stamp {
+    width: 56px;
+    height: auto;
+    margin-bottom: 4px;
+  }
+  .footer__signoff {
+    color: var(--marigold);
+    margin-top: -6px;
   }
   .footer__tag {
     font-family: var(--display);

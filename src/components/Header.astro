@@ -20,7 +20,7 @@ const other = alternate(current, lang);
 
 <header class="header">
   <a class="header__logo" href={href('home', lang)}>
-    <Logo tone="cream" />
+    <Logo layout="horizontal" tone="cream" />
   </a>
   <nav aria-label={lang === 'es' ? 'Principal' : 'Main'}>
     <ul>
@@ -54,7 +54,7 @@ const other = alternate(current, lang);
     color: var(--cream);
   }
   .header__logo {
-    width: clamp(120px, 11vw, 150px);
+    width: clamp(220px, 22vw, 290px);
     font-size: 1.35rem;
     color: var(--cream);
     text-decoration: none;
