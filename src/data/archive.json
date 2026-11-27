@@ -1,0 +1,268 @@
+{
+ "kinds": {
+  "brunch": [
+   "Brunch",
+   "Brunch"
+  ],
+  "wine": [
+   "Wine tasting",
+   "Cata de vino"
+  ],
+  "community": [
+   "Community",
+   "Comunidad"
+  ],
+  "collab": [
+   "Collaboration",
+   "Colaboración"
+  ],
+  "supper": [
+   "Supper club",
+   "Supper club"
+  ],
+  "networking": [
+   "Networking",
+   "Networking"
+  ],
+  "workshop": [
+   "Workshop",
+   "Taller"
+  ]
+ },
+ "events": [
+  {
+   "date": "2026-10-11",
+   "title": "Aki Matsuri Japanese Pottery Kiln Opening Ceremony",
+   "kind": "workshop",
+   "place": "Masia Can Brull",
+   "with": null,
+   "url": "https://mkpotterystudio.com/workshops/kiln-opening/",
+   "image": null
+  },
+  {
+   "date": "2026-07-02",
+   "title": "Conversations for the Curious (Pride Edition)",
+   "kind": "networking",
+   "place": "Borneta, El Born",
+   "with": null,
+   "url": "https://www.eventbrite.com/e/1992336561287",
+   "image": null
+  },
+  {
+   "date": "2026-06-23",
+   "title": "Sant Joan’s Night Supper & Rooftop Fireworks",
+   "kind": "collab",
+   "place": "Borneta, El Born",
+   "with": null,
+   "url": "https://www.sevenrooms.com/experiences/volta/sant-joan-night-4695477704114176?fbclid=PAdGRleASfPHFleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAaech2wQ0lkhwa86UiKJImpClsST-lzbRIpCR8GGnHZwcQnXiyrJ47d7gyTv4g_aem_JUNMYRucyF8ixJqlKWv7yg",
+   "image": null
+  },
+  {
+   "date": "2026-05-28",
+   "title": "Creative Mezze: 5-Course Supper Club with a Winemaker and Gelato Maestra",
+   "kind": "supper",
+   "place": "bïrch (ex Revealbot)",
+   "with": "Patrick Wardell",
+   "url": "https://luma.com/27j4rqhc",
+   "image": "creative-mezze-5-course-supper-club-with-2026-05"
+  },
+  {
+   "date": "2026-05-19",
+   "title": "BJuneteenth May Meetup",
+   "kind": "community",
+   "place": "Borneta, El Born",
+   "with": "Juneteenth, Nigel Lovell",
+   "url": "https://luma.com/2ey39tj9",
+   "image": "bjuneteenth-may-meetup-2026-05"
+  },
+  {
+   "date": "2026-04-19",
+   "title": "Chicken&Waffles Brunch | BJuneteenth Info Day",
+   "kind": "brunch",
+   "place": "Barcelona",
+   "with": "Nigel Lovell, Juneteenth, FLIPPIN' BIRDS",
+   "url": "https://luma.com/0dn16jez",
+   "image": "chicken-waffles-brunch-bjuneteenth-info--2026-04"
+  },
+  {
+   "date": "2026-04-16",
+   "title": "Dine, Wine & Conversations",
+   "kind": "supper",
+   "place": "Barcelona",
+   "with": "Elowines Events",
+   "url": "https://luma.com/qa7215mw",
+   "image": "dine-wine-conversations-2026-04"
+  },
+  {
+   "date": "2026-03-19",
+   "title": "B Juneteenth",
+   "kind": "community",
+   "place": "The Station",
+   "with": "Juneteenth",
+   "url": "https://luma.com/94qpoz24",
+   "image": "b-juneteenth-2026-03"
+  },
+  {
+   "date": "2026-03-12",
+   "title": "From Mexico With Love (No Forks Required) Dinner & Cocktails Social",
+   "kind": "supper",
+   "place": "Barcelona",
+   "with": null,
+   "url": "https://luma.com/f1zwpdxa",
+   "image": "from-mexico-with-love-no-forks-required--2026-03"
+  },
+  {
+   "date": "2026-03-05",
+   "title": "MWC26/ 4YFN: Networking Happy Hour",
+   "kind": "networking",
+   "place": "Borneta, El Born",
+   "with": "Croissant Workspaces, Fernanda Grace Lins, Scott Mackin",
+   "url": "https://luma.com/wk7ytc8e",
+   "image": "mwc26-4yfn-networking-happy-hour-2026-03"
+  },
+  {
+   "date": "2025-11-30",
+   "title": "Volta Aperitivo — Italian Bites, Cocktails & Beats",
+   "kind": "collab",
+   "place": "Borneta, El Born",
+   "with": "Hotel Borneta",
+   "url": "https://luma.com/5v2tqa5o",
+   "image": "volta-aperitivo-italian-bites-cocktails--2025-11"
+  },
+  {
+   "date": "2025-11-14",
+   "title": "Amsterdam Special: Opera Night Dinner",
+   "kind": "supper",
+   "place": "Amsterdam",
+   "with": null,
+   "url": "https://luma.com/1l7l1djc",
+   "image": "amsterdam-special-opera-night-dinner-2025-11"
+  },
+  {
+   "date": "2025-11-08",
+   "title": "Alice In Wonderland: Dinner with a Mad Hatter",
+   "kind": "supper",
+   "place": "El Born",
+   "with": "Kerry Joyce",
+   "url": "https://luma.com/hzcj5hvw",
+   "image": "alice-in-wonderland-dinner-with-a-mad-ha-2025-11"
+  },
+  {
+   "date": "2025-10-30",
+   "title": "Boos & Booze: Peruvian-Japanese (Nikkei) Dinner + Cocktails",
+   "kind": "supper",
+   "place": "Eixample",
+   "with": "Georges Moujaes, Patrick Wardell",
+   "url": "https://luma.com/co725pvq",
+   "image": "boos-booze-peruvian-japanese-nikkei-dinn-2025-10"
+  },
+  {
+   "date": "2025-10-23",
+   "title": "Wine Casino: Tasting & Game Night",
+   "kind": "wine",
+   "place": "El Born",
+   "with": "Nastia",
+   "url": "https://luma.com/bzac31ix",
+   "image": "wine-casino-tasting-game-night-2025-10"
+  },
+  {
+   "date": "2025-10-19",
+   "title": "Volta Aperitivo x Andrea Civettini",
+   "kind": "collab",
+   "place": "Borneta, El Born",
+   "with": "Hotel Borneta",
+   "url": "https://luma.com/lidh5kzk",
+   "image": "volta-aperitivo-x-andrea-civettini-2025-10"
+  },
+  {
+   "date": "2025-10-18",
+   "title": "Chicken&Champagne Brunch (w/ Waffles)",
+   "kind": "brunch",
+   "place": "El Born",
+   "with": "FLIPPIN' BIRDS",
+   "url": "https://luma.com/7jevkhjq",
+   "image": "chicken-champagne-brunch-w-waffles-2025-10"
+  },
+  {
+   "date": "2025-10-16",
+   "title": "A Journey Across the Med",
+   "kind": "collab",
+   "place": "Borneta, El Born",
+   "with": "Hotel Borneta",
+   "url": "https://luma.com/2dhjlup3",
+   "image": "a-journey-across-the-med-2025-10"
+  },
+  {
+   "date": "2025-10-08",
+   "title": "Supper Club | with Clara Griffiths",
+   "kind": "collab",
+   "place": "Borneta, El Born",
+   "with": "Hotel Borneta",
+   "url": "https://luma.com/2utdpqr4",
+   "image": "supper-club-with-clara-griffiths-2025-10"
+  },
+  {
+   "date": "2025-02-06",
+   "title": "Underwater Wine Tasting at a Seaside Penthouse",
+   "kind": "wine",
+   "place": "Barcelona",
+   "with": "CASAVEO",
+   "url": "https://luma.com/6rb5jaa5",
+   "image": "underwater-wine-tasting-at-a-seaside-pen-2025-02"
+  },
+  {
+   "date": "2025-01-30",
+   "title": "Edible Abstract",
+   "kind": "supper",
+   "place": "Potassi K19. Art Gallery",
+   "with": "CASAVEO",
+   "url": "https://luma.com/xy6nnhyc",
+   "image": "edible-abstract-2025-01"
+  },
+  {
+   "date": "2024-11-28",
+   "title": "Thanksgiving Feast Mode Fête",
+   "kind": "supper",
+   "place": "Barcelona",
+   "with": null,
+   "url": "https://luma.com/i9kvlwrj",
+   "image": "thanksgiving-feast-mode-f-te-2024-11"
+  },
+  {
+   "date": "2024-11-08",
+   "title": "Earth Wind & Fire Dinner with Natural Wine Pairings",
+   "kind": "supper",
+   "place": "El Born",
+   "with": "Marta Bocos, Anita Cristiani",
+   "url": "https://luma.com/x59j5rc7",
+   "image": "earth-wind-fire-dinner-with-natural-wine-2024-11"
+  },
+  {
+   "date": "2024-10-25",
+   "title": "Boat, Bebidas, Brunch (& Dinner)",
+   "kind": "brunch",
+   "place": "Port Fòrum",
+   "with": null,
+   "url": "https://luma.com/7d23c4en",
+   "image": "boat-bebidas-brunch-dinner-2024-10"
+  },
+  {
+   "date": "2024-10-03",
+   "title": "Autumn Equinox Dinner",
+   "kind": "supper",
+   "place": "Barcelona",
+   "with": "Marta Bocos",
+   "url": "https://luma.com/7sv2v1jh",
+   "image": "autumn-equinox-dinner-2024-10"
+  },
+  {
+   "date": "2024-09-25",
+   "title": "Sea, Friends & Sun Supper",
+   "kind": "supper",
+   "place": "El Born",
+   "with": "Nastia",
+   "url": "https://luma.com/pgsut2d7",
+   "image": "sea-friends-sun-supper-2024-09"
+  }
+ ]
+}

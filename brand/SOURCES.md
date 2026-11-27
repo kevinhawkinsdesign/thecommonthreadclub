@@ -27,3 +27,4 @@ Originals are kept in `brand/photos/` and `brand/pack/`. Canva templates for pos
 | `src/assets/moments/{candlelit-dinner,papel-picado,tacos,friends}.jpg`, `src/assets/trips/*.jpg`, `public/video/a-toast.mp4` | Photos and video sent by the owner, 27 November 2026 (originals in `brand/photos/2026-11b/`; the toast video is cropped to remove a reposter's handle) |
 | `src/assets/moments/{chips,polaroids,arrivals,sommelier,candle-room}.jpg`, `src/assets/past/thanksgiving-2026.jpg` | Photos sent by the owner (originals in `brand/photos/2026-11c/`; Thanksgiving cropped above the story caption) |
 | `src/assets/moments/{cello-room,chef,gallery-cello,guitar,kimono-toast,host-speaking,selfie}.jpg`, `src/assets/private/*.jpg` | Photos sent by the owner (originals in `brand/photos/2026-11d/`) |
+| `src/assets/archive/*.jpg` | Event covers from the Luma calendar (600px), via `scripts/sync-luma.py` |

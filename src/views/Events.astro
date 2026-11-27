@@ -6,6 +6,7 @@ import LumaEvents from '../components/LumaEvents.astro';
 import PastCard from '../components/PastCard.astro';
 import Offer from '../components/Offer.astro';
 import TripCard from '../components/TripCard.astro';
+import ArchiveList from '../components/ArchiveList.astro';
 import { trips } from '../data/trips';
 import { archive } from '../data/past';
 import { t, type Lang } from '../i18n';
@@ -43,6 +44,14 @@ const hasNext = Boolean(upcomingEvent(lang));
       </Room>
     )
   }
+
+  <Room tone="sand">
+    <div class="center head" id="all">
+      <h2>{e.everyTitle}</h2>
+      <p>{e.everyIntro}</p>
+    </div>
+    <ArchiveList lang={lang} />
+  </Room>
 
   <Room tone="aubergine">
     <div class="center head" id="trips">

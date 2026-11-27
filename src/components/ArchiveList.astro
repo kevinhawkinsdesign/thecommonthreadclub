@@ -1,0 +1,128 @@
+---
+// Every past event from the Luma calendar, grouped by year, as small
+// ticket stubs. Data: src/data/archive.json (refresh: scripts/sync-luma.py).
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import archive from '../data/archive.json';
+import { pastEvents } from '../data/past';
+import { t, type Lang } from '../i18n';
+import { formatDate } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t[lang].events;
+const covers = import.meta.glob<{ default: ImageMetadata }>('../assets/archive/*.jpg', { eager: true });
+const cover = (slug: string | null) => (slug ? covers[`../assets/archive/${slug}.jpg`]?.default : undefined);
+const featured = new Set(pastEvents.map((e) => e.url));
+const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Madrid' });
+const events = archive.events.filter((e) => e.date < today && !featured.has(e.url));
+const years = [...new Set(events.map((e) => e.date.slice(0, 4)))];
+const kinds = archive.kinds as Record<string, [string, string]>;
+const kindLabel = (k: string) => kinds[k]?.[lang === 'en' ? 0 : 1] ?? '';
+---
+
+{
+  years.map((year) => (
+    <section class="year" aria-labelledby={`y-${year}`}>
+      <h3 id={`y-${year}`} class="year__label">{year}</h3>
+      <ul class="stubs">
+        {events
+          .filter((e) => e.date.startsWith(year))
+          .map((e) => {
+            const img = cover(e.image);
+            return (
+              <li class="stub">
+                <a href={e.url}>
+                  {img ? (
+                    <Image src={img} alt="" width={160} height={160} class="stub__img" loading="lazy" />
+                  ) : (
+                    <span class="stub__img stub__img--none" aria-hidden="true" />
+                  )}
+                  <span class="stub__text">
+                    <span class="caps stub__date">
+                      <time datetime={e.date}>{formatDate(e.date, lang, { day: 'numeric', month: 'short' })}</time> ·{' '}
+                      {kindLabel(e.kind)}
+                    </span>
+                    <span class="stub__title">{e.title}</span>
+                    <span class="stub__meta">
+                      {e.place}
+                      {e.with && <> · {c.with} {e.with}</>}
+                    </span>
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+      </ul>
+    </section>
+  ))
+}
+
+<style>
+  .year + .year {
+    margin-top: clamp(36px, 5vw, 56px);
+  }
+  .year__label {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    text-align: center;
+    margin-bottom: 0.8em;
+  }
+  .stubs {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .stub a {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+    height: 100%;
+    padding: 8px 14px 8px 8px;
+    background: var(--cream);
+    color: var(--aubergine);
+    text-decoration: none;
+    box-shadow: 0 10px 22px -18px rgb(51 4 40 / 0.55);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .stub a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 26px -18px rgb(51 4 40 / 0.6);
+  }
+  .stub__img {
+    display: block;
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+  }
+  .stub__img--none {
+    background:
+      var(--pattern) 0 0 / 160px repeat,
+      var(--sand);
+    opacity: 0.6;
+  }
+  .stub__text {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+  }
+  .stub__date {
+    font-size: 0.68rem;
+    color: var(--rust);
+  }
+  .stub__title {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    line-height: 1.2;
+  }
+  .stub__meta {
+    font-size: 0.82rem;
+    line-height: 1.35;
+    color: var(--ink-soft);
+  }
+</style>
