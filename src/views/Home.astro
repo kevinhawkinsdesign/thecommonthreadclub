@@ -8,6 +8,7 @@ import Reel from '../components/Reel.astro';
 import PastCard from '../components/PastCard.astro';
 import Arch from '../components/Arch.astro';
 import Moments from '../components/Moments.astro';
+import { moments, homeCount } from '../data/moments';
 import kevin from '../assets/photos/kevin.jpg';
 import Arrow from '../components/Arrow.astro';
 import { contact, luma, press } from '../config';
@@ -112,7 +113,7 @@ const recent = archive().slice(0, 3);
       <h2>{h.moments.title}</h2>
       <p>{h.moments.body}</p>
     </div>
-    <Moments lang={lang} />
+    <Moments lang={lang} items={moments.slice(0, homeCount)} video />
   </Room>
 
   <Room tone="sand">

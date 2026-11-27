@@ -1,48 +1,41 @@
 ---
 // A loose spread of photos from past nights, like prints laid on the table.
-import { Picture } from 'astro:assets';
-import { getImage } from 'astro:assets';
+import { getImage, Picture } from 'astro:assets';
+import type { Moment } from '../data/moments';
 import { t, type Lang } from '../i18n';
 import { url } from '../lib';
-import group from '../assets/moments/group.jpg';
-import candlelit from '../assets/moments/candlelit-dinner.jpg';
-import longTable from '../assets/moments/long-table.jpg';
-import seastar from '../assets/moments/seastar-priorat.jpg';
-import tacos from '../assets/moments/tacos.jpg';
-import casino from '../assets/moments/casino-table.jpg';
-import papelPicado from '../assets/moments/papel-picado.jpg';
-import firstDinner from '../assets/moments/first-dinner.jpg';
-import friends from '../assets/moments/friends.jpg';
-import chips from '../assets/moments/chips.jpg';
-import polaroids from '../assets/moments/polaroids.jpg';
-import arrivals from '../assets/moments/arrivals.jpg';
-import sommelier from '../assets/moments/sommelier.jpg';
-import candleRoom from '../assets/moments/candle-room.jpg';
 import toastPoster from '../assets/moments/toast-poster.jpg';
 
 interface Props {
   lang: Lang;
+  items: Moment[];
+  video?: boolean;
+  columns?: 2 | 3;
 }
-const { lang } = Astro.props;
-const c = t[lang].home.moments;
-const photos = [group, candlelit, arrivals, seastar, tacos, chips, longTable, casino, candleRoom, papelPicado, polaroids, firstDinner, sommelier, friends];
-const tilts = [-1.2, 0.8, -0.4, 1.1, -0.9, 0.5, -0.6, 1, -0.8, 0.6, -1, 0.7, -0.5, 0.9, -0.7];
-const poster = await getImage({ src: toastPoster, width: 480, format: 'webp' });
+const { lang, items, video = false, columns = 3 } = Astro.props;
+const tilts = [-1.2, 0.8, -0.4, 1.1, -0.9, 0.5, -0.6, 1, -0.8, 0.6, -1, 0.7, -0.5];
+const tilt = (i: number) => `--tilt: ${tilts[i % tilts.length]}deg`;
+const poster = video ? await getImage({ src: toastPoster, width: 480, format: 'webp' }) : null;
+const toast = t[lang].home.moments.toast;
 ---
 
-<div class="moments">
+<div class:list={['moments', `moments--${columns}`]}>
   {
-    photos.map((src, i) => (
-      <figure style={`--tilt: ${tilts[i]}deg`}>
-        <Picture src={src} alt={c.alts[i]} widths={[320, 480, 720]} sizes="(min-width: 900px) 280px, 45vw" formats={['avif', 'webp']} loading="lazy" />
-        <figcaption>{c.captions[i]}</figcaption>
+    items.map((it, i) => (
+      <figure style={tilt(i)}>
+        <Picture src={it.src} alt={it.alt[lang]} widths={[320, 480, 720]} sizes="(min-width: 900px) 280px, 45vw" formats={['avif', 'webp']} loading="lazy" />
+        <figcaption>{it.caption[lang]}</figcaption>
       </figure>
     ))
   }
-  <figure style={`--tilt: ${tilts[14]}deg`}>
-    <video src={url('video/a-toast.mp4')} poster={poster.src} muted loop playsinline autoplay preload="none" aria-label={c.toast}></video>
-    <figcaption>{c.toast}</figcaption>
-  </figure>
+  {
+    poster && (
+      <figure style={tilt(items.length)} class="moments__video">
+        <video src={url('video/a-toast.mp4')} poster={poster.src} muted loop playsinline autoplay preload="none" aria-label={toast} />
+        <figcaption>{toast}</figcaption>
+      </figure>
+    )
+  }
 </div>
 
 <style>
@@ -51,7 +44,7 @@ const poster = await getImage({ src: toastPoster, width: 480, format: 'webp' });
     column-gap: clamp(14px, 2.5vw, 24px);
   }
   @media (min-width: 760px) {
-    .moments {
+    .moments--3 {
       columns: 3;
     }
   }
@@ -69,12 +62,6 @@ const poster = await getImage({ src: toastPoster, width: 480, format: 'webp' });
   figure:hover {
     transform: rotate(0deg) scale(1.02);
   }
-  @media (prefers-reduced-motion: reduce) {
-    figure,
-    figure:hover {
-      transform: none;
-    }
-  }
   video {
     display: block;
     width: 100%;
@@ -83,10 +70,11 @@ const poster = await getImage({ src: toastPoster, width: 480, format: 'webp' });
     background: var(--aubergine);
   }
   @media (prefers-reduced-motion: reduce) {
-    video {
-      display: none;
+    figure,
+    figure:hover {
+      transform: none;
     }
-    figure:has(video) {
+    .moments__video {
       display: none;
     }
   }
