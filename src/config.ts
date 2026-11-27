@@ -32,8 +32,13 @@ export const contact = {
   instagram: 'https://www.instagram.com/thecommonthreadclub/',
 };
 
-// Press coverage, newest first.
+// Press coverage, newest first. Leave url empty if there's no link yet.
 export const press = [
+  {
+    outlet: 'ELLE',
+    title: "Where to celebrate New Year's Eve in Barcelona: 8 hotel restaurants for all tastes and budgets",
+    url: '', // TODO: link to the elle.com article
+  },
   {
     outlet: 'Bulevard',
     title: 'NYE Glam Cabaret en Borneta: arte, música y performance para dar la bienvenida a 2026',

@@ -97,7 +97,7 @@ const recent = archive().slice(0, 3);
           ))}
         </div>
         <p class="center more">
-          <a class="btn btn--quiet" href={`${href('events', lang)}#past`}>
+          <a class="btn btn--quiet" href={`${href('events', lang)}#all`}>
             {h.pastCta} <Arrow />
           </a>
           <a class="btn btn--quiet" href={`${href('events', lang)}#trips`}>
@@ -127,7 +127,7 @@ const recent = archive().slice(0, 3);
           {press.map((p) => (
             <p class="press__item">
               <span class="press__outlet">{p.outlet}</span>
-              <a href={p.url}>{p.title}</a>
+              {p.url ? <a href={p.url}>{p.title}</a> : <span>{p.title}</span>}
             </p>
           ))}
         </div>
